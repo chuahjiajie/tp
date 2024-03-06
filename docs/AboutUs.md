@@ -50,7 +50,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/chuahjiajie.md)]
 
 * Role: Developer
-* Responsibilities: Logic
+* Responsibilities: 
+  * Logic
+  * Deliverables and Deadlines
 
 ### Jae Geun
 
