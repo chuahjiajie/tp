@@ -20,6 +20,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.CCA.CCA;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -100,8 +101,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<CCA> updatedCCAs = editPersonDescriptor.getCCAs().orElse(personToEdit.getCCAs());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedCCAs);
     }
 
     @Override
@@ -138,6 +140,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Set<CCA> CCAs;
 
         public EditPersonDescriptor() {}
 
@@ -151,6 +154,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setCCAs(toCopy.CCAs);
         }
 
         /**
@@ -207,6 +211,23 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code CCAs} to this object's {@code CCAs}.
+         * A defensive copy of {@code CCAs} is used internally.
+         */
+        public void setCCAs(Set<CCA> CCAs) {
+            this.CCAs = (CCAs != null) ? new HashSet<>(CCAs) : null;
+        }
+
+        /**
+         * Returns an unmodifiable CCA set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code CCAs} is null.
+         */
+        public Optional<Set<CCA>> getCCAs() {
+            return (CCAs != null) ? Optional.of(Collections.unmodifiableSet(CCAs)) : Optional.empty();
         }
 
         @Override
