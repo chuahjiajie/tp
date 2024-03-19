@@ -17,8 +17,8 @@ class JsonAdaptedCCA {
      * Constructs a {@code JsonAdaptedCCA} with the given {@code CCAName}.
      */
     @JsonCreator
-    public JsonAdaptedCCA(String tagName) {
-        this.CCAName = tagName;
+    public JsonAdaptedCCA(String CCAName) {
+        this.CCAName = CCAName;
     }
 
     /**

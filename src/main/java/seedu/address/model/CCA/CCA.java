@@ -9,8 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class CCA {
 
-    public static final String MESSAGE_CONSTRAINTS = "CCA names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "CCA names should be alphanumeric (but can include " +
+            "whitespace)";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}\\s]+";
 
     public final String CCAName;
 
