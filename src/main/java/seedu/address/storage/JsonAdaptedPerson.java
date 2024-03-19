@@ -38,7 +38,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("tags") List<JsonAdaptedCCA> CCAs) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("CCAs") List<JsonAdaptedCCA> CCAs) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -61,6 +61,9 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        CCAs.addAll(source.getCCAs().stream()
+                .map(JsonAdaptedCCA::new)
                 .collect(Collectors.toList()));
     }
 
