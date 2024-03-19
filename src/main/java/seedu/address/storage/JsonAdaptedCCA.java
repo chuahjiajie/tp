@@ -14,7 +14,7 @@ class JsonAdaptedCCA {
     private final String CCAName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedCCA} with the given {@code CCAName}.
      */
     @JsonCreator
     public JsonAdaptedCCA(String tagName) {
@@ -22,7 +22,7 @@ class JsonAdaptedCCA {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code CCA} into this class for Jackson use.
      */
     public JsonAdaptedCCA(CCA source) {
         CCAName = source.CCAName;
@@ -34,9 +34,9 @@ class JsonAdaptedCCA {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted tag object into the model's {@code CCA} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted CCA.
      */
     public CCA toModelType() throws IllegalValueException {
         if (!CCA.isValidTagName(CCAName)) {

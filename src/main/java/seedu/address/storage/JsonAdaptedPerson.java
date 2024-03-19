@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.CCA.CCA;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -29,7 +30,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final List<JsonAdaptedTag> CCAs = new ArrayList<>();
+    private final List<JsonAdaptedCCA> CCAs = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -74,6 +75,11 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+        final List<CCA> personCCAs = new ArrayList<>();
+        for (JsonAdaptedCCA CCA : CCAs) {
+            personCCAs.add(CCA.toModelType());
+        }
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -107,6 +113,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<CCA> modelCCAs = new HashSet<>(personCCAs);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelCCAs);
     }
 
