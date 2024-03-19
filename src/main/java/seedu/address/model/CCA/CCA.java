@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a CCA in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidCCAName(String)}
  */
 public class CCA {
 
@@ -22,14 +22,14 @@ public class CCA {
      */
     public CCA(String CCAName) {
         requireNonNull(CCAName);
-        checkArgument(isValidTagName(CCAName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidCCAName(CCAName), MESSAGE_CONSTRAINTS);
         this.CCAName = CCAName;
     }
 
     /**
      * Returns true if a given string is a valid tag name.
      */
-    public static boolean isValidTagName(String test) {
+    public static boolean isValidCCAName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

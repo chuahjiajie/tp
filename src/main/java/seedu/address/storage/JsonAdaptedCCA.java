@@ -39,7 +39,7 @@ class JsonAdaptedCCA {
      * @throws IllegalValueException if there were any data constraints violated in the adapted CCA.
      */
     public CCA toModelType() throws IllegalValueException {
-        if (!CCA.isValidTagName(CCAName)) {
+        if (!CCA.isValidCCAName(CCAName)) {
             throw new IllegalValueException(CCA.MESSAGE_CONSTRAINTS);
         }
         return new CCA(CCAName);

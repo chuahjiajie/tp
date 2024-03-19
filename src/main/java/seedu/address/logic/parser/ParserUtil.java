@@ -117,11 +117,11 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code CCA} is invalid.
      */
-    public static CCA parseCCA(String CCA) throws ParseException {
-        requireNonNull(CCA);
-        String trimmedCCA = CCA.trim();
-        if (!Tag.isValidTagName(trimmedCCA)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static CCA parseCCA(String CCAString) throws ParseException {
+        requireNonNull(CCAString);
+        String trimmedCCA = CCAString.trim();
+        if (!CCA.isValidCCAName(trimmedCCA)) {
+            throw new ParseException(CCA.MESSAGE_CONSTRAINTS);
         }
         return new CCA(trimmedCCA);
     }
