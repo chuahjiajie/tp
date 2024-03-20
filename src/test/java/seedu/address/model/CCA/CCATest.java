@@ -1,26 +1,26 @@
-package seedu.address.model.CCA;
+package seedu.address.model.cca;
 
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class CCATest {
+public class CcaTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new CCA(null));
+        assertThrows(NullPointerException.class, () -> new Cca(null));
     }
 
     @Test
     public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidCCAName = "";
-        assertThrows(IllegalArgumentException.class, () -> new CCA(invalidCCAName));
+        String invalidCcaName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Cca(invalidCcaName));
     }
 
     @Test
-    public void isValidCCAName() {
+    public void isValidCcaName() {
         // null tag name
-        assertThrows(NullPointerException.class, () -> CCA.isValidCCAName(null));
+        assertThrows(NullPointerException.class, () -> Cca.isValidCcaName(null));
     }
 
 }

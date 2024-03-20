@@ -41,7 +41,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private FlowPane CCAs;
+    private FlowPane ccas;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -57,8 +57,8 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        person.getCCAs().stream()
-                .sorted(Comparator.comparing(CCA -> CCA.CCAName))
-                .forEach(CCA -> CCAs.getChildren().add(new Label("CCA: " + CCA.CCAName)));
+        person.getCcas().stream()
+                .sorted(Comparator.comparing(cca -> cca.ccaName))
+                .forEach(cca -> ccas.getChildren().add(new Label("CCA: " + cca.ccaName)));
     }
 }

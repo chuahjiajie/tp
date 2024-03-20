@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -21,8 +21,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.CCA.CCA;
 import seedu.address.model.Model;
+import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -103,9 +103,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<CCA> updatedCCAs = editPersonDescriptor.getCCAs().orElse(personToEdit.getCCAs());
+        Set<Cca> updatedCcas = editPersonDescriptor.getCcas().orElse(personToEdit.getCcas());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedCCAs);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedCcas);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private Set<CCA> CCAs;
+        private Set<Cca> ccas;
 
         public EditPersonDescriptor() {}
 
@@ -156,7 +156,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setCCAs(toCopy.CCAs);
+            setCcas(toCopy.ccas);
         }
 
         /**
@@ -219,8 +219,8 @@ public class EditCommand extends Command {
          * Sets {@code CCAs} to this object's {@code CCAs}.
          * A defensive copy of {@code CCAs} is used internally.
          */
-        public void setCCAs(Set<CCA> CCAs) {
-            this.CCAs = (CCAs != null) ? new HashSet<>(CCAs) : null;
+        public void setCcas(Set<Cca> ccas) {
+            this.ccas = (ccas != null) ? new HashSet<>(ccas) : null;
         }
 
         /**
@@ -228,8 +228,8 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code CCAs} is null.
          */
-        public Optional<Set<CCA>> getCCAs() {
-            return (CCAs != null) ? Optional.of(Collections.unmodifiableSet(CCAs)) : Optional.empty();
+        public Optional<Set<Cca>> getCcas() {
+            return (ccas != null) ? Optional.of(Collections.unmodifiableSet(ccas)) : Optional.empty();
         }
 
         @Override

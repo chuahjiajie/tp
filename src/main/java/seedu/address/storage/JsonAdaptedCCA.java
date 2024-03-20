@@ -4,33 +4,33 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.CCA.CCA;
+import seedu.address.model.cca.Cca;
 
 /**
  * Jackson-friendly version of {@link CCA}.
  */
-class JsonAdaptedCCA {
+class JsonAdaptedCca {
 
-    private final String CCAName;
+    private final String ccaName;
 
     /**
      * Constructs a {@code JsonAdaptedCCA} with the given {@code CCAName}.
      */
     @JsonCreator
-    public JsonAdaptedCCA(String CCAName) {
-        this.CCAName = CCAName;
+    public JsonAdaptedCca(String ccaName) {
+        this.ccaName = ccaName;
     }
 
     /**
      * Converts a given {@code CCA} into this class for Jackson use.
      */
-    public JsonAdaptedCCA(CCA source) {
-        CCAName = source.CCAName;
+    public JsonAdaptedCca(Cca source) {
+        ccaName = source.ccaName;
     }
 
     @JsonValue
-    public String getCCAName() {
-        return CCAName;
+    public String getCcaName() {
+        return ccaName;
     }
 
     /**
@@ -38,11 +38,11 @@ class JsonAdaptedCCA {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted CCA.
      */
-    public CCA toModelType() throws IllegalValueException {
-        if (!CCA.isValidCCAName(CCAName)) {
-            throw new IllegalValueException(CCA.MESSAGE_CONSTRAINTS);
+    public Cca toModelType() throws IllegalValueException {
+        if (!Cca.isValidCcaName(ccaName)) {
+            throw new IllegalValueException(Cca.MESSAGE_CONSTRAINTS);
         }
-        return new CCA(CCAName);
+        return new Cca(ccaName);
     }
 
 }

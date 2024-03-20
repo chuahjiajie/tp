@@ -11,7 +11,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.CCA.CCA;
+import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -39,8 +39,8 @@ public class PersonUtil {
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
-        person.getCCAs().stream().forEach(
-            c -> sb.append(PREFIX_CCA + c.CCAName + " ")
+        person.getCcas().stream().forEach(
+            c -> sb.append(PREFIX_CCA + c.ccaName + " ")
         );
         return sb.toString();
     }
@@ -64,12 +64,12 @@ public class PersonUtil {
             }
         }
         sb.append(" ");
-        if (descriptor.getCCAs().isPresent()) {
-            Set<CCA> tags = descriptor.getCCAs().get();
+        if (descriptor.getCcas().isPresent()) {
+            Set<Cca> tags = descriptor.getCcas().get();
             if (tags.isEmpty()) {
                 sb.append(PREFIX_CCA);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_CCA).append(s.CCAName).append(" "));
+                tags.forEach(s -> sb.append(PREFIX_CCA).append(s.ccaName).append(" "));
             }
         }
         return sb.toString();

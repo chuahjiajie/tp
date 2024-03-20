@@ -2,7 +2,12 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -13,7 +18,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.CCA.CCA;
+import seedu.address.model.cca.Cca;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -57,7 +62,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-        parseCCAsForEdit(argMultimap.getAllValues(PREFIX_CCA)).ifPresent(editPersonDescriptor::setCCAs);
+        parseCcasForEdit(argMultimap.getAllValues(PREFIX_CCA)).ifPresent(editPersonDescriptor::setCcas);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -86,13 +91,13 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code CCAs} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<CCA>} containing zero tags.
      */
-    private Optional<Set<CCA>> parseCCAsForEdit(Collection<String> CCAs) throws ParseException {
-        assert CCAs != null;
+    private Optional<Set<Cca>> parseCcasForEdit(Collection<String> ccas) throws ParseException {
+        assert ccas != null;
 
-        if (CCAs.isEmpty()) {
+        if (ccas.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> CCASet = CCAs.size() == 1 && CCAs.contains("") ? Collections.emptySet() : CCAs;
-        return Optional.of(ParserUtil.parseCCAs(CCASet));
+        Collection<String> ccaSet = ccas.size() == 1 && ccas.contains("") ? Collections.emptySet() : ccas;
+        return Optional.of(ParserUtil.parseCcas(ccaSet));
     }
 }

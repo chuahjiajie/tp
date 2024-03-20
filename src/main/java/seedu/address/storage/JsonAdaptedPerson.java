@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.CCA.CCA;
+import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -30,7 +30,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final List<JsonAdaptedCCA> CCAs = new ArrayList<>();
+    private final List<JsonAdaptedCca> ccas = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,7 +38,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("CCAs") List<JsonAdaptedCCA> CCAs) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("CCAs") List<JsonAdaptedCca> ccas) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -46,8 +46,8 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
-        if (CCAs != null) {
-            this.CCAs.addAll(CCAs);
+        if (ccas != null) {
+            this.ccas.addAll(ccas);
         }
     }
 
@@ -62,8 +62,8 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        CCAs.addAll(source.getCCAs().stream()
-                .map(JsonAdaptedCCA::new)
+        ccas.addAll(source.getCcas().stream()
+                .map(JsonAdaptedCca::new)
                 .collect(Collectors.toList()));
     }
 
@@ -78,9 +78,9 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final List<CCA> personCCAs = new ArrayList<>();
-        for (JsonAdaptedCCA CCA : CCAs) {
-            personCCAs.add(CCA.toModelType());
+        final List<Cca> personCcas = new ArrayList<>();
+        for (JsonAdaptedCca cca : ccas) {
+            personCcas.add(cca.toModelType());
         }
 
         if (name == null) {
@@ -116,8 +116,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Set<CCA> modelCCAs = new HashSet<>(personCCAs);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelCCAs);
+        final Set<Cca> modelCcas = new HashSet<>(personCcas);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelCcas);
     }
 
 }

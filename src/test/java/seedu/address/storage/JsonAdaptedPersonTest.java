@@ -32,8 +32,8 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedCCA> VALID_CCAS = BENSON.getCCAs().stream()
-            .map(JsonAdaptedCCA::new)
+    private static final List<JsonAdaptedCca> VALID_CCAS = BENSON.getCcas().stream()
+            .map(JsonAdaptedCca::new)
             .collect(Collectors.toList());
 
     @Test
@@ -110,10 +110,10 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        List<JsonAdaptedCCA> invalidCCAs = new ArrayList<>(VALID_CCAS);
+        List<JsonAdaptedCca> invalidCcas = new ArrayList<>(VALID_CCAS);
         invalidTags.add(new JsonAdaptedTag(INVALID_CCA));
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags, invalidCCAs);
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags, invalidCcas);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 

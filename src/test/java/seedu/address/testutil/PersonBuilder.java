@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.CCA.CCA;
+import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -27,7 +27,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private Set<CCA> CCAs;
+    private Set<Cca> ccas;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -38,7 +38,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        CCAs = new HashSet<>();
+        ccas = new HashSet<>();
     }
 
     /**
@@ -50,7 +50,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        CCAs = new HashSet<>(personToCopy.getCCAs());
+        ccas = new HashSet<>(personToCopy.getCcas());
     }
 
     /**
@@ -72,8 +72,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code CCA} into a {@code Set<CCA>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withCCAs(String ... CCAs) {
-        this.CCAs = SampleDataUtil.getCCASet(CCAs);
+    public PersonBuilder withCcas(String ... ccas) {
+        this.ccas = SampleDataUtil.getCcaSet(ccas);
         return this;
     }
 
@@ -102,7 +102,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, CCAs);
+        return new Person(name, phone, email, address, tags, ccas);
     }
 
 }
