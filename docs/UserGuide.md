@@ -104,7 +104,7 @@ The first thing you’d probably want to do is to clear the sample data, as it i
 
 You can do so using the clear command as follows:
 
-    ![clear command] (docs/images/UG-Basics/clear-command.png)
+    ![clear command](docs/images/UG-Basics/clear-command.png)
     
 
 
