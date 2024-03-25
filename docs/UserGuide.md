@@ -96,6 +96,18 @@ To get started with CCA Manager and explore its features further, check out our 
 
 --------------------------------------------------------------------------------------------------------------------
 ## Basics
+
+Confused on where to get started? Don’t fret, in this section we’ll outline how to use CCA Manager to its maximum effect with a few use case scenarios.
+
+### Clear Contacts
+The first thing you’d probably want to do is to clear the sample data, as it is likely of no relevance to you.
+
+You can do so using the clear command as follows:
+
+    ![clear command] (docs/images/UG-Basics/clear-command.png)
+    
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
