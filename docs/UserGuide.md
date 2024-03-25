@@ -95,6 +95,8 @@ To get started with CCA Manager and explore its features further, check out our 
  Refer to the [Features](#features) below for details of each command.⬇️⬇️⬇️⬇️
 
 --------------------------------------------------------------------------------------------------------------------
+## Basics
+--------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
