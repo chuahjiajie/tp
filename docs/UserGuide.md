@@ -149,8 +149,8 @@ ACTION PRIMARY_VALUE ARGUMENT_NAME/ARGUMENT_VALUE
     - `p` is the `ARGUMENT_NAME` of the `ARGUMENT_VALUE` `87601212`.
     - `e` is the `ARGUMENT_NAME` of the `ARGUMENT_VALUE` `test@gmail.com`.
 - Some commands allow multiple `ARGUMENT_VALUE`s associated with the same `ARGUMENT_NAME`
-  - E.g., For the command `edit 2 t/Treasurer t/EXCO Member`
-      - The values `Treasurer` and `EXCO Member` are associated with the `ARGUMENT_NAME` `t`.
+  - E.g., For the command `edit 2 r/Treasurer r/EXCO Member`
+      - The values `Treasurer` and `EXCO Member` are associated with the `ARGUMENT_NAME` `r`.
 </box>
 
 Now we can move on to some command commands. For a full list of commands available for CCA Manager, refer to our [Reference](#reference).
@@ -248,13 +248,13 @@ Output:
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter that can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [r/ROLE]` can be used as `n/John Doe r/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/friend`, `r/friend r/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -267,7 +267,7 @@ Output:
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -278,7 +278,7 @@ Format: `help`
 
 Adds a person to the CCA Manager.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [c/CCA]…​`
 
 _Adds a CCA group to the CCA manager._
 
@@ -287,12 +287,12 @@ _Adds a CCA group to the CCA manager._
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have any number of roles and ccas (including 0)
 </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe r/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/criminal`
 
 ### Listing all persons : `list`
 
@@ -304,18 +304,18 @@ Format: `list`
 
 Edits an existing person in the CCA Manager.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [c/CCA]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [c/CCA]...`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing roles, the existing roles of the person will be removed i.e., the adding of roles is not cumulative.
+* You can remove all the person’s roles by typing `r/` without
+    specifying any roles after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower r/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing roles.
   
 **[Images with example is TBD]**
 
@@ -415,12 +415,12 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] c/CCA GROUP…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague c/CCA Cycling`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [c/CCA]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/friend r/colleague c/CCA Cycling`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE] [c/CCA]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Filter** | `filter CCA1, CCA2, ...` e.g. `filter NUS Cycling`
-**Assign** | `Assign INDEX r/ ROLE` e.g. `Assign 2 r/ Member` or `Assign 2 r/Member`
+**Assign** | `assign INDEX r/ROLE` e.g. `assign 2 r/ Member` or `assign 2 r/Member`
 **Help**   | `help`
