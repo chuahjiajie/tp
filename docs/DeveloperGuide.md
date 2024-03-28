@@ -256,6 +256,19 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
+### \[Proposed\] Payment splitting
+
+After payments are implemented, we expect to be able to split payments among
+CCA members. An example command is ``split a/4.00 c/NUS Cycling``. Which means
+"split $4.00 among CCA members NUS Cycling".  The process is as follows.
+
+1. Identify all members belonging to that CCA.
+2. Count the number of members in 1., and split the amount equally.
+   * Note: rounding errors may occur here. So we should use `double` in Java
+     for higher precision and also round to nearest 2 d.p.
+3. Add the split amount to each member's "payment owed" field
+   (this field has yet to be implemented).
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
