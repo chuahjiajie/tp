@@ -269,6 +269,32 @@ CCA members. An example command is ``split a/4.00 c/NUS Cycling``. Which means
 3. Add the split amount to each member's "payment owed" field
    (this field has yet to be implemented).
 
+### \[Proposed\] Attendance Tracking
+
+After members of a CCA has been added to CCA Manager, it is expected to be able to track
+their attendance. This will be displayed below their CCA.
+
+An example command for setting attendance is ``setatt n\John Doe a\9 s\10``. Which means
+"Set the attendance of John Doe to be 9 out of 10 sessions".  The process is as follows.
+
+1. Retrieve the attendance information of John Doe.
+2. Edit the attendance details according to the input.
+3. Update the attendance details of the person in the model.
+
+An example command for setting the number of sessions is ``setsess n\John Doe s\10``. Which means
+"Set the number of sessions of John Doe to be 10".  The process is as follows.
+
+1. Retrieve the attendance information of John Doe.
+2. Increment the attendance value by 1.
+3. Update the attendance details of the person in the model.
+
+An example command for incrementing attendance is ``incatt n\John Doe``. Which means
+"Increment the attendance of John Doe by 1".  The process is as follows.
+
+1. Retrieve the attendance information of John Doe.
+2. Edit the session detail according to the input.
+3. Update the attendance details of the person in the model.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
