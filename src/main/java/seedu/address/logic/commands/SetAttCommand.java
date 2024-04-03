@@ -73,16 +73,16 @@ public class SetAttCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToAssign = lastShownList.get(index.getZeroBased());
-        Person assignedPerson = createSetAttPerson(personToAssign, setAttDescriptor);
+        Person personToSetAtt = lastShownList.get(index.getZeroBased());
+        Person setAttPerson = createSetAttPerson(personToSetAtt, setAttDescriptor);
 
-        if (!personToAssign.isSamePerson(assignedPerson) && model.hasPerson(assignedPerson)) {
+        if (!personToSetAtt.isSamePerson(setAttPerson) && model.hasPerson(setAttPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToAssign, assignedPerson);
+        model.setPerson(personToSetAtt, setAttPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SETATT_PERSON_SUCCESS, Messages.format(assignedPerson)));
+        return new CommandResult(String.format(MESSAGE_SETATT_PERSON_SUCCESS, Messages.format(setAttPerson)));
     }
 
     /**

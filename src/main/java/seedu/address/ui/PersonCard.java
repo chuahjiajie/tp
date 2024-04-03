@@ -44,6 +44,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane ccas;
     @FXML
     private Label owe;
+    @FXML
+    private Label attendance;
 
 
     /**
@@ -58,6 +60,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         owe.setText("Owe: " + "$" + person.getAmount().value);
+        attendance.setText("Attendance: " + person.getAtt().value + "/" + person.getSess());
         person.getRoles().stream()
                 .sorted(Comparator.comparing(role -> role.roleName))
                 .forEach(role -> roles.getChildren().add(new Label(role.roleName)));
