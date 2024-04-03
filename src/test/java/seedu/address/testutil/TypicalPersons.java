@@ -28,28 +28,36 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withRoles("friends")
             .withCcas("NUS Cycling")
-            .withAmount("10.00").build();
+            .withAmount("10.00")
+            .withAtt("0")
+            .withSess("1").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withRoles("owesMoney", "friends")
             .withCcas("NUS Cycling", "NUS Bakes")
             .withAmount("20.00")
-            .withAtt()
-            .withSess().build();
+            .withAtt("0")
+            .withSess("1").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withCcas("NUS Cycling")
-            .withAmount("30.00").build();
+            .withAmount("30.00")
+            .withAtt("0")
+            .withSess("1").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withRoles("friends")
             .withCcas("NUS Cycling")
-            .withAmount("40.00").build();
+            .withAmount("40.00")
+            .withAtt("0")
+            .withSess("1").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
-            .withAmount("50.00").build();
+            .withAmount("50.00")
+            .withAtt("0")
+            .withSess("1").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
 

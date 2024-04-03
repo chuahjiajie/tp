@@ -9,11 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Attendance {
 
-    public static final String MESSAGE_CONSTRAINTS = "Attendance should be a positive integer"
-            + "sessions";
+    public static final String MESSAGE_CONSTRAINTS = "Attendance should be a positive integer";
     public static final String VALIDATION_REGEX = "[0-9]+";
 
-    public final String attendance;
+    public final String value;
 
     /**
      * Constructs a {@code Attendance}.
@@ -23,11 +22,11 @@ public class Attendance {
     public Attendance(String attendance) {
         requireNonNull(attendance);
         checkArgument(isValidAttendance(attendance), MESSAGE_CONSTRAINTS);
-        this.attendance = attendance;
+        this.value = attendance;
     }
 
     public int getValue() {
-        return Integer.parseInt(attendance);
+        return Integer.parseInt(value);
     }
 
     /**
@@ -49,14 +48,18 @@ public class Attendance {
         }
 
         Attendance otherAtt = (Attendance) other;
-        return attendance == otherAtt.attendance;
+        return value == otherAtt.value;
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + String.valueOf(attendance) + ']';
+        return value;
     }
 
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
 }

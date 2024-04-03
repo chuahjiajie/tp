@@ -77,8 +77,8 @@ class JsonAdaptedPerson {
         ccas.addAll(source.getCcas().stream()
                 .map(JsonAdaptedCca::new)
                 .collect(Collectors.toList()));
-        attendance = source.getAtt().attendance;
-        sessions = source.getSess().sessions;
+        attendance = source.getAtt().value;
+        sessions = source.getSess().value;
     }
 
     /**
@@ -135,19 +135,27 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Amount.MESSAGE_CONSTRAINTS);
         }
         final Amount modelAmount = amount.toModelType();
-        final Address modelAddress = new Address(address);
-        final Set<Role> modelRoles = new HashSet<>(personRoles);
-        final Set<Cca> modelCcas = new HashSet<>(personCcas);
 
+        if (attendance == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Attendance.class.getSimpleName()));
+        }
         if (!Attendance.isValidAttendance(attendance)) {
             throw new IllegalValueException(Attendance.MESSAGE_CONSTRAINTS);
         }
         final Attendance modelAtt = new Attendance(attendance);
 
+        if (sessions == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Sessions.class.getSimpleName()));
+        }
         if (!Sessions.isValidSessions(sessions)) {
             throw new IllegalValueException(Sessions.MESSAGE_CONSTRAINTS);
         }
         final Sessions modelSess = new Sessions(sessions);
+        final Address modelAddress = new Address(address);
+        final Set<Role> modelRoles = new HashSet<>(personRoles);
+        final Set<Cca> modelCcas = new HashSet<>(personCcas);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRoles, modelCcas, modelAmount,
                 modelAtt, modelSess);

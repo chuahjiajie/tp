@@ -9,11 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Sessions {
 
-    public static final String MESSAGE_CONSTRAINTS = "Sessions should be a positive integer"
-            + "sessions";
+    public static final String MESSAGE_CONSTRAINTS = "Sessions should be a positive integer";
     public static final String VALIDATION_REGEX = "[0-9]+";
 
-    public final String sessions;
+    public final String value;
 
     /**
      * Constructs a {@code Sessions}.
@@ -23,11 +22,11 @@ public class Sessions {
     public Sessions(String sessions) {
         requireNonNull(sessions);
         checkArgument(isValidSessions(sessions), MESSAGE_CONSTRAINTS);
-        this.sessions = sessions;
+        this.value = sessions;
     }
 
     public int getValue() {
-        return Integer.parseInt(sessions);
+        return Integer.parseInt(value);
     }
 
     /**
@@ -49,14 +48,19 @@ public class Sessions {
         }
 
         Sessions otherSess = (Sessions) other;
-        return sessions == otherSess.sessions;
+        return value == otherSess.value;
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + String.valueOf(sessions) + ']';
+        return value;
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
     }
 
 }
