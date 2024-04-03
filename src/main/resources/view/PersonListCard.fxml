@@ -27,12 +27,12 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-        <FlowPane>
+      <FlowPane>
           <Label fx:id="rolelabel" text="Roles: "/>
           <FlowPane fx:id="roles">
         </FlowPane>
       </FlowPane>
-        <FlowPane>
+      <FlowPane>
           <Label fx:id="ccalabel" text="CCAs: "/>
           <FlowPane fx:id="ccas">
         </FlowPane>
