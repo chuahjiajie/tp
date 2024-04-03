@@ -5,16 +5,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SESSIONS;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SetAttCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.attendance.Attendance;
-import seedu.address.model.roles.Role;
 
 /**
  * Parses input arguments and creates a new SetAttCommand Object
@@ -43,17 +36,14 @@ public class SetAttCommandParser implements Parser<SetAttCommand> {
 
         SetAttCommand.SetAttDescriptor setAttDescriptor = new SetAttCommand.SetAttDescriptor();
 
-        setAttDescriptor.setAtt();
+        setAttDescriptor.setAtt(ParserUtil.parseAtt(argMultimap.getValue(PREFIX_ATTENDANCE).get()));
+        setAttDescriptor.setSess(ParserUtil.parseSess(argMultimap.getValue(PREFIX_SESSIONS).get()));
 
-        parseRolesForAssign(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(assignPersonDescriptor::setRole);
-
-        System.out.println(assignPersonDescriptor.toString());
-
-        if (!assignPersonDescriptor.isAnyFieldNotEdited()) {
-            throw new ParseException(AssignCommand.MESSAGE_NOT_ASSIGNED);
+        if (!setAttDescriptor.isAnyFieldNotEdited()) {
+            throw new ParseException(SetAttCommand.MESSAGE_ATT_NOT_SET);
         }
 
-        return new AssignCommand(index, assignPersonDescriptor);
+        return new SetAttCommand(index, setAttDescriptor);
 
     }
 }
