@@ -13,6 +13,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.amount.Amount;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -93,8 +95,11 @@ public class OweCommand extends Command {
         Set<Role> updatedRoles = personToOwe.getRoles();
         Set<Cca> updatedCcas = personToOwe.getCcas();
         Amount updatedAmount = new Amount(amount.toString());
+        Attendance updatedAttendance = personToOwe.getAtt();
+        Sessions updatedSessions = personToOwe.getSess();
+
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRoles, updatedCcas,
-                updatedAmount);
+                updatedAmount, updatedAttendance, updatedSessions);
     }
 
     @Override
