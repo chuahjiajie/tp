@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SESSIONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,7 +26,11 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.roles.Role;
 
-public class SetAttCommand {
+/**
+ * Assigns role to the existing person in the CCA Manager
+ */
+public class SetAttCommand extends Command {
+
     public static final String COMMAND_WORD = "setatt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the attendance details of the person identified "
@@ -36,26 +40,26 @@ public class SetAttCommand {
             + "[" + PREFIX_ATTENDANCE + "ATTENDANCE] "
             + "[" + PREFIX_SESSIONS + "SESSIONS] "
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_ATTENDANCE + "3 "
+            + PREFIX_SESSIONS + "10";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_SETATT_PERSON_SUCCESS = "Set Attendance for Person: %1$s";
+    public static final String MESSAGE_ATT_NOT_SET = "Integer has to be provided after /att or /s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Attendance has already been set to that value";
 
     private final Index index;
-    private final EditCommand.EditPersonDescriptor editPersonDescriptor;
+    private final SetAttCommand.SetAttDescriptor setAttDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param setAttDescriptor attendance details to edit the person with
      */
-    public EditCommand(Index index, EditCommand.EditPersonDescriptor editPersonDescriptor) {
+    public SetAttCommand(Index index, SetAttCommand.SetAttDescriptor setAttDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(setAttDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditCommand.EditPersonDescriptor(editPersonDescriptor);
+        this.setAttDescriptor = new SetAttCommand.SetAttDescriptor(setAttDescriptor);
     }
 
     @Override
@@ -67,159 +71,76 @@ public class SetAttCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person personToAssign = lastShownList.get(index.getZeroBased());
+        Person assignedPerson = createAssignedPerson(personToAssign, assignPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personToAssign.isSamePerson(assignedPerson) && model.hasPerson(assignedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personToAssign, assignedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_ASSIGN_PERSON_SUCCESS, Messages.format(assignedPerson)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns an assigned person with details of the role
+     * @param personToAssign person who will be assigned
+     * @param assignPersonDescriptor details of the role to assign the person with
+     * @return Person who is assigned with a role
      */
-    private static Person createEditedPerson(Person personToEdit, EditCommand.EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Person createAssignedPerson(Person personToAssign,
+                                               AssignCommand.AssignPersonDescriptor assignPersonDescriptor) {
+        assert personToAssign != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
-        Set<Cca> updatedCcas = editPersonDescriptor.getCcas().orElse(personToEdit.getCcas());
-        Amount updatedAmount = personToEdit.getAmount();
+        Name updatedName = personToAssign.getName();
+        Phone updatedPhone = personToAssign.getPhone();
+        Email updatedEmail = personToAssign.getEmail();
+        Address updatedAddress = personToAssign.getAddress();
+        Set<Cca> updatedCcas = personToAssign.getCcas();
+        Set<Role> updatedRoles = assignPersonDescriptor.getRole().orElse(personToAssign.getRoles());
+        Amount updatedAmount = personToAssign.getAmount();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedRoles, updatedCcas, updatedAmount);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
-            return false;
-        }
-
-        EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
-                .toString();
-    }
-
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details of the role to assign the person with.
      */
-    public static class EditPersonDescriptor {
-        private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
-        private Set<Role> roles;
-        private Set<Cca> ccas;
+    public static class SetAttDescriptor {
+        private Attendance attendance;
+        private Sessions sessions;
 
-        public EditPersonDescriptor() {}
+        public SetAttDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code roles} is used internally.
          */
-        public EditPersonDescriptor(EditCommand.EditPersonDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setRoles(toCopy.roles);
-            setCcas(toCopy.ccas);
+        public SetAttDescriptor(SetAttCommand.SetAttDescriptor toCopy) {
+            setAtt(toCopy.attendance);
+            setSess(toCopy.sessions);
         }
+
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if at least all fields are edited.
          */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, ccas, roles);
+        public boolean isAnyFieldNotEdited() {
+            return CollectionUtil.isNotNull(attendance, sessions);
         }
 
-        public void setName(Name name) {
-            this.name = name;
+        public void setAtt(int attendance) {
+            this.attendance = attendance;
         }
 
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+        public void setSess(int sessions) {
+            this.sessions = sessions;
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
-        }
-
-        /**
-         * Sets {@code roles} to this object's {@code roles}.
-         * A defensive copy of {@code roles} is used internally.
-         */
-        public void setRoles(Set<Role> roles) {
-            this.roles = (roles != null) ? new HashSet<>(roles) : null;
-        }
-
-        /**
-         * Returns an unmodifiable roles set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code roles} is null.
-         */
-        public Optional<Set<Role>> getRoles() {
-            return (roles != null) ? Optional.of(Collections.unmodifiableSet(roles)) : Optional.empty();
-        }
-
-        /**
-         * Sets {@code CCAs} to this object's {@code CCAs}.
-         * A defensive copy of {@code CCAs} is used internally.
-         */
-        public void setCcas(Set<Cca> ccas) {
-            this.ccas = (ccas != null) ? new HashSet<>(ccas) : null;
-        }
-
-        /**
-         * Returns an unmodifiable CCA set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code CCAs} is null.
-         */
-        public Optional<Set<Cca>> getCcas() {
-            return (ccas != null) ? Optional.of(Collections.unmodifiableSet(ccas)) : Optional.empty();
+        public int getAtt() {
+            return (attendance != null) ? Optional.of(Collections.unmodifiableSet(role)) : Optional.empty();
         }
 
         @Override
@@ -229,27 +150,18 @@ public class SetAttCommand {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditCommand.EditPersonDescriptor)) {
+            if (!(other instanceof AssignCommand.AssignPersonDescriptor)) {
                 return false;
             }
 
-            EditCommand.EditPersonDescriptor otherEditPersonDescriptor = (EditCommand.EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(roles, otherEditPersonDescriptor.roles);
+            AssignCommand.AssignPersonDescriptor otherAssignDescriptor = (AssignCommand.AssignPersonDescriptor) other;
+            return Objects.equals(role, otherAssignDescriptor.role);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("roles", roles)
-                    .add("CCAs", ccas)
+                    .add("role", role)
                     .toString();
         }
     }
