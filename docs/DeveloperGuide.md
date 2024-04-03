@@ -342,7 +342,7 @@ More details of these specific features in the future.
 After members of a CCA has been added to CCA Manager, it is expected to be able to track
 their attendance. This will be displayed below their CCA.
 
-An example command for setting attendance is ``setatt n\John Doe a\9 s\10``. Which means
+An example command for setting attendance is ``setatt n\John Doe att\9 s\10``. Which means
 "Set the attendance of John Doe to be 9 out of 10 sessions".  The process is as follows.
 
 1. Retrieve the attendance information of John Doe.
