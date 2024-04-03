@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.amount.Amount;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -41,10 +43,10 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("roles") List<JsonAdaptedRole> roles, @JsonProperty("CCAs") List<JsonAdaptedCca> ccas,
-            @JsonProperty("amount") JsonAdaptedAmount amount, @JsonProperty("attendance") String attendance,
-            @JsonProperty("sessions") String sessions) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("roles") List<JsonAdaptedRole> roles, @JsonProperty("CCAs") List<JsonAdaptedCca> ccas,
+                             @JsonProperty("amount") JsonAdaptedAmount amount, @JsonProperty("attendance") String attendance,
+                             @JsonProperty("sessions") String sessions) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,6 +58,8 @@ class JsonAdaptedPerson {
             this.ccas.addAll(ccas);
         }
         this.amount = amount;
+        this.attendance = attendance;
+        this.sessions = sessions;
     }
 
     /**
@@ -73,6 +77,8 @@ class JsonAdaptedPerson {
         ccas.addAll(source.getCcas().stream()
                 .map(JsonAdaptedCca::new)
                 .collect(Collectors.toList()));
+        attendance = source.getAtt().attendance;
+        sessions = source.getSess().sessions;
     }
 
     /**
@@ -133,7 +139,17 @@ class JsonAdaptedPerson {
         final Set<Role> modelRoles = new HashSet<>(personRoles);
         final Set<Cca> modelCcas = new HashSet<>(personCcas);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRoles, modelCcas, modelAmount);
-    }
+        if (!Attendance.isValidAttendance(attendance)) {
+            throw new IllegalValueException(Attendance.MESSAGE_CONSTRAINTS);
+        }
+        final Attendance modelAtt = new Attendance(attendance);
 
+        if (!Sessions.isValidSessions(sessions)) {
+            throw new IllegalValueException(Sessions.MESSAGE_CONSTRAINTS);
+        }
+        final Sessions modelSess = new Sessions(sessions);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRoles, modelCcas, modelAmount,
+                modelAtt, modelSess);
+    }
 }

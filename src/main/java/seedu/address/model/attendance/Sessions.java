@@ -13,7 +13,7 @@ public class Sessions {
             + "sessions";
     public static final String VALIDATION_REGEX = "[0-9]+";
 
-    public final int sessions;
+    public final String sessions;
 
     /**
      * Constructs a {@code Sessions}.
@@ -23,11 +23,11 @@ public class Sessions {
     public Sessions(String sessions) {
         requireNonNull(sessions);
         checkArgument(isValidSessions(sessions), MESSAGE_CONSTRAINTS);
-        this.sessions = Integer.parseInt(sessions);
+        this.sessions = sessions;
     }
 
     public int getValue() {
-        return sessions;
+        return Integer.parseInt(sessions);
     }
 
     /**

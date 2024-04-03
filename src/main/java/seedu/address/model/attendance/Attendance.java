@@ -13,7 +13,7 @@ public class Attendance {
             + "sessions";
     public static final String VALIDATION_REGEX = "[0-9]+";
 
-    public final int attendance;
+    public final String attendance;
 
     /**
      * Constructs a {@code Attendance}.
@@ -23,11 +23,11 @@ public class Attendance {
     public Attendance(String attendance) {
         requireNonNull(attendance);
         checkArgument(isValidAttendance(attendance), MESSAGE_CONSTRAINTS);
-        this.attendance = Integer.parseInt(attendance);
+        this.attendance = attendance;
     }
 
     public int getValue() {
-        return attendance;
+        return Integer.parseInt(attendance);
     }
 
     /**
