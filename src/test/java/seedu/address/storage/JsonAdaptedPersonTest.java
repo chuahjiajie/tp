@@ -12,8 +12,6 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.SetAttCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.Sessions;
 import seedu.address.model.person.Address;
@@ -145,8 +143,8 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_nullAttendance_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ROLES,
-                VALID_CCAS, VALID_AMOUNT, null, VALID_SESSIONS);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_ROLES, VALID_CCAS, VALID_AMOUNT, null, VALID_SESSIONS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Attendance.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -162,8 +160,8 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_nullSessions_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ROLES,
-                VALID_CCAS, VALID_AMOUNT, VALID_ATTENDANCE, null);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_ROLES, VALID_CCAS, VALID_AMOUNT, VALID_ATTENDANCE, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Sessions.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

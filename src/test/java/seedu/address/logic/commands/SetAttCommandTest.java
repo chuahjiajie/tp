@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SESSIONS;
-
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -20,7 +19,7 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.SetAttDescriptorBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for AssignCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for SetAttCommand.
  */
 public class SetAttCommandTest {
 
