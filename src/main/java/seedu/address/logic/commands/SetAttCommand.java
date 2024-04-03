@@ -18,6 +18,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.amount.Amount;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -44,7 +46,7 @@ public class SetAttCommand extends Command {
             + PREFIX_SESSIONS + "10";
 
     public static final String MESSAGE_SETATT_PERSON_SUCCESS = "Set Attendance for Person: %1$s";
-    public static final String MESSAGE_ATT_NOT_SET = "Integer has to be provided after /att or /s";
+    public static final String MESSAGE_ATT_NOT_SET = "Positive Integer has to be provided after /att and /s";
     public static final String MESSAGE_DUPLICATE_PERSON = "Attendance has already been set to that value";
 
     private final Index index;
@@ -72,7 +74,7 @@ public class SetAttCommand extends Command {
         }
 
         Person personToAssign = lastShownList.get(index.getZeroBased());
-        Person assignedPerson = createAssignedPerson(personToAssign, assignPersonDescriptor);
+        Person assignedPerson = createAssignedPerson(personToAssign, setAttDescriptor);
 
         if (!personToAssign.isSamePerson(assignedPerson) && model.hasPerson(assignedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -80,7 +82,7 @@ public class SetAttCommand extends Command {
 
         model.setPerson(personToAssign, assignedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ASSIGN_PERSON_SUCCESS, Messages.format(assignedPerson)));
+        return new CommandResult(String.format(MESSAGE_SETATT_PERSON_SUCCESS, Messages.format(assignedPerson)));
     }
 
     /**
@@ -116,13 +118,12 @@ public class SetAttCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code roles} is used internally.
+         * A defensive copy of {@code SetAtt} is used internally.
          */
         public SetAttDescriptor(SetAttCommand.SetAttDescriptor toCopy) {
             setAtt(toCopy.attendance);
             setSess(toCopy.sessions);
         }
-
 
         /**
          * Returns true if at least all fields are edited.
@@ -131,17 +132,22 @@ public class SetAttCommand extends Command {
             return CollectionUtil.isNotNull(attendance, sessions);
         }
 
-        public void setAtt(int attendance) {
+        public void setAtt(Attendance attendance) {
             this.attendance = attendance;
         }
 
-        public void setSess(int sessions) {
+        public Optional<Attendance> getAtt() {
+            return (attendance != null) ? Optional.of(attendance) : Optional.empty();
+        }
+
+        public void setSess(Sessions sessions) {
             this.sessions = sessions;
         }
 
-        public int getAtt() {
-            return (attendance != null) ? Optional.of(Collections.unmodifiableSet(role)) : Optional.empty();
+        public Optional<Sessions> getSess() {
+            return (attendance != null) ? Optional.of(sessions) : Optional.empty();
         }
+
 
         @Override
         public boolean equals(Object other) {
@@ -150,18 +156,20 @@ public class SetAttCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof AssignCommand.AssignPersonDescriptor)) {
+            if (!(other instanceof SetAttCommand.SetAttDescriptor)) {
                 return false;
             }
 
-            AssignCommand.AssignPersonDescriptor otherAssignDescriptor = (AssignCommand.AssignPersonDescriptor) other;
-            return Objects.equals(role, otherAssignDescriptor.role);
+            SetAttCommand.SetAttDescriptor otherSetAttDescriptor = (SetAttCommand.SetAttDescriptor) other;
+            return Objects.equals(attendance, otherSetAttDescriptor.attendance)
+                    && Objects.equals(sessions, otherSetAttDescriptor.sessions);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("role", role)
+                    .add("attendance", attendance)
+                    .add("sessions", sessions)
                     .toString();
         }
     }
