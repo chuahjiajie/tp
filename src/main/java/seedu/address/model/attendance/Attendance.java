@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Attendance {
 
-    public static final String MESSAGE_CONSTRAINTS = "Attendance should be a positive integer" +
-            "sessions";
+    public static final String MESSAGE_CONSTRAINTS = "Attendance should be a positive integer"
+            + "sessions";
     public static final String VALIDATION_REGEX = "[0-9]+";
 
     public final int attendance;

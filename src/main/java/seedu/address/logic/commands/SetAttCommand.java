@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SESSIONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -74,7 +73,7 @@ public class SetAttCommand extends Command {
         }
 
         Person personToAssign = lastShownList.get(index.getZeroBased());
-        Person assignedPerson = createAssignedPerson(personToAssign, setAttDescriptor);
+        Person assignedPerson = createSetAttPerson(personToAssign, setAttDescriptor);
 
         if (!personToAssign.isSamePerson(assignedPerson) && model.hasPerson(assignedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -86,13 +85,13 @@ public class SetAttCommand extends Command {
     }
 
     /**
-     * Creates and returns an assigned person with details of the role
+     * Creates and returns an person with attendance details
      * @param personToAssign person who will be assigned
-     * @param assignPersonDescriptor details of the role to assign the person with
-     * @return Person who is assigned with a role
+     * @param setAttDescriptor details of the attendance to assign the person with
+     * @return Person who is assigned with attendance details
      */
-    private static Person createAssignedPerson(Person personToAssign,
-                                               AssignCommand.AssignPersonDescriptor assignPersonDescriptor) {
+    private static Person createSetAttPerson(Person personToAssign,
+                                               SetAttCommand.SetAttDescriptor setAttDescriptor) {
         assert personToAssign != null;
 
         Name updatedName = personToAssign.getName();
@@ -100,11 +99,13 @@ public class SetAttCommand extends Command {
         Email updatedEmail = personToAssign.getEmail();
         Address updatedAddress = personToAssign.getAddress();
         Set<Cca> updatedCcas = personToAssign.getCcas();
-        Set<Role> updatedRoles = assignPersonDescriptor.getRole().orElse(personToAssign.getRoles());
+        Set<Role> updatedRoles = personToAssign.getRoles();
         Amount updatedAmount = personToAssign.getAmount();
+        Attendance updatedAttendance = setAttDescriptor.getAtt().orElse(personToAssign.getAtt());
+        Sessions updatedSessions = setAttDescriptor.getSess().orElse(personToAssign.getSess());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedRoles, updatedCcas, updatedAmount);
+                updatedRoles, updatedCcas, updatedAmount, updatedAttendance, updatedSessions);
     }
 
     /**
