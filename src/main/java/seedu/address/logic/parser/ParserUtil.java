@@ -10,6 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.amount.Amount;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -164,5 +166,35 @@ public class ParserUtil {
             ccaSet.add(parseCca(ccaName));
         }
         return ccaSet;
+    }
+
+    /**
+     * Parses a {@code String attendance} into an {@code attendance}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code attendance} is invalid.
+     */
+    public static Attendance parseAtt(String attendance) throws ParseException {
+        requireNonNull(attendance);
+        String trimmedAtt = attendance.trim();
+        if (!Attendance.isValidAttendance(trimmedAtt)) {
+            throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
+        }
+        return new Attendance(attendance);
+    }
+
+    /**
+     * Parses a {@code String sessions} into an {@code sessions}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sessions} is invalid.
+     */
+    public static Sessions parseSess(String sessions) throws ParseException {
+        requireNonNull(sessions);
+        String trimmedSess = sessions.trim();
+        if (!Sessions.isValidSessions(trimmedSess)) {
+            throw new ParseException(Sessions.MESSAGE_CONSTRAINTS);
+        }
+        return new Sessions(sessions);
     }
 }
