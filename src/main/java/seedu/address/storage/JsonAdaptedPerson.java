@@ -153,11 +153,19 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Sessions.MESSAGE_CONSTRAINTS);
         }
         final Sessions modelSess = new Sessions(sessions);
+
+        if (isMoreThanSess(modelAtt, modelSess)) {
+            throw new IllegalValueException(Attendance.MESSAGE_LESS_THAN_CONSTRAINT);
+        }
         final Address modelAddress = new Address(address);
         final Set<Role> modelRoles = new HashSet<>(personRoles);
         final Set<Cca> modelCcas = new HashSet<>(personCcas);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRoles, modelCcas, modelAmount,
                 modelAtt, modelSess);
+    }
+
+    public boolean isMoreThanSess(Attendance attendance, Sessions sessions) {
+        return attendance.getValue() > sessions.getValue();
     }
 }
