@@ -30,11 +30,14 @@ public class Person {
     private final Set<Cca> ccas = new HashSet<>();
     private final Amount amount;
 
+    private final Metadata metadata;
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Role> roles, Set<Cca> ccas, Amount amount) {
-        requireAllNonNull(name, phone, email, address, roles, ccas, amount);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Role> roles,
+                  Set<Cca> ccas, Amount amount, Metadata metadata) {
+        requireAllNonNull(name, phone, email, address, roles, ccas, amount, metadata);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -42,6 +45,7 @@ public class Person {
         this.roles.addAll(roles);
         this.ccas.addAll(ccas);
         this.amount = amount;
+        this.metadata = metadata;
     }
 
     /**
@@ -52,7 +56,7 @@ public class Person {
      * @return new person
      */
     public Person replaceCca(Set<Cca> newCcas) {
-        return new Person(name, phone, email, address, roles, newCcas, amount);
+        return new Person(name, phone, email, address, roles, newCcas, amount, metadata);
     }
 
     public Name getName() {
@@ -92,6 +96,13 @@ public class Person {
      */
     public Amount getAmount() {
         return amount;
+    }
+
+    /**
+     * Returns the Metadata of the person.
+     */
+    public Metadata getMetadata() {
+        return metadata;
     }
 
     /**
@@ -136,13 +147,14 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && roles.equals(otherPerson.roles)
                 && ccas.equals(otherPerson.ccas)
+                && metadata.equals(otherPerson.metadata)
                 && otherPerson.getAmount().equals(getAmount());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, roles, ccas, amount);
+        return Objects.hash(name, phone, email, address, roles, ccas, amount, metadata);
     }
 
     @Override
@@ -155,6 +167,7 @@ public class Person {
                 .add("roles", roles)
                 .add("CCAs", ccas)
                 .add("amount", amount)
+                .add("metadata", metadata)
                 .toString();
     }
 
