@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Sessions {
 
-    public static final String MESSAGE_CONSTRAINTS = "Sessions should be a positive integer";
+    public static final String MESSAGE_CONSTRAINTS = "Sessions should be a non-negative integer";
     public static final String VALIDATION_REGEX = "[0-9]+";
 
     public final String value;
