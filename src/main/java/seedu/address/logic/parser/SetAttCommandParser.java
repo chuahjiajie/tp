@@ -16,6 +16,7 @@ public class SetAttCommandParser implements Parser<SetAttCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the SetAttCommand
      * and returns an SetAttCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
@@ -43,7 +44,13 @@ public class SetAttCommandParser implements Parser<SetAttCommand> {
             throw new ParseException(SetAttCommand.MESSAGE_ATT_NOT_SET);
         }
 
-        return new SetAttCommand(index, setAttDescriptor);
+        int attendanceInt = setAttDescriptor.getAtt().get().getValue();
+        int sessionsInt = setAttDescriptor.getSess().get().getValue();
 
+        if (attendanceInt > sessionsInt) {
+            throw new ParseException(SetAttCommand.MESSAGE_ATT_TOO_LARGE);
+        }
+
+        return new SetAttCommand(index, setAttDescriptor);
     }
 }

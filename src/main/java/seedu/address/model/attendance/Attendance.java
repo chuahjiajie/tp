@@ -26,6 +26,10 @@ public class Attendance {
         this.attendance = Integer.parseInt(attendance);
     }
 
+    public int getValue() {
+        return attendance;
+    }
+
     /**
      * Returns true if a given string is a valid attendance number.
      */

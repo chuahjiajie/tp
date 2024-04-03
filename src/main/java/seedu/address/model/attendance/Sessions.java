@@ -26,6 +26,10 @@ public class Sessions {
         this.sessions = Integer.parseInt(sessions);
     }
 
+    public int getValue() {
+        return sessions;
+    }
+
     /**
      * Returns true if a given string is a valid session number.
      */

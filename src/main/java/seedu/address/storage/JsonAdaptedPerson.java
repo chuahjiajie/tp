@@ -33,6 +33,8 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final List<JsonAdaptedCca> ccas = new ArrayList<>();
     private final JsonAdaptedAmount amount;
+    private final String attendance;
+    private final String sessions;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -41,7 +43,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("roles") List<JsonAdaptedRole> roles, @JsonProperty("CCAs") List<JsonAdaptedCca> ccas,
-            @JsonProperty("amount") JsonAdaptedAmount amount) {
+            @JsonProperty("amount") JsonAdaptedAmount amount, @JsonProperty("attendance") String attendance,
+            @JsonProperty("sessions") String sessions) {
         this.name = name;
         this.phone = phone;
         this.email = email;

@@ -46,6 +46,7 @@ public class SetAttCommand extends Command {
 
     public static final String MESSAGE_SETATT_PERSON_SUCCESS = "Set Attendance for Person: %1$s";
     public static final String MESSAGE_ATT_NOT_SET = "Positive Integer has to be provided after /att and /s";
+    public static final String MESSAGE_ATT_TOO_LARGE = "Attendance number exceeds sessions number";
     public static final String MESSAGE_DUPLICATE_PERSON = "Attendance has already been set to that value";
 
     private final Index index;
