@@ -34,7 +34,9 @@ public class TypicalPersons {
             .withEmail("johnd@example.com").withPhone("98765432")
             .withRoles("owesMoney", "friends")
             .withCcas("NUS Cycling", "NUS Bakes")
-            .withAmount("20.00").build();
+            .withAmount("20.00")
+            .withAtt()
+            .withSess().build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withCcas("NUS Cycling")

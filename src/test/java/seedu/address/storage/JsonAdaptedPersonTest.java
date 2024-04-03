@@ -31,6 +31,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final JsonAdaptedAmount VALID_AMOUNT = new JsonAdaptedAmount(BENSON.getAmount());
+    private static final String VALID_ATTENDANCE =
     private static final List<JsonAdaptedRole> VALID_ROLES = BENSON.getRoles().stream()
             .map(JsonAdaptedRole::new)
             .collect(Collectors.toList());
