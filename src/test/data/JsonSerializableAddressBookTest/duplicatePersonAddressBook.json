@@ -9,7 +9,9 @@
     "CCAs" : [ "NUS Cycling" ],
     "amount" : {
       "value" : "0.0"
-    }
+    },
+    "attendance": [ "0" ],
+    "sessions": [ "1" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -19,6 +21,8 @@
     "CCAs" : [ "NUS Cycling" ],
     "amount" : {
       "value" : "0.0"
-    }
+    },
+    "attendance": [ "0" ],
+    "sessions": [ "1" ]
   } ]
 }

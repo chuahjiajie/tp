@@ -2,12 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SESSIONS;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.SetAttCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new SetAttCommand Object
@@ -25,6 +28,10 @@ public class SetAttCommandParser implements Parser<SetAttCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ATTENDANCE, PREFIX_SESSIONS);
 
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetAttCommand.MESSAGE_USAGE));
+        }
         Index index;
 
         try {
@@ -40,10 +47,6 @@ public class SetAttCommandParser implements Parser<SetAttCommand> {
         setAttDescriptor.setAtt(ParserUtil.parseAtt(argMultimap.getValue(PREFIX_ATTENDANCE).get()));
         setAttDescriptor.setSess(ParserUtil.parseSess(argMultimap.getValue(PREFIX_SESSIONS).get()));
 
-        if (!setAttDescriptor.isAnyFieldNotEdited()) {
-            throw new ParseException(SetAttCommand.MESSAGE_ATT_NOT_SET);
-        }
-
         int attendanceInt = setAttDescriptor.getAtt().get().getValue();
         int sessionsInt = setAttDescriptor.getSess().get().getValue();
 
@@ -52,5 +55,9 @@ public class SetAttCommandParser implements Parser<SetAttCommand> {
         }
 
         return new SetAttCommand(index, setAttDescriptor);
+    }
+
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
