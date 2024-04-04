@@ -12,6 +12,7 @@
     },
     "attendance": [ "0" ],
     "sessions": [ "1" ]
+    "metadata" : "I like to do leetcode everyday."
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -24,5 +25,6 @@
     },
     "attendance": [ "0" ],
     "sessions": [ "1" ]
+    "metadata": "I like to eat apples."
   } ]
 }

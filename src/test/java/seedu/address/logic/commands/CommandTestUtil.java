@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_METADATA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -45,6 +46,7 @@ public class CommandTestUtil {
     public static final String VALID_AMOUNT = "10.00";
     public static final String VALID_ATTENDANCE = "1";
     public static final String VALID_SESSIONS = "5";
+    public static final String VALID_METADATA = "I like to do leetcode everyday.";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -61,6 +63,7 @@ public class CommandTestUtil {
     public static final String AMOUNT_DESC_DEFAULT = " " + PREFIX_AMOUNT + VALID_AMOUNT;
     public static final String ATTENDANCE_DESC_DEFAULT = " " + PREFIX_ATTENDANCE + VALID_ATTENDANCE;
     public static final String SESSIONS_DESC_DEFAULT = " " + PREFIX_SESSIONS + VALID_SESSIONS;
+    public static final String METADATA_DESC_DEFAULT = " " + PREFIX_METADATA + VALID_METADATA;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

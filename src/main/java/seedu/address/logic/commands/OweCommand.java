@@ -18,6 +18,7 @@ import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Metadata;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -86,7 +87,7 @@ public class OweCommand extends Command {
         return new CommandResult(String.format("Owed Person: $%s", owedPerson.getAmount().toString()));
     }
 
-    private static Person createOwedPerson(Person personToOwe, Amount amount) {
+    protected static Person createOwedPerson(Person personToOwe, Amount amount) {
         assert personToOwe != null;
         Name updatedName = personToOwe.getName();
         Phone updatedPhone = personToOwe.getPhone();
@@ -97,9 +98,10 @@ public class OweCommand extends Command {
         Amount updatedAmount = new Amount(amount.toString());
         Attendance updatedAttendance = personToOwe.getAtt();
         Sessions updatedSessions = personToOwe.getSess();
+        Metadata updatedMetadata = personToOwe.getMetadata();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRoles, updatedCcas,
-                updatedAmount, updatedAttendance, updatedSessions);
+                updatedAmount, updatedAttendance, updatedSessions, updatedMetadata);
     }
 
     @Override

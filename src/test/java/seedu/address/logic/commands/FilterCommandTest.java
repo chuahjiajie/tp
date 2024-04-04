@@ -15,6 +15,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.cca.Cca;
 import seedu.address.model.person.CcaContainsKeywordPredicate;
 
 /**
@@ -33,10 +36,20 @@ public class FilterCommandTest {
 
     @Test
     public void equals() {
+        Set<Cca> firstPredicateKeywordList = Arrays
+                .asList("first")
+                .stream()
+                .map(Cca::new)
+                .collect(Collectors.toSet());
+        Set<Cca> secondPredicateKeywordList = Arrays
+                .asList("second")
+                .stream()
+                .map(Cca::new)
+                .collect(Collectors.toSet());
         CcaContainsKeywordPredicate firstPredicate =
-                new CcaContainsKeywordPredicate(Collections.singletonList("first"));
+                new CcaContainsKeywordPredicate(firstPredicateKeywordList, Optional.empty());
         CcaContainsKeywordPredicate secondPredicate =
-                new CcaContainsKeywordPredicate(Collections.singletonList("second"));
+                new CcaContainsKeywordPredicate(secondPredicateKeywordList, Optional.empty());
 
         FilterCommand findFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand findSecondCommand = new FilterCommand(secondPredicate);
@@ -80,7 +93,15 @@ public class FilterCommandTest {
 
     @Test
     public void toStringMethod() {
-        CcaContainsKeywordPredicate predicate = new CcaContainsKeywordPredicate(Arrays.asList("friends"));
+        Set<Cca> predicateKeywordsList = Arrays
+                .asList("friends")
+                .stream()
+                .map(Cca::new)
+                .collect(Collectors.toSet());
+        CcaContainsKeywordPredicate predicate = new CcaContainsKeywordPredicate(
+                predicateKeywordsList,
+                Optional.empty()
+        );
         FilterCommand filterCommand = new FilterCommand(predicate);
         String expected = FilterCommand.class.getCanonicalName() + "{cca=" + predicate + "}";
         assertEquals(expected, filterCommand.toString());
@@ -91,6 +112,6 @@ public class FilterCommandTest {
      */
     private CcaContainsKeywordPredicate preparePredicate(String userInput) {
         return new CcaContainsKeywordPredicate(Arrays.stream(userInput.split(","))
-                .map(String::trim).collect(Collectors.toList()));
+                .map(String::trim).map(Cca::new).collect(Collectors.toSet()), Optional.empty());
     }
 }

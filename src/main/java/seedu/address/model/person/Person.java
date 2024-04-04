@@ -34,12 +34,15 @@ public class Person {
     private final Attendance attendance;
     private final Sessions sessions;
 
+    private final Metadata metadata;
+
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Role> roles, Set<Cca> ccas, Amount amount,
-                  Attendance attendance, Sessions sessions) {
-        requireAllNonNull(name, phone, email, address, roles, ccas, amount, attendance, sessions);
+                  Attendance attendance, Sessions sessions, Metadata metadata) {
+        requireAllNonNull(name, phone, email, address, roles, ccas, amount, attendance, sessions, metadata);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -49,6 +52,7 @@ public class Person {
         this.amount = amount;
         this.attendance = attendance;
         this.sessions = sessions;
+        this.metadata = metadata;
     }
 
     /**
@@ -59,7 +63,7 @@ public class Person {
      * @return new person
      */
     public Person replaceCca(Set<Cca> newCcas) {
-        return new Person(name, phone, email, address, roles, newCcas, amount, attendance, sessions);
+        return new Person(name, phone, email, address, roles, newCcas, amount, attendance, sessions, metadata);
     }
 
     public Name getName() {
@@ -99,6 +103,13 @@ public class Person {
      */
     public Amount getAmount() {
         return amount;
+    }
+
+    /**
+     * Returns the Metadata of the person.
+     */
+    public Metadata getMetadata() {
+        return metadata;
     }
 
     /**
@@ -154,12 +165,14 @@ public class Person {
                 && otherPerson.getAmount().equals(getAmount())
                 && attendance.equals(otherPerson.attendance)
                 && sessions.equals(otherPerson.sessions);
+                && metadata.equals(otherPerson.metadata)
+                && otherPerson.getAmount().equals(getAmount());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, roles, ccas, amount, attendance, sessions);
+        return Objects.hash(name, phone, email, address, roles, ccas, amount, attendance, sessions, metadata);
     }
 
     @Override
@@ -174,6 +187,7 @@ public class Person {
                 .add("amount", amount)
                 .add("attendance", attendance)
                 .add("sessions", sessions)
+                .add("metadata", metadata)
                 .toString();
     }
 

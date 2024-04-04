@@ -16,6 +16,7 @@ import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Metadata;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -32,11 +33,13 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String metadata;
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final List<JsonAdaptedCca> ccas = new ArrayList<>();
     private final JsonAdaptedAmount amount;
     private final String attendance;
     private final String sessions;
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -48,7 +51,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("CCAs") List<JsonAdaptedCca> ccas,
                              @JsonProperty("amount") JsonAdaptedAmount amount,
                              @JsonProperty("attendance") String attendance,
-                             @JsonProperty("sessions") String sessions) {
+                             @JsonProperty("sessions") String sessions,
+                             @JsonProperty("metadata") String metadata) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -62,6 +66,7 @@ class JsonAdaptedPerson {
         this.amount = amount;
         this.attendance = attendance;
         this.sessions = sessions;
+        this.metadata = metadata;
     }
 
     /**
@@ -72,6 +77,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        metadata = source.getMetadata().metadata;
         amount = new JsonAdaptedAmount(source.getAmount());
         roles.addAll(source.getRoles().stream()
                 .map(JsonAdaptedRole::new)
@@ -136,6 +142,16 @@ class JsonAdaptedPerson {
         if (!Amount.isValidAmount(amount.getValue())) {
             throw new IllegalValueException(Amount.MESSAGE_CONSTRAINTS);
         }
+
+        if (metadata == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Metadata.class.getSimpleName()));
+        }
+        if (!Metadata.isValidMetadata(metadata)) {
+            throw new IllegalValueException(Metadata.MESSAGE_CONSTRAINTS);
+        }
+        final Metadata modelMetadata = new Metadata(metadata);
+
         final Amount modelAmount = amount.toModelType();
 
         if (attendance == null) {
@@ -164,7 +180,7 @@ class JsonAdaptedPerson {
         final Set<Cca> modelCcas = new HashSet<>(personCcas);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRoles, modelCcas, modelAmount,
-                modelAtt, modelSess);
+                modelAtt, modelSess, , modelMetadata);
     }
 
     public boolean isMoreThanSess(Attendance attendance, Sessions sessions) {

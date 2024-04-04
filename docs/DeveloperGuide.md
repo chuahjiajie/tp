@@ -374,7 +374,7 @@ app developers so that they can immediately improve the features. The process is
 2. User fill in the feedback form based on the issues that they have.
 3. User submit the feedback form (Google Form)
 4. App Developers receive the feedback
-   
+
 As CCA members participates in their CCA activities and events, they may want
 certain things to improve in their CCA. At the same time, the Exco members would
 want to know how their CCA management or ways of handling events/activities can improve.

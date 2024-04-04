@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_METADATA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -19,6 +20,7 @@ import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Metadata;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -37,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ROLE,
-                        PREFIX_CCA);
+                        PREFIX_CCA, PREFIX_METADATA);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -51,11 +53,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
         Set<Cca> ccaList = ParserUtil.parseCcas(argMultimap.getAllValues(PREFIX_CCA));
+        Metadata metadata = ParserUtil.parseMetadata(argMultimap.getValue(PREFIX_METADATA).get());
         Amount amount = new Amount("0.0");
         Attendance attendance = new Attendance("0");
         Sessions sessions = new Sessions("0");
 
-        Person person = new Person(name, phone, email, address, roleList, ccaList, amount, attendance, sessions);
+        Person person = new Person(name, phone, email, address, roleList, ccaList, amount, attendance, sessions, metadata);
 
         return new AddCommand(person);
     }

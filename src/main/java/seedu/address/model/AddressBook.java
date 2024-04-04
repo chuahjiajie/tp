@@ -99,11 +99,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a cca to the address book.
+     * The cca must not already exist in the address book.
      */
     public void addCca(Cca c) {
         ccas.add(c);
+    }
+
+    /**
+     * Removes a cca to the address book.
+     * The cca must not already exist in the address book.
+     */
+    public void removeCca(Cca c) {
+        ccas.remove(c);
     }
 
     /**

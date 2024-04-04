@@ -1,3 +1,5 @@
+// Part of the code is adapted from original AB3 Code. All credits and thanks to the original
+// CS2103T teaching team for this.
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -22,6 +24,7 @@ import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Metadata;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -101,9 +104,10 @@ public class AssignCommand extends Command {
         Amount updatedAmount = personToAssign.getAmount();
         Attendance updatedAttendance = personToAssign.getAtt();
         Sessions updatedSessions = personToAssign.getSess();
+        Metadata updatedMetadata = personToAssign.getMetadata();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedRoles, updatedCcas, updatedAmount, updatedAttendance, updatedSessions);
+                updatedRoles, updatedCcas, updatedAmount, updatedAttendance, updatedSessions, updatedMetadata);
     }
 
     /**

@@ -5,18 +5,20 @@ package seedu.address.model.amount;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.math.BigDecimal;
+
 /**
  * Represents an Amount in the address book.
  * is valid as declared in {@link #isValidAmount(String)}
  */
 public class Amount {
-    public static final String MESSAGE_CONSTRAINTS = "Amount should only contain correct numbers"
+    public static final String MESSAGE_CONSTRAINTS = "Amount should only contain correct numbers "
             + "with no more than 2 decimal places\n"
             + "and it should not be blank or negative";
     public static final String MESSAGE_NUMBER_CONSTRAINTS = "Amount should not be negative";
     private static final String AMOUNT_VALIDATION_REGEX = "(?!0\\d)\\d+(\\.\\d{1,2})?";
 
-    public final String value;
+    public final BigDecimal value;
 
     /**
      * Constructs a {@code Amount}.
@@ -26,7 +28,11 @@ public class Amount {
     public Amount(String amount) {
         requireNonNull(amount);
         checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
-        this.value = amount;
+        this.value = new BigDecimal(amount);
+    }
+
+    private Amount(BigDecimal value) {
+        this.value = value;
     }
 
     /**
@@ -41,7 +47,7 @@ public class Amount {
      * Returns true if a given string is a negative amount.
      */
     public static boolean isNegativeAmount(String test) {
-        boolean isNegativeAmount = Double.parseDouble(test) < 0;
+        boolean isNegativeAmount = new BigDecimal(test).compareTo(new BigDecimal(0)) < 0;
         return isNegativeAmount;
     }
 
@@ -54,7 +60,7 @@ public class Amount {
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override
@@ -66,10 +72,19 @@ public class Amount {
 
     @Override
     public int hashCode() {
-        return Double.hashCode(Double.parseDouble(value));
+        return value.hashCode();
     }
 
     public int compareTo(Amount other) {
-        return Double.compare(Double.parseDouble(this.value), Double.parseDouble(other.value));
+        return this.value.compareTo(other.value);
+    }
+
+    /**
+     * Returns a new amount by deducting current amount with another amount.
+     * @param other The other amount to deduct by
+     * @return A new amount.
+     */
+    public Amount deduct(Amount other) {
+        return new Amount(this.value.add(other.value));
     }
 }

@@ -30,7 +30,7 @@ public class JsonAdaptedAmount {
      * Converts a given {@code Amount} into this class for Jackson use.
      */
     public JsonAdaptedAmount(Amount source) {
-        value = source.value;
+        value = source.value.toString();
     }
 
     @JsonProperty("value")

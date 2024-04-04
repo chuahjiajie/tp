@@ -27,12 +27,12 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-        <FlowPane>
+      <FlowPane>
           <Label fx:id="rolelabel" text="Roles: "/>
           <FlowPane fx:id="roles">
         </FlowPane>
       </FlowPane>
-        <FlowPane>
+      <FlowPane>
           <Label fx:id="ccalabel" text="CCAs: "/>
           <FlowPane fx:id="ccas">
         </FlowPane>
@@ -42,6 +42,7 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="owe" styleClass="cell_small_label" text="\$owe" />
       <Label fx:id="attendance" styleClass="cell_small_label" text="\$attendance" />
+      <Label fx:id="metadata" styleClass="cell_small_label" text="\$metadata" />
     </VBox>
   </GridPane>
 </HBox>

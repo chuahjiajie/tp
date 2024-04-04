@@ -9,6 +9,7 @@ import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Metadata;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -27,6 +28,7 @@ public class PersonBuilder {
     public static final String DEFAULT_AMOUNT = "0.0";
     public static final String DEFAULT_ATTENDANCE = "0";
     public static final String DEFAULT_SESSIONS = "0";
+    public static final String DEFAULT_METADATA = "I like peaches";
 
     private Name name;
     private Phone phone;
@@ -37,6 +39,7 @@ public class PersonBuilder {
     private Amount amount;
     private Attendance attendance;
     private Sessions sessions;
+    private Metadata metadata;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -51,6 +54,7 @@ public class PersonBuilder {
         amount = new Amount(DEFAULT_AMOUNT);
         attendance = new Attendance(DEFAULT_ATTENDANCE);
         sessions = new Sessions(DEFAULT_SESSIONS);
+        metadata = new Metadata(DEFAULT_METADATA);
     }
 
     /**
@@ -66,6 +70,7 @@ public class PersonBuilder {
         amount = personToCopy.getAmount();
         attendance = personToCopy.getAtt();
         sessions = personToCopy.getSess();
+        metadata = personToCopy.getMetadata();
     }
 
     /**
@@ -140,8 +145,15 @@ public class PersonBuilder {
         return this;
     }
 
+     * Sets the {@code Metadata} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMetadata(String metadata) {
+        this.metadata = new Metadata(metadata);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, roles, ccas, amount, attendance, sessions);
+        return new Person(name, phone, email, address, roles, ccas, amount, attendance, sessions, metadata);
     }
 
 }

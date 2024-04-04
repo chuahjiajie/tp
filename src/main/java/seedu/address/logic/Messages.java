@@ -53,6 +53,8 @@ public class Messages {
                 .append(person.getAtt())
                 .append("/")
                 .append(person.getSess());
+        builder.append("; Metadata: ")
+                .append(person.getMetadata());
         return builder.toString();
     }
 

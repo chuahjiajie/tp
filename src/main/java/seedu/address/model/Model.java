@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Person;
 
 /**
@@ -70,6 +71,12 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Deletes the given cca.
+     * The cca must exist in the address book.
+     */
+    void deleteCca(Cca cca);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -79,9 +86,18 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifable view of the filtered Cca list */
+    ObservableList<Cca> getFilteredCcaList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the filtered cca list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredCcaList(Predicate<Cca> predicate);
 }
