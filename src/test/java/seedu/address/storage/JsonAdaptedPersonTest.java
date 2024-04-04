@@ -138,7 +138,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidAttendance_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ROLES,
-                        VALID_CCAS, VALID_AMOUNT, INVALID_ATTENDANCE_N, VALID_SESSIONS);
+                        VALID_CCAS, VALID_AMOUNT, INVALID_ATTENDANCE_N, VALID_SESSIONS, VALID_METADATA);
         String expectedMessage = Attendance.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -146,7 +146,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_nullAttendance_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_ROLES, VALID_CCAS, VALID_AMOUNT, null, VALID_SESSIONS);
+                VALID_ROLES, VALID_CCAS, VALID_AMOUNT, null, VALID_SESSIONS, VALID_METADATA);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Attendance.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -155,7 +155,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidSessions_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ROLES,
-                        VALID_CCAS, VALID_AMOUNT, VALID_ATTENDANCE, INVALID_SESSIONS_N);
+                        VALID_CCAS, VALID_AMOUNT, VALID_ATTENDANCE, INVALID_SESSIONS_N, VALID_METADATA);
         String expectedMessage = Sessions.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -163,7 +163,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_nullSessions_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_ROLES, VALID_CCAS, VALID_AMOUNT, VALID_ATTENDANCE, null);
+                VALID_ROLES, VALID_CCAS, VALID_AMOUNT, VALID_ATTENDANCE, null, VALID_METADATA);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Sessions.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -172,7 +172,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidSetAtt_throwsParseException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ROLES,
-                        VALID_CCAS, VALID_AMOUNT, INVALID_ATTENDANCE, INVALID_SESSIONS);
+                        VALID_CCAS, VALID_AMOUNT, INVALID_ATTENDANCE, INVALID_SESSIONS, VALID_METADATA);
         String expectedMessage = Attendance.MESSAGE_LESS_THAN_CONSTRAINT;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

@@ -31,7 +31,7 @@ public class TypicalPersons {
             .withCcas("NUS Cycling")
             .withAmount("10.00")
             .withAtt("0")
-            .withSess("1").build();
+            .withSess("1")
             .withMetadata("I like to eat apples.").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
@@ -40,21 +40,21 @@ public class TypicalPersons {
             .withCcas("NUS Cycling", "NUS Bakes")
             .withAmount("20.00")
             .withAtt("0")
-            .withSess("1").build();
+            .withSess("1")
             .withMetadata("I like to eat oranges.").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withCcas("NUS Cycling")
             .withAmount("30.00")
             .withAtt("0")
-            .withSess("1").build();
+            .withSess("1")
             .withMetadata("I like to eat apples.").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withRoles("friends")
             .withCcas("NUS Cycling")
             .withAmount("40.00")
             .withAtt("0")
-            .withSess("1").build();
+            .withSess("1")
             .withMetadata("I like to play basketball.").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").withMetadata("I support Manchester United.")
@@ -63,7 +63,7 @@ public class TypicalPersons {
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withAmount("50.00")
             .withAtt("0")
-            .withSess("1").build();
+            .withSess("1")
             .withMetadata("I support Manchester United.").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").withMetadata("I support Manchester United.")

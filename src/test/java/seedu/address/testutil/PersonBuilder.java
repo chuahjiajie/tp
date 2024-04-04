@@ -145,6 +145,7 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
      * Sets the {@code Metadata} of the {@code Person} that we are building.
      */
     public PersonBuilder withMetadata(String metadata) {

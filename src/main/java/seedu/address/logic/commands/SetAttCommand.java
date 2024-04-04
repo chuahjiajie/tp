@@ -20,11 +20,7 @@ import seedu.address.model.amount.Amount;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.roles.Role;
 
 /**
@@ -104,9 +100,10 @@ public class SetAttCommand extends Command {
         Amount updatedAmount = personToAssign.getAmount();
         Attendance updatedAttendance = setAttDescriptor.getAtt().orElse(personToAssign.getAtt());
         Sessions updatedSessions = setAttDescriptor.getSess().orElse(personToAssign.getSess());
+        Metadata updatedMetaData = personToAssign.getMetadata();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedRoles, updatedCcas, updatedAmount, updatedAttendance, updatedSessions);
+                updatedRoles, updatedCcas, updatedAmount, updatedAttendance, updatedSessions, updatedMetaData);
     }
 
     /**
