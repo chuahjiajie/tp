@@ -164,9 +164,8 @@ public class Person {
                 && ccas.equals(otherPerson.ccas)
                 && otherPerson.getAmount().equals(getAmount())
                 && attendance.equals(otherPerson.attendance)
-                && sessions.equals(otherPerson.sessions);
-                && metadata.equals(otherPerson.metadata)
-                && otherPerson.getAmount().equals(getAmount());
+                && sessions.equals(otherPerson.sessions)
+                && metadata.equals(otherPerson.metadata);
     }
 
     @Override
