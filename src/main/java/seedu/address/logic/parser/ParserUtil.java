@@ -197,6 +197,7 @@ public class ParserUtil {
             throw new ParseException(Sessions.MESSAGE_CONSTRAINTS);
         }
         return new Sessions(sessions);
+    }
 
     /**
      * Parses a {@code String sessions} into an {@code sessions}.
