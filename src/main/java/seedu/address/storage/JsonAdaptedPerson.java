@@ -180,7 +180,7 @@ class JsonAdaptedPerson {
         final Set<Cca> modelCcas = new HashSet<>(personCcas);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRoles, modelCcas, modelAmount,
-                modelAtt, modelSess, , modelMetadata);
+                modelAtt, modelSess, modelMetadata);
     }
 
     public boolean isMoreThanSess(Attendance attendance, Sessions sessions) {
