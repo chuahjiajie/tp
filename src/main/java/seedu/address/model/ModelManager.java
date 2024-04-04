@@ -114,6 +114,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void deleteCca(Cca target) {
+        addressBook.removeCca(target);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

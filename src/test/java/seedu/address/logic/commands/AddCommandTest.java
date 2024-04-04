@@ -168,6 +168,11 @@ public class AddCommandTest {
         public void updateFilteredCcaList(Predicate<Cca> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteCca(Cca cca) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
     /**
      * A Model stub that contains a single person.
