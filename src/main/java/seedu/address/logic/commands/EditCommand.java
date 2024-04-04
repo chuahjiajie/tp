@@ -24,6 +24,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.amount.Amount;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -110,9 +112,11 @@ public class EditCommand extends Command {
         Set<Cca> updatedCcas = editPersonDescriptor.getCcas().orElse(personToEdit.getCcas());
         Metadata updatedMetadata = editPersonDescriptor.getMetadata().orElse(personToEdit.getMetadata());
         Amount updatedAmount = personToEdit.getAmount();
+        Attendance updatedAttendance = personToEdit.getAtt();
+        Sessions updatedSessions = personToEdit.getSess();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedRoles, updatedCcas, updatedAmount, updatedMetadata);
+                updatedRoles, updatedCcas, updatedAmount, updatedAttendance, updatedSessions, updatedMetadata);
     }
 
     @Override

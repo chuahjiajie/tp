@@ -15,6 +15,8 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.amount.Amount;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -53,8 +55,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Cca> ccaList = ParserUtil.parseCcas(argMultimap.getAllValues(PREFIX_CCA));
         Metadata metadata = ParserUtil.parseMetadata(argMultimap.getValue(PREFIX_METADATA).get());
         Amount amount = new Amount("0.0");
+        Attendance attendance = new Attendance("0");
+        Sessions sessions = new Sessions("0");
 
-        Person person = new Person(name, phone, email, address, roleList, ccaList, amount, metadata);
+        Person person = new Person(name, phone, email, address, roleList, ccaList, amount, attendance, sessions,
+                metadata);
 
         return new AddCommand(person);
     }

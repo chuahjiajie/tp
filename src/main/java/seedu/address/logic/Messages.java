@@ -49,6 +49,10 @@ public class Messages {
         person.getCcas().forEach(builder::append);
         builder.append("; Amount: ")
                 .append(person.getAmount());
+        builder.append("; Attendance: ")
+                .append(person.getAtt())
+                .append("/")
+                .append(person.getSess());
         builder.append("; Metadata: ")
                 .append(person.getMetadata());
         return builder.toString();

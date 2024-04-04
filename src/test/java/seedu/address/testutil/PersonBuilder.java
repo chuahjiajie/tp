@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.amount.Amount;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -24,6 +26,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_AMOUNT = "0.0";
+    public static final String DEFAULT_ATTENDANCE = "0";
+    public static final String DEFAULT_SESSIONS = "0";
     public static final String DEFAULT_METADATA = "I like peaches";
 
     private Name name;
@@ -33,6 +37,8 @@ public class PersonBuilder {
     private Set<Role> roles;
     private Set<Cca> ccas;
     private Amount amount;
+    private Attendance attendance;
+    private Sessions sessions;
     private Metadata metadata;
 
     /**
@@ -46,6 +52,8 @@ public class PersonBuilder {
         roles = new HashSet<>();
         ccas = new HashSet<>();
         amount = new Amount(DEFAULT_AMOUNT);
+        attendance = new Attendance(DEFAULT_ATTENDANCE);
+        sessions = new Sessions(DEFAULT_SESSIONS);
         metadata = new Metadata(DEFAULT_METADATA);
     }
 
@@ -60,6 +68,8 @@ public class PersonBuilder {
         roles = new HashSet<>(personToCopy.getRoles());
         ccas = new HashSet<>(personToCopy.getCcas());
         amount = personToCopy.getAmount();
+        attendance = personToCopy.getAtt();
+        sessions = personToCopy.getSess();
         metadata = personToCopy.getMetadata();
     }
 
@@ -74,7 +84,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withRoles(String ... roles) {
+    public PersonBuilder withRoles(String... roles) {
         this.roles = SampleDataUtil.getRoleSet(roles);
         return this;
     }
@@ -82,7 +92,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code CCA} into a {@code Set<CCA>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withCcas(String ... ccas) {
+    public PersonBuilder withCcas(String... ccas) {
         this.ccas = SampleDataUtil.getCcaSet(ccas);
         return this;
     }
@@ -120,6 +130,22 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Attendance} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAtt(String attendance) {
+        this.attendance = new Attendance(attendance);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Sessions} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSess(String sessions) {
+        this.sessions = new Sessions(sessions);
+        return this;
+    }
+
+    /**
      * Sets the {@code Metadata} of the {@code Person} that we are building.
      */
     public PersonBuilder withMetadata(String metadata) {
@@ -128,7 +154,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, roles, ccas, amount, metadata);
+        return new Person(name, phone, email, address, roles, ccas, amount, attendance, sessions, metadata);
     }
 
 }

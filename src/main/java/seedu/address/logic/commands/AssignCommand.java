@@ -19,6 +19,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.amount.Amount;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -100,10 +102,12 @@ public class AssignCommand extends Command {
         Set<Cca> updatedCcas = personToAssign.getCcas();
         Set<Role> updatedRoles = assignPersonDescriptor.getRole().orElse(personToAssign.getRoles());
         Amount updatedAmount = personToAssign.getAmount();
+        Attendance updatedAttendance = personToAssign.getAtt();
+        Sessions updatedSessions = personToAssign.getSess();
         Metadata updatedMetadata = personToAssign.getMetadata();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedRoles, updatedCcas, updatedAmount, updatedMetadata);
+                updatedRoles, updatedCcas, updatedAmount, updatedAttendance, updatedSessions, updatedMetadata);
     }
 
     /**

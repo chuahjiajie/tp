@@ -11,6 +11,8 @@
     "amount" : {
       "value" : "10.00"
     },
+    "attendance": "0",
+    "sessions": "1",
     "metadata": "I like to eat apples."
   }, {
     "name" : "Benson Meier",
@@ -22,6 +24,8 @@
       "value" : "20.00"
     },
     "CCAs" : [ "NUS Cycling", "NUS Bakes" ],
+    "attendance": "0",
+    "sessions": "1",
     "metadata": "I like to eat oranges."
   }, {
     "name" : "Carl Kurz",
@@ -33,6 +37,8 @@
       "value" : "30.00"
     },
     "CCAs" : [ "NUS Cycling" ],
+    "attendance": "0",
+    "sessions": "1",
     "metadata": "I like to eat apples."
   }, {
     "name" : "Daniel Meier",
@@ -44,6 +50,8 @@
       "value" : "40.00"
     },
     "CCAs" : [ "NUS Cycling" ],
+    "attendance": "0",
+    "sessions": "1",
     "metadata": "I like to play basketball."
   }, {
     "name" : "Elle Meyer",
@@ -55,6 +63,8 @@
       "value" : "0.0"
     },
     "CCAs" : [ ],
+    "attendance": "0",
+    "sessions": "0",
     "metadata": "I support Manchester United."
   }, {
     "name" : "Fiona Kunz",
@@ -66,6 +76,8 @@
       "value" : "50.00"
     },
     "CCAs" : [ ],
+    "attendance": "0",
+    "sessions": "1",
     "metadata": "I support Manchester United."
   }, {
     "name" : "George Best",
@@ -77,6 +89,8 @@
       "value" : "0.0"
     },
     "CCAs" : [ ],
+    "attendance": "0",
+    "sessions": "0",
     "metadata": "I support Manchester United."
   } ]
 }

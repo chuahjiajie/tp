@@ -9,6 +9,8 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.amount.Amount;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
 import seedu.address.model.roles.Role;
 
@@ -29,15 +31,18 @@ public class Person {
     private final Set<Role> roles = new HashSet<>();
     private final Set<Cca> ccas = new HashSet<>();
     private final Amount amount;
+    private final Attendance attendance;
+    private final Sessions sessions;
 
     private final Metadata metadata;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Role> roles,
-                  Set<Cca> ccas, Amount amount, Metadata metadata) {
-        requireAllNonNull(name, phone, email, address, roles, ccas, amount, metadata);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Role> roles, Set<Cca> ccas, Amount amount,
+                  Attendance attendance, Sessions sessions, Metadata metadata) {
+        requireAllNonNull(name, phone, email, address, roles, ccas, amount, attendance, sessions, metadata);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,6 +50,8 @@ public class Person {
         this.roles.addAll(roles);
         this.ccas.addAll(ccas);
         this.amount = amount;
+        this.attendance = attendance;
+        this.sessions = sessions;
         this.metadata = metadata;
     }
 
@@ -56,7 +63,7 @@ public class Person {
      * @return new person
      */
     public Person replaceCca(Set<Cca> newCcas) {
-        return new Person(name, phone, email, address, roles, newCcas, amount, metadata);
+        return new Person(name, phone, email, address, roles, newCcas, amount, attendance, sessions, metadata);
     }
 
     public Name getName() {
@@ -112,6 +119,14 @@ public class Person {
         return amount;
     }
 
+    public Attendance getAtt() {
+        return attendance;
+    }
+
+    public Sessions getSess() {
+        return sessions;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -147,14 +162,16 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && roles.equals(otherPerson.roles)
                 && ccas.equals(otherPerson.ccas)
-                && metadata.equals(otherPerson.metadata)
-                && otherPerson.getAmount().equals(getAmount());
+                && otherPerson.getAmount().equals(getAmount())
+                && attendance.equals(otherPerson.attendance)
+                && sessions.equals(otherPerson.sessions)
+                && metadata.equals(otherPerson.metadata);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, roles, ccas, amount, metadata);
+        return Objects.hash(name, phone, email, address, roles, ccas, amount, attendance, sessions, metadata);
     }
 
     @Override
@@ -167,6 +184,8 @@ public class Person {
                 .add("roles", roles)
                 .add("CCAs", ccas)
                 .add("amount", amount)
+                .add("attendance", attendance)
+                .add("sessions", sessions)
                 .add("metadata", metadata)
                 .toString();
     }

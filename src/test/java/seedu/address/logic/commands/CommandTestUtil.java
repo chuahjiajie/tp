@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_METADATA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SESSIONS;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -42,6 +44,8 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_FRIEND = "friend";
     public static final String VALID_CCA = "NUS Cycling";
     public static final String VALID_AMOUNT = "10.00";
+    public static final String VALID_ATTENDANCE = "1";
+    public static final String VALID_SESSIONS = "5";
     public static final String VALID_METADATA = "I like to do leetcode everyday.";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -57,6 +61,8 @@ public class CommandTestUtil {
     public static final String ROLE_DESC_HEAD = " " + PREFIX_ROLE + VALID_ROLE_HEAD;
     public static final String CCA_DESC_DEFAULT = " " + PREFIX_CCA + VALID_CCA;
     public static final String AMOUNT_DESC_DEFAULT = " " + PREFIX_AMOUNT + VALID_AMOUNT;
+    public static final String ATTENDANCE_DESC_DEFAULT = " " + PREFIX_ATTENDANCE + VALID_ATTENDANCE;
+    public static final String SESSIONS_DESC_DEFAULT = " " + PREFIX_SESSIONS + VALID_SESSIONS;
     public static final String METADATA_DESC_DEFAULT = " " + PREFIX_METADATA + VALID_METADATA;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -65,7 +71,8 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "hubby*"; // '*' not allowed in roles
     public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "10.00.00"; // extra decimal point
-
+    public static final String INVALID_ATTENDANCE_DESC = " " + PREFIX_ATTENDANCE + "-1"; // negative integer not allowed
+    public static final String INVALID_SESSIONS_DESC = " " + PREFIX_SESSIONS + "-1"; // negative integer not allowed
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

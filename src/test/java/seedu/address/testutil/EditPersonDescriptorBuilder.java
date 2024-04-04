@@ -103,9 +103,9 @@ public class EditPersonDescriptorBuilder {
      * @param metadata
      * @return
      */
-    public EditPersonDescriptor withMetadata(String metadata) {
+    public EditPersonDescriptorBuilder withMetadata(String metadata) {
         descriptor.setMetadata(new Metadata(metadata));
-        return this.build();
+        return this;
     }
 
     public EditPersonDescriptor build() {
