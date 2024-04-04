@@ -10,8 +10,8 @@
     "amount" : {
       "value" : "0.0"
     },
-    "attendance": [ "0" ],
-    "sessions": [ "1" ]
+    "attendance": "0",
+    "sessions": "1",
     "metadata" : "I like to do leetcode everyday."
   }, {
     "name": "Alice Pauline",
@@ -23,8 +23,8 @@
     "amount" : {
       "value" : "0.0"
     },
-    "attendance": [ "0" ],
-    "sessions": [ "1" ]
+    "attendance": "0",
+    "sessions": "1",
     "metadata": "I like to eat apples."
   } ]
 }

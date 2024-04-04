@@ -49,7 +49,7 @@ public class Attendance {
         }
 
         Attendance otherAtt = (Attendance) other;
-        return value == otherAtt.value;
+        return value.equals(otherAtt.value);
     }
 
     /**

@@ -48,7 +48,7 @@ public class Sessions {
         }
 
         Sessions otherSess = (Sessions) other;
-        return value == otherSess.value;
+        return value.equals(otherSess.value);
     }
 
     /**
