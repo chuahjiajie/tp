@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.storage.JsonAdaptedAmount;
@@ -34,14 +36,14 @@ public class AmountTest {
     @Test
     public void testHashCode() {
         Amount amount = new Amount("30");
-        int expectedHashCode = Double.hashCode(30);
+        int expectedHashCode = new BigDecimal(30).hashCode();
         assertEquals(expectedHashCode, amount.hashCode());
     }
 
     @Test
     public void testToString() {
         Amount amount = new Amount("100");
-        assertEquals(amount.toString(), amount.value);
+        assertEquals(amount.toString(), amount.value.toString());
     }
 
     @Test

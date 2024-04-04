@@ -85,7 +85,7 @@ public class OweCommand extends Command {
         return new CommandResult(String.format("Owed Person: $%s", owedPerson.getAmount().toString()));
     }
 
-    private static Person createOwedPerson(Person personToOwe, Amount amount) {
+    protected static Person createOwedPerson(Person personToOwe, Amount amount) {
         assert personToOwe != null;
         Name updatedName = personToOwe.getName();
         Phone updatedPhone = personToOwe.getPhone();
