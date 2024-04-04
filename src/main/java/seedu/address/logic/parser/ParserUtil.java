@@ -198,6 +198,10 @@ public class ParserUtil {
         }
         return new Sessions(sessions);
 
+    /**
+     * Parses a {@code String sessions} into an {@code sessions}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
      * Parses {@code Metadata metadata} into a {@code Metadata}.
      */
     public static Metadata parseMetadata(String metadata) throws ParseException {
