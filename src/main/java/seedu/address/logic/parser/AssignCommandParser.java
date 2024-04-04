@@ -1,3 +1,5 @@
+// Part of the code is adapted from original AB3 Code. All credits and thanks to the original
+// CS2103T teaching team for this.
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;

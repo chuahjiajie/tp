@@ -1,33 +1,40 @@
 package seedu.address.model.person;
 
-import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.cca.Cca;
+import seedu.address.model.roles.Role;
 
 
 /**
  * Tests that a {@code Person}'s {@code Cca} matches any of the keywords given.
  */
 public class CcaContainsKeywordPredicate implements Predicate<Person> {
-    private final List<Cca> ccas;
+    private final Set<Cca> ccas;
+    private final Optional<Set<Role>> roles;
 
     /**
      * Returns a CcaContainsKeywordsPredicate object by taking a list of the Cca names.
      */
-    public CcaContainsKeywordPredicate(List<String> keywords) {
+    public CcaContainsKeywordPredicate(Set<Cca> keywords, Optional<Set<Role>> roles) {
 
-        this.ccas = keywords.stream().map(Cca::new).collect(Collectors.toList());
+        this.ccas = keywords;
+        this.roles = roles;
     }
 
     @Override
     public boolean test(Person person) {
         Set<Cca> personCcas = person.getCcas();
-        return ccas.stream()
+        Set<Role> personRoles = person.getRoles();
+        boolean matchesCCa = ccas.stream()
                 .anyMatch(personCcas::contains);
+        boolean matchesRole = this.roles
+                .map(realRoles -> realRoles.stream().anyMatch(personRoles::contains))
+                .orElse(true);
+        return matchesCCa && matchesRole;
     }
 
     @Override
@@ -42,11 +49,15 @@ public class CcaContainsKeywordPredicate implements Predicate<Person> {
         }
 
         CcaContainsKeywordPredicate otherNameContainsKeywordsPredicate = (CcaContainsKeywordPredicate) other;
-        return ccas.equals(otherNameContainsKeywordsPredicate.ccas);
+        return ccas.equals(otherNameContainsKeywordsPredicate.ccas)
+                && roles.equals(otherNameContainsKeywordsPredicate.roles);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("ccas", ccas).toString();
+        return new ToStringBuilder(this)
+                .add("ccas", ccas)
+                .add("roles", roles)
+                .toString();
     }
 }

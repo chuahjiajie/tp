@@ -8,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -20,17 +21,34 @@ public class RoleContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
-        List<String> firstPredicateKeywordList = Collections.singletonList("first");
-        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+        Set<Cca> firstPredicateKeywordList = Arrays
+                .asList("first")
+                .stream()
+                .map(Cca::new)
+                .collect(Collectors.toSet());
+        Set<Cca> secondPredicateKeywordList = Arrays
+                .asList("first", "second")
+                .stream()
+                .map(Cca::new)
+                .collect(Collectors.toSet());
 
-        CcaContainsKeywordPredicate firstPredicate = new CcaContainsKeywordPredicate(firstPredicateKeywordList);
-        CcaContainsKeywordPredicate secondPredicate = new CcaContainsKeywordPredicate(secondPredicateKeywordList);
+        CcaContainsKeywordPredicate firstPredicate = new CcaContainsKeywordPredicate(
+                firstPredicateKeywordList,
+                Optional.empty()
+        );
+        CcaContainsKeywordPredicate secondPredicate = new CcaContainsKeywordPredicate(
+                secondPredicateKeywordList,
+                Optional.empty()
+        );
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        CcaContainsKeywordPredicate firstPredicateCopy = new CcaContainsKeywordPredicate(firstPredicateKeywordList);
+        CcaContainsKeywordPredicate firstPredicateCopy = new CcaContainsKeywordPredicate(
+                firstPredicateKeywordList,
+                Optional.empty()
+        );
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -44,40 +62,65 @@ public class RoleContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameContainsKeywords_returnsTrue() {
+    public void test_ccaContainsKeywords_returnsTrue() {
         // One keyword
-        CcaContainsKeywordPredicate predicate = new CcaContainsKeywordPredicate(Collections.singletonList("friends"));
+        Set<Cca> firstPredicateKeywordList = Arrays
+                .asList("friends")
+                .stream()
+                .map(Cca::new)
+                .collect(Collectors.toSet());
+        CcaContainsKeywordPredicate predicate = new CcaContainsKeywordPredicate(
+                firstPredicateKeywordList,
+                Optional.empty()
+        );
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withCcas("friends").build()));
 
         // Multiple keywords
-        predicate = new CcaContainsKeywordPredicate(Arrays.asList("friends", "classmates"));
+        firstPredicateKeywordList = Arrays
+                .asList("friends", "classmates")
+                .stream()
+                .map(Cca::new)
+                .collect(Collectors.toSet());
+        predicate = new CcaContainsKeywordPredicate(firstPredicateKeywordList, Optional.empty());
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withCcas("friends").build()));
 
         // Only one matching keyword
-        predicate = new CcaContainsKeywordPredicate(Arrays.asList("friends", "classmates"));
+        predicate = new CcaContainsKeywordPredicate(firstPredicateKeywordList, Optional.empty());
         assertTrue(predicate.test(
                 new PersonBuilder().withName("Alice Carol").withCcas("friends", "classmates").build()));
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_ccaDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        CcaContainsKeywordPredicate predicate = new CcaContainsKeywordPredicate(Collections.emptyList());
+        CcaContainsKeywordPredicate predicate = new CcaContainsKeywordPredicate(
+                Collections.emptySet(),
+                Optional.empty()
+        );
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
 
         // Non-matching keyword
-        predicate = new CcaContainsKeywordPredicate(Arrays.asList("Friends"));
+        Set<Cca> firstPredicateKeywordList = Arrays
+                .asList("Friends")
+                .stream()
+                .map(Cca::new)
+                .collect(Collectors.toSet());
+        predicate = new CcaContainsKeywordPredicate(firstPredicateKeywordList, Optional.empty());
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withRoles("Friend").build()));
 
     }
 
     @Test
     public void toStringMethod() {
-        List<String> keywords = List.of("keyword1", "keyword2");
-        CcaContainsKeywordPredicate predicate = new CcaContainsKeywordPredicate(keywords);
+        Set<Cca> keywords = Arrays
+                .asList("keyword1", "keyword2")
+                .stream()
+                .map(Cca::new)
+                .collect(Collectors.toSet());
+        CcaContainsKeywordPredicate predicate = new CcaContainsKeywordPredicate(keywords, Optional.empty());
 
         String expected = CcaContainsKeywordPredicate.class.getCanonicalName() + "{ccas="
-                + keywords.stream().map(Cca::new).collect(Collectors.toList()) + "}";
+                + keywords + ", roles=" + Optional.empty() + "}";
         assertEquals(expected, predicate.toString());
     }
 }

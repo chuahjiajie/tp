@@ -18,9 +18,12 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters a person by their CCA "
-            + "(case-sensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: CCA [MORE CCAs]...\n"
-            + "Example: " + COMMAND_WORD + " friends";
+            + "(case-sensitive) and optionally their roles."
+            + "Displays them as a list with index numbers.\n"
+            + "Parameters: c/CCA c/[MORE CCAs]... r/ROLE /r[MORE ROLES]\n"
+            + "Example: " + COMMAND_WORD + " c/NUS Cycling r/Member";
+
+    public static final String MESSAGE_NOT_FILTER_CCA = "A CCA should be provided.";
 
     private final CcaContainsKeywordPredicate cca;
 

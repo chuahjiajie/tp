@@ -8,6 +8,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +27,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.OweCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.amount.Amount;
+import seedu.address.model.cca.Cca;
 import seedu.address.model.person.CcaContainsKeywordPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -81,10 +84,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_filter() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FilterCommand command = (FilterCommand) parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(", ")));
-        assertEquals(new FilterCommand(new CcaContainsKeywordPredicate(keywords)), command);
+        List<String> ccas = Arrays.asList("foo", "bar", "baz");
+        Set<Cca> keywords = ccas
+                .stream()
+                .map(Cca::new)
+                .collect(Collectors.toSet());
+        String cmd =
+            FilterCommand.COMMAND_WORD + " " + ccas.stream().map(cca -> "c/" + cca)
+                    .collect(Collectors.joining(" "));
+        FilterCommand command = (FilterCommand) parser.parseCommand(cmd);
+        assertEquals(new FilterCommand(new CcaContainsKeywordPredicate(keywords, Optional.empty())), command);
     }
 
     @Test

@@ -2,15 +2,20 @@
 // CS2103T teaching team for this.
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.cca.Cca;
 import seedu.address.model.person.CcaContainsKeywordPredicate;
+import seedu.address.model.roles.Role;
 
 
 /**
@@ -24,16 +29,24 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @throws ParseException if the user input does not conform to the expected format
      */
     public FilterCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        requireNonNull(args);
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CCA, PREFIX_ROLE);
+
+
+        if (argumentMultimap.getValue(PREFIX_CCA).isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_NOT_FILTER_CCA)
+            );
         }
 
-        List<String> nameKeywords = Arrays.stream(trimmedArgs.split(","))
-                .map(String::trim).collect(Collectors.toList());
+        Set<Cca> ccas = new HashSet<>(ParserUtil.parseCcas(argumentMultimap.getAllValues(PREFIX_CCA)));
 
-        return new FilterCommand(new CcaContainsKeywordPredicate(nameKeywords));
+        Optional<Set<Role>> roles = argumentMultimap.getAllValues(PREFIX_ROLE).isEmpty()
+                ? Optional.empty()
+                : Optional.of(new HashSet<>(ParserUtil.parseRoles(argumentMultimap.getAllValues(PREFIX_ROLE))));
+
+        CcaContainsKeywordPredicate predicate = new CcaContainsKeywordPredicate(ccas, roles);
+        return new FilterCommand(predicate);
     }
 
 }
