@@ -58,7 +58,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Attendance attendance = new Attendance("0");
         Sessions sessions = new Sessions("0");
 
-        Person person = new Person(name, phone, email, address, roleList, ccaList, amount, attendance, sessions, metadata);
+        Person person = new Person(name, phone, email, address, roleList, ccaList, amount, attendance, sessions,
+                metadata);
 
         return new AddCommand(person);
     }

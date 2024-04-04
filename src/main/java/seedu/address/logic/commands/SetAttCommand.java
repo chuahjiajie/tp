@@ -20,7 +20,12 @@ import seedu.address.model.amount.Amount;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.Sessions;
 import seedu.address.model.cca.Cca;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Metadata;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.roles.Role;
 
 /**
