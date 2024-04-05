@@ -239,6 +239,38 @@ Output:
 
   ![delete-output](images/UG-Basics/delete-output.png)
 
+### Set up owe amount money: `Owe`
+Set up owe amount of money in each person.
+
+Format: owe INDEX m/AMOUNT
+
+### Delete a CCA: `cca_delete`
+Delete a current existing CCA
+
+Format: cca_delete c/CCA
+
+### Remove or show CCA details: `cca display/cca remove`
+show the details of the current CCA and remove a current CCA
+
+Format: cca display c/CCA or
+        cca remove c/CCA
+
+### Charge a person with an amount of money: `charge`
+Charge a person with an amount of money by CCA and role
+
+Format: charge m/AMOUNT c/NUS CCA r/ROLES
+
+### Track attendance: `setatt`
+Set attendance for each person
+
+Format: setatt INDEX att/NUMBER s/NUMBER
+
+### Filter by CCA and roles: `filter`
+Filter the current list with CCA and roles
+
+Format: filter c/CCA r/ROLES
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Reference
@@ -278,7 +310,7 @@ Format: `help`
 
 Adds a person to the CCA Manager.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [c/CCA]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [c/CCA]…​ [d/MetaContact]`
 
 _Adds a CCA group to the CCA manager._
 
@@ -357,6 +389,38 @@ Clears all entries from the CCA Manager.
 
 Format: `clear`
 
+### Set up owe amount money: `Owe`
+Set up owe amount of money in each person.
+
+Format: owe INDEX m/AMOUNT
+
+### Delete a CCA: `cca_delete`
+Delete a current existing CCA
+
+Format: cca_delete c/CCA
+
+### Remove or show CCA details: `cca display/cca remove`
+Show the details of the current CCA and remove a current CCA
+
+Format: cca display c/CCA 
+        cca remove c/CCA
+
+### Charge a person with an amount of money: `charge`
+Charge a person with an amount of money by CCA and role
+
+Format: charge m/AMOUNT c/NUS CCA [r/ROLES]
+`[]` - Denotes optional
+
+### Filter by CCA and roles: `filter`
+Filter the current list with CCA and roles
+
+Format: filter c/CCA r/ROLES
+
+### Track attendance: `setatt`
+Set attendance for each person
+
+Format: setatt INDEX att/NUMBER s/NUMBER
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -415,12 +479,18 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [c/CCA]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/friend r/colleague c/CCA Cycling`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [c/CCA]…​ [d/MetaContact]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/friend r/colleague c/CCA Cycling d/I love eating apples`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEX`<br> e.g., `delete 3` 
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE] [c/CCA]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
-**Filter** | `filter CCA1, CCA2, ...` e.g. `filter NUS Cycling`
+**Filter** | `filter CCA1, CCA2, ...` e.g. `filter NUS Cycling` or `filter c/CCA r/ROLES` e.g. `filter c/CCA Cycling r/colleagues`
 **Assign** | `assign INDEX r/ROLE` e.g. `assign 2 r/ Member` or `assign 2 r/Member`
+**Owe**    | `owe INDEX m/AMOUNT` e.g. `owe 2 m/10.0`
+**cca_delete** | `cca_delete c/CCA` e.g. `cca_delete c/NUS Cycling`
+**charge** | `charge m/AMOUNT c/NUS CCA r/ROLES` e.g. `charge m/5.0 c/NUS Cycling r/member`
+**setatt** | `setatt INDEX att/NUMBER s/NUMBER` e.g. `setatt 2 att/6 s/7`
+**cca display** | `cca display c/CCA` e.g. `cca display c/NUS Greyhats`
+**cca remove** | `cca remove c/CCA` e.g. `cca remove c/NUS Greyhats`
 **Help**   | `help`
