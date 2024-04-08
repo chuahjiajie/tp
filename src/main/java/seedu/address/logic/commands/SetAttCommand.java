@@ -105,7 +105,7 @@ public class SetAttCommand extends Command {
         Amount updatedAmount = personToAssign.getAmount();
         Attendance updatedAttendance = setAttDescriptor.getAtt().orElse(personToAssign.getAtt());
         Sessions updatedSessions = setAttDescriptor.getSess().orElse(personToAssign.getSess());
-        Metadata updatedMetaData = personToAssign.getMetadata();
+        Optional<Metadata> updatedMetaData = personToAssign.getMetadata();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedRoles, updatedCcas, updatedAmount, updatedAttendance, updatedSessions, updatedMetaData);

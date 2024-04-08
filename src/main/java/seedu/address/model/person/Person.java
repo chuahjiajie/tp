@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -34,13 +35,13 @@ public class Person {
     private final Attendance attendance;
     private final Sessions sessions;
 
-    private final Metadata metadata;
+    private final Optional<Metadata> metadata;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Role> roles, Set<Cca> ccas, Amount amount,
-                  Attendance attendance, Sessions sessions, Metadata metadata) {
+                  Attendance attendance, Sessions sessions, Optional<Metadata> metadata) {
         requireAllNonNull(name, phone, email, address, roles, ccas, amount, attendance, sessions, metadata);
 
         this.name = name;
@@ -53,6 +54,14 @@ public class Person {
         this.attendance = attendance;
         this.sessions = sessions;
         this.metadata = metadata;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Role> roles, Set<Cca> ccas, Amount amount,
+                  Attendance attendance, Sessions sessions, Metadata metadata) {
+        this(name, phone, email, address, roles, ccas, amount, attendance, sessions, Optional.ofNullable(metadata));
     }
 
     /**
@@ -108,7 +117,7 @@ public class Person {
     /**
      * Returns the Metadata of the person.
      */
-    public Metadata getMetadata() {
+    public Optional<Metadata> getMetadata() {
         return metadata;
     }
 
@@ -186,7 +195,9 @@ public class Person {
                 .add("amount", amount)
                 .add("attendance", attendance)
                 .add("sessions", sessions)
-                .add("metadata", metadata)
+                .add("metadata", metadata
+                    .map(m -> m.toString())
+                    .orElse(Metadata.NO_METADATA_STRING))
                 .toString();
     }
 

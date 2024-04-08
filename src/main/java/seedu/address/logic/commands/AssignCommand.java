@@ -104,7 +104,7 @@ public class AssignCommand extends Command {
         Amount updatedAmount = personToAssign.getAmount();
         Attendance updatedAttendance = personToAssign.getAtt();
         Sessions updatedSessions = personToAssign.getSess();
-        Metadata updatedMetadata = personToAssign.getMetadata();
+        Optional<Metadata> updatedMetadata = personToAssign.getMetadata();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedRoles, updatedCcas, updatedAmount, updatedAttendance, updatedSessions, updatedMetadata);

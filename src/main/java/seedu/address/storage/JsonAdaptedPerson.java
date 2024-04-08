@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -77,7 +78,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        metadata = source.getMetadata().metadata;
+        metadata = source.getMetadata().map(m -> m.metadata).orElse(Metadata.NO_METADATA_STRING);
         amount = new JsonAdaptedAmount(source.getAmount());
         roles.addAll(source.getRoles().stream()
                 .map(JsonAdaptedRole::new)
@@ -143,14 +144,17 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Amount.MESSAGE_CONSTRAINTS);
         }
 
+        boolean isNullMetadata = metadata.equals(Metadata.NO_METADATA_STRING);
         if (metadata == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Metadata.class.getSimpleName()));
         }
-        if (!Metadata.isValidMetadata(metadata)) {
+        if (!isNullMetadata && !Metadata.isValidMetadata(metadata)) {
             throw new IllegalValueException(Metadata.MESSAGE_CONSTRAINTS);
         }
-        final Metadata modelMetadata = new Metadata(metadata);
+        final Optional<Metadata> modelMetadata = isNullMetadata
+            ? Optional.empty()
+            : Optional.of(new Metadata(metadata));
 
         final Amount modelAmount = amount.toModelType();
 

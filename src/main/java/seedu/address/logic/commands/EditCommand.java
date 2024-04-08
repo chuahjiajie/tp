@@ -110,7 +110,9 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
         Set<Cca> updatedCcas = editPersonDescriptor.getCcas().orElse(personToEdit.getCcas());
-        Metadata updatedMetadata = editPersonDescriptor.getMetadata().orElse(personToEdit.getMetadata());
+        Optional<Metadata> updatedMetadata = editPersonDescriptor
+            .getMetadata()
+            .or(() -> personToEdit.getMetadata());
         Amount updatedAmount = personToEdit.getAmount();
         Attendance updatedAttendance = personToEdit.getAtt();
         Sessions updatedSessions = personToEdit.getSess();

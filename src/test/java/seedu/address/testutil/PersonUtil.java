@@ -13,6 +13,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.cca.Cca;
+import seedu.address.model.person.Metadata;
 import seedu.address.model.person.Person;
 import seedu.address.model.roles.Role;
 
@@ -43,7 +44,10 @@ public class PersonUtil {
         person.getCcas().stream().forEach(
             c -> sb.append(PREFIX_CCA + c.ccaName + " ")
         );
-        sb.append(PREFIX_METADATA + person.getMetadata().metadata + " ");
+        sb.append(PREFIX_METADATA + person
+            .getMetadata()
+            .map(Metadata::toString)
+            .orElse(Metadata.NO_METADATA_STRING) + " ");
         return sb.toString();
     }
 

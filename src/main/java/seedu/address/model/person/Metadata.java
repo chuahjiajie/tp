@@ -9,6 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 
 public class Metadata {
+    public static final String NO_METADATA_STRING = "//NO METADATA//";
     public static final String MESSAGE_CONSTRAINTS =
             "Meta-data should only contain alphanumeric characters and spaces, and it should not be blank";
 

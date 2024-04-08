@@ -6,6 +6,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -98,7 +99,7 @@ public class OweCommand extends Command {
         Amount updatedAmount = new Amount(amount.toString());
         Attendance updatedAttendance = personToOwe.getAtt();
         Sessions updatedSessions = personToOwe.getSess();
-        Metadata updatedMetadata = personToOwe.getMetadata();
+        Optional<Metadata> updatedMetadata = personToOwe.getMetadata();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRoles, updatedCcas,
                 updatedAmount, updatedAttendance, updatedSessions, updatedMetadata);

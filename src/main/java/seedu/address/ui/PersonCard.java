@@ -63,7 +63,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         owe.setText("Owe: " + "$" + person.getAmount().value);
         attendance.setText("Attendance: " + person.getAtt().value + "/" + person.getSess());
-        metadata.setText(person.getMetadata().metadata);
+        metadata.setText(person.getMetadata().map(m -> m.metadata).orElse(""));
         person.getRoles().stream()
                 .sorted(Comparator.comparing(role -> role.roleName))
                 .forEach(role -> roles.getChildren().add(new Label(role.roleName)));

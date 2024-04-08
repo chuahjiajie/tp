@@ -40,7 +40,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setRoles(person.getRoles());
         descriptor.setCcas(person.getCcas());
-        descriptor.setMetadata(person.getMetadata());
+        descriptor.setMetadata(person.getMetadata().orElse(null));
     }
 
     /**

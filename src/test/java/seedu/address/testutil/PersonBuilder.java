@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.amount.Amount;
@@ -39,7 +40,7 @@ public class PersonBuilder {
     private Amount amount;
     private Attendance attendance;
     private Sessions sessions;
-    private Metadata metadata;
+    private Optional<Metadata> metadata;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -54,7 +55,7 @@ public class PersonBuilder {
         amount = new Amount(DEFAULT_AMOUNT);
         attendance = new Attendance(DEFAULT_ATTENDANCE);
         sessions = new Sessions(DEFAULT_SESSIONS);
-        metadata = new Metadata(DEFAULT_METADATA);
+        metadata = Optional.of(new Metadata(DEFAULT_METADATA));
     }
 
     /**
@@ -149,7 +150,7 @@ public class PersonBuilder {
      * Sets the {@code Metadata} of the {@code Person} that we are building.
      */
     public PersonBuilder withMetadata(String metadata) {
-        this.metadata = new Metadata(metadata);
+        this.metadata = Optional.of(new Metadata(metadata));
         return this;
     }
 

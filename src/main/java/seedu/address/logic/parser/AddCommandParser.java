@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -53,7 +54,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
         Set<Cca> ccaList = ParserUtil.parseCcas(argMultimap.getAllValues(PREFIX_CCA));
-        Metadata metadata = ParserUtil.parseMetadata(argMultimap.getValue(PREFIX_METADATA).get());
+        Optional<String> metastring = argMultimap.getValue(PREFIX_METADATA);
+        Optional<Metadata> metadata = metastring.isPresent()
+            ? Optional.of(ParserUtil.parseMetadata(metastring.get()))
+            : Optional.empty();
         Amount amount = new Amount("0.0");
         Attendance attendance = new Attendance("0");
         Sessions sessions = new Sessions("0");
