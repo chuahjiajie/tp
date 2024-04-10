@@ -24,6 +24,7 @@ public class FilterCommand extends Command {
             + "Example: " + COMMAND_WORD + " c/NUS Cycling r/Member";
 
     public static final String MESSAGE_NOT_FILTER_CCA = "A CCA should be provided.";
+    public static final String MESSAGE_ROLE_EMPTY = "Role field is empty.";
 
     private final CcaContainsKeywordPredicate cca;
 

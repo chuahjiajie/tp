@@ -33,6 +33,11 @@ public class AssignCommandParser implements Parser<AssignCommand> {
 
         Index index;
 
+        // Make sure all roles are not empty
+        if (argMultimap.getAllValues(PREFIX_ROLE).stream().anyMatch(String::isEmpty)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
+        }
+
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
