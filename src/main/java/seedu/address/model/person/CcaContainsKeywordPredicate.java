@@ -29,6 +29,14 @@ public class CcaContainsKeywordPredicate implements Predicate<Person> {
         return ccas.contains(cca);
     }
 
+    public Set<Cca> getCcas() {
+        return ccas;
+    }
+
+    public Optional<Set<Role>> getRoles() {
+        return roles;
+    }
+
     @Override
     public boolean test(Person person) {
         Set<Cca> personCcas = person.getCcas();

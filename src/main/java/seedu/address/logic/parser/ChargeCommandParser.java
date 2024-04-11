@@ -36,19 +36,22 @@ public class ChargeCommandParser implements Parser<ChargeCommand> {
 
         if (argumentMultimap.getValue(PREFIX_AMOUNT).isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChargeCommand.MESSAGE_NO_AMOUNT)
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChargeCommand.MESSAGE_NO_AMOUNT
+                    + "\n" + ChargeCommand.MESSAGE_USAGE)
             );
         }
 
         if (argumentMultimap.getValue(PREFIX_CCA).isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_NOT_FILTER_CCA)
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_NOT_FILTER_CCA
+                    + "\n" + ChargeCommand.MESSAGE_USAGE)
             );
         }
 
         // Make sure all roles are not empty
         if (argumentMultimap.getAllValues(PREFIX_ROLE).stream().anyMatch(String::isEmpty)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ROLE_EMPTY));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ROLE_EMPTY)
+            + "\n" + ChargeCommand.MESSAGE_USAGE);
         }
 
 
@@ -59,7 +62,14 @@ public class ChargeCommandParser implements Parser<ChargeCommand> {
                 : Optional.of(new HashSet<>(ParserUtil.parseRoles(argumentMultimap.getAllValues(PREFIX_ROLE))));
 
         CcaContainsKeywordPredicate predicate = new CcaContainsKeywordPredicate(ccas, roles);
-        return new ChargeCommand(new Amount(argumentMultimap.getValue(PREFIX_AMOUNT).get()), predicate);
+        Amount amt;
+        try {
+            amt = new Amount(argumentMultimap.getValue(PREFIX_AMOUNT).get());
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, e.getMessage())
+                + "\n" + ChargeCommand.MESSAGE_USAGE);
+        }
+        return new ChargeCommand(amt, predicate);
     }
 
 }

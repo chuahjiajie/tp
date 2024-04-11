@@ -35,7 +35,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         if (argumentMultimap.getValue(PREFIX_CCA).isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_NOT_FILTER_CCA)
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        FilterCommand.MESSAGE_NOT_FILTER_CCA
+                        + "\n" + FilterCommand.MESSAGE_USAGE)
             );
         }
 

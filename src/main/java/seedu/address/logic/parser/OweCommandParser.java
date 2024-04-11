@@ -4,7 +4,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 
 import seedu.address.commons.core.index.Index;
@@ -30,7 +30,8 @@ public class OweCommandParser implements Parser<OweCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OweCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                + "\n" + OweCommand.MESSAGE_USAGE, pe);
         }
 
         if (argMultimap.getValue(PREFIX_AMOUNT).isEmpty()) {

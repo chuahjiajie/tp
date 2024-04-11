@@ -24,8 +24,8 @@ public class ChargeCommand extends Command {
 
     // MESSAGE_USAGE below is modified from my Teammate's (AlphaJae) code
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a certain amount to how much all matching CCA + optional role members owe."
-            + "Parameters: INDEX (must be a positive integer) "
+            + ": Adds a certain amount to how much all matching CCA + optional role members owe. "
+            + "Parameters: "
             + "[" + PREFIX_AMOUNT + "AMOUNT]...\n"
             + "[" + PREFIX_CCA + "AMOUNT] (more than one allowed)...\n"
             + "[" + PREFIX_ROLE + "AMOUNT] (more than one allowed)...\n"

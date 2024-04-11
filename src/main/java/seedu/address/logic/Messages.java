@@ -5,7 +5,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.cca.Cca;
+import seedu.address.model.person.CcaContainsKeywordPredicate;
+import seedu.address.model.person.Metadata;
 import seedu.address.model.person.Person;
+import seedu.address.model.roles.Role;
 
 /**
  * Container for user visible messages.
@@ -54,8 +58,35 @@ public class Messages {
                 .append("/")
                 .append(person.getSess());
         builder.append("; Metadata: ")
-                .append(person.getMetadata());
+                .append(person.getMetadata()
+                    .map(m -> m.metadata).orElse(Metadata.NO_METADATA_STRING));
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code CcaContainsKeywordPredicate} for display to the user.
+     */
+    public static String format(CcaContainsKeywordPredicate p) {
+        return "["
+            + "CCAs: " + p.getCcas().stream().map(Messages::format).collect(Collectors.joining(", "))
+            + p.getRoles().map(rs ->
+                ", Roles: "
+                + rs.stream().map(Messages::format).collect(Collectors.joining(", ")))
+                    .orElse("")
+            + "]";
+    }
+
+    /**
+     * Formats the {@code Cca} for display to the user.
+     */
+    public static String format(Cca c) {
+        return c.ccaName;
+    }
+
+    /**
+     * Formats the {@code Role} for display to the user.
+     */
+    public static String format(Role r) {
+        return r.roleName;
+    }
 }

@@ -39,8 +39,8 @@ public class SetAttCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_ATTENDANCE + "ATTENDANCE] "
-            + "[" + PREFIX_SESSIONS + "SESSIONS] "
+            + "" + PREFIX_ATTENDANCE + "ATTENDANCE "
+            + "" + PREFIX_SESSIONS + "SESSIONS "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ATTENDANCE + "3 "
             + PREFIX_SESSIONS + "10";

@@ -4,6 +4,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import java.util.Collection;
@@ -41,17 +42,17 @@ public class AssignCommandParser implements Parser<AssignCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                + "\n" + AssignCommand.MESSAGE_USAGE, pe);
         }
 
         AssignCommand.AssignPersonDescriptor assignPersonDescriptor = new AssignCommand.AssignPersonDescriptor();
 
         parseRolesForAssign(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(assignPersonDescriptor::setRole);
 
-        System.out.println(assignPersonDescriptor.toString());
-
         if (!assignPersonDescriptor.isAnyFieldNotEdited()) {
-            throw new ParseException(AssignCommand.MESSAGE_NOT_ASSIGNED);
+            throw new ParseException(AssignCommand.MESSAGE_NOT_ASSIGNED
+                + "\n" + AssignCommand.MESSAGE_USAGE);
         }
 
         return new AssignCommand(index, assignPersonDescriptor);

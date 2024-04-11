@@ -32,7 +32,9 @@ public class DeleteCcaCommandParser implements Parser<DeleteCcaCommand> {
 
         if (argumentMultimap.getValue(PREFIX_CCA).isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCcaCommand.MESSAGE_NO_CCA)
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteCcaCommand.MESSAGE_NO_CCA
+                    + "\n" + DeleteCcaCommand.MESSAGE_USAGE)
             );
         }
 

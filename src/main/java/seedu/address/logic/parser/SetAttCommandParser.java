@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SESSIONS;
 
@@ -35,7 +36,8 @@ public class SetAttCommandParser implements Parser<SetAttCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetAttCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                + "\n" + SetAttCommand.MESSAGE_USAGE, pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ATTENDANCE, PREFIX_SESSIONS);
@@ -49,7 +51,8 @@ public class SetAttCommandParser implements Parser<SetAttCommand> {
         int sessionsInt = setAttDescriptor.getSess().get().getValue();
 
         if (attendanceInt > sessionsInt) {
-            throw new ParseException(SetAttCommand.MESSAGE_ATT_TOO_LARGE);
+            throw new ParseException(SetAttCommand.MESSAGE_ATT_TOO_LARGE
+                + "\n" + SetAttCommand.MESSAGE_USAGE);
         }
 
         return new SetAttCommand(index, setAttDescriptor);

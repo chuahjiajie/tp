@@ -25,7 +25,7 @@ public class DeleteCcaCommand extends Command {
 
     // MESSAGE_USAGE below is modified from my Teammate's (AlphaJae) code
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes a CCA and all its associated members from your contacts."
+            + ": Deletes a CCA and all its associated members from your contacts. "
             + "Parameters: "
             + "[" + PREFIX_CCA + "CCA]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -82,7 +82,7 @@ public class DeleteCcaCommand extends Command {
                     })
                     .collect(Collectors.toSet());
                 model.setPerson(affectedPerson, affectedPerson.replaceCca(updatedCca));
-                result.append(String.format("Person affected: $%s\n", affectedPerson.getName()));
+                result.append(String.format("Person affected: %s\n", affectedPerson.getName()));
             });
 
         // Update filteredlist to display the same people
