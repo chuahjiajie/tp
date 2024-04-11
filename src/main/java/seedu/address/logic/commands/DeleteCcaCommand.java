@@ -84,8 +84,6 @@ public class DeleteCcaCommand extends Command {
                 model.setPerson(affectedPerson, affectedPerson.replaceCca(updatedCca));
                 result.append(String.format("Person affected: $%s\n", affectedPerson.getName()));
             });
-        // Remove Ccas
-        removedCcas.stream().distinct().forEach(model::deleteCca);
 
         // Update filteredlist to display the same people
         model.updateFilteredPersonList(p -> affectedPeople

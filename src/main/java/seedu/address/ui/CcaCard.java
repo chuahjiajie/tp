@@ -61,8 +61,28 @@ public class CcaCard extends UiPart<Region> {
 
         allRoles.forEach(r -> ccaRoleList
             .getChildren()
-            .add(generateRoleUi(r, ccaPersonel))
+            .add(generateRoleUi(r.roleName, ccaPersonel
+                .filtered(p -> !p
+                .getRoles()
+                .stream()
+                .noneMatch(o -> o.roleName.equals(r.roleName))
+                )
+                .stream()
+                .sorted((a, b) -> a.getName().fullName.compareTo(b.getName().fullName))
+                .collect(Collectors.toList())
+            ))
         );
+
+        List<Person> noRoles = ccaPersonel
+            .stream()
+            .filter(p -> p.getRoles().isEmpty())
+            .collect(Collectors.toList());
+
+        if (noRoles.size() != 0) {
+            ccaRoleList
+                .getChildren()
+                .add(generateRoleUi("No roles", noRoles));
+        }
     }
 
     private HBox generateRoleListElementUi(int idx, Person p) {
@@ -79,7 +99,7 @@ public class CcaCard extends UiPart<Region> {
         return hb;
     }
 
-    private VBox generateRoleUi(Role r, ObservableList<Person> ccaPersonel) {
+    private VBox generateRoleUi(String roleString, List<Person> rolePersonel) {
 
         VBox rb = new VBox();
         rb.getStyleClass().add("ccaRoleListBox");
@@ -87,18 +107,8 @@ public class CcaCard extends UiPart<Region> {
         // Add the role label
         Label l = new Label();
         l.getStyleClass().add("ccaRoleName");
-        l.setText(r.roleName + ":");
+        l.setText(roleString + ":");
         rb.getChildren().add(l);
-
-        // Get the people satisfying role
-        List<Person> rolePersonel = ccaPersonel.filtered(p -> !p
-            .getRoles()
-            .stream()
-            .noneMatch(o -> o.roleName.equals(r.roleName))
-            )
-            .stream()
-            .sorted((a, b) -> a.getName().fullName.compareTo(b.getName().fullName))
-            .collect(Collectors.toList());
 
         // Create box for rolePersonel list
         VBox b = new VBox();

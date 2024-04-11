@@ -45,6 +45,15 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// list overwrite operations
 
+    private void trimCcas() {
+        List<Person> allPerson = getPersonList();
+        getCcaList().stream().collect(Collectors.toList()).stream()
+            .filter(c -> allPerson
+                .stream()
+                .filter(p -> p.getCcas().contains(c)).count() == 0)
+            .forEach(c -> ccas.remove(c));
+    }
+
     /**
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
@@ -124,6 +133,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         Person newEditedPerson = editedPerson
             .replaceCca(ccas.getUniqueCcas(editedPerson.getCcas()));
         persons.setPerson(target, newEditedPerson);
+        trimCcas();
     }
 
     /**
@@ -132,6 +142,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        trimCcas();
     }
     //// util methods
     @Override
