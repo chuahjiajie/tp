@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.NIL_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -63,7 +64,7 @@ public class PersonUtil {
         if (descriptor.getRoles().isPresent()) {
             Set<Role> roles = descriptor.getRoles().get();
             if (roles.isEmpty()) {
-                sb.append(PREFIX_ROLE);
+                sb.append(PREFIX_ROLE + NIL_FIELD);
             } else {
                 sb.append(PREFIX_ROLE);
                 roles.forEach(s -> sb.append(PREFIX_ROLE).append(s.roleName).append(" "));
@@ -73,7 +74,7 @@ public class PersonUtil {
         if (descriptor.getCcas().isPresent()) {
             Set<Cca> roles = descriptor.getCcas().get();
             if (roles.isEmpty()) {
-                sb.append(PREFIX_CCA);
+                sb.append(PREFIX_CCA + NIL_FIELD);
             } else {
                 roles.forEach(s -> sb.append(PREFIX_CCA).append(s.ccaName).append(" "));
             }

@@ -2,6 +2,7 @@ package seedu.address.model.cca;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.CliSyntax.NIL_FIELD;
 
 /**
  * Represents a CCA in the address book.
@@ -9,8 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Cca {
 
-    public static final String MESSAGE_CONSTRAINTS = "CCA names should be alphanumeric (but can include "
-        + "whitespace)";
+    public static final String MESSAGE_CONSTRAINTS = "CCA names should be non-empty and alphanumeric "
+        + "(but can include whitespace).\n"
+        + "CCA names cannot be \"" + NIL_FIELD + "\" as \"" + NIL_FIELD
+        + "\" is reserved for denoting an empty CCA field.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}\\s]+";
 
     public final String ccaName;
@@ -30,7 +33,7 @@ public class Cca {
      * Returns true if a given string is a valid Cca name.
      */
     public static boolean isValidCcaName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !test.equals(NIL_FIELD) && test.matches(VALIDATION_REGEX);
     }
 
     /**

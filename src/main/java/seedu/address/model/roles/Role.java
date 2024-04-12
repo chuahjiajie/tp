@@ -2,6 +2,7 @@ package seedu.address.model.roles;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.CliSyntax.NIL_FIELD;
 
 /**
  * Represents a Role in the address book.
@@ -9,7 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Role {
 
-    public static final String MESSAGE_CONSTRAINTS = "Role names should be alphanumeric with whitespace";
+    public static final String MESSAGE_CONSTRAINTS = "Role names should be non-empty and alphanumeric "
+        + "(but can include whitespace).\n"
+        + "Role names cannot be \"" + NIL_FIELD + "\" as \"" + NIL_FIELD
+        + "\" is reserved for denoting an empty role field.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}\\s]+";
 
     public final String roleName;
@@ -29,7 +33,7 @@ public class Role {
      * Returns true if a given string is a valid role name.
      */
     public static boolean isValidRoleName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !test.equals(NIL_FIELD) && test.matches(VALIDATION_REGEX);
     }
 
     @Override

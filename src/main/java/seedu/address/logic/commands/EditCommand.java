@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.NIL_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -55,7 +56,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_METADATA + "Meta-data]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com\n\n"
+            + "Tip: To clear all of the person's roles, use " + PREFIX_ROLE + NIL_FIELD + "\n"
+            + "Tip: To clear all of the person's CCAs, use " + PREFIX_CCA + NIL_FIELD;
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

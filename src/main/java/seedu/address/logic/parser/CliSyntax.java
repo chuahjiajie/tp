@@ -16,4 +16,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ATTENDANCE = new Prefix("att/");
     public static final Prefix PREFIX_SESSIONS = new Prefix("s/");
     public static final Prefix PREFIX_METADATA = new Prefix("d/");
+
+    public static final String NIL_FIELD = "nil";
 }
