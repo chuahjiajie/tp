@@ -27,6 +27,10 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    public static String innerTrim(String string) {
+        return String.join(" ",string.split("\\s+"));
+    }
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -48,12 +52,11 @@ public class ParserUtil {
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
-        String trimmedName = name.trim();
-        String innerTrimmedName = String.join(" ",trimmedName.split("\\s+"));
-        if (!Name.isValidName(innerTrimmedName)) {
+        String trimmedName = innerTrim(name.trim());
+        if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new Name(innerTrimmedName);
+        return new Name(trimmedName);
     }
 
     /**
@@ -79,7 +82,7 @@ public class ParserUtil {
      */
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
-        String trimmedAddress = address.trim();
+        String trimmedAddress = innerTrim(address.trim());
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
@@ -109,7 +112,7 @@ public class ParserUtil {
      */
     public static Role parseRole(String role) throws ParseException {
         requireNonNull(role);
-        String trimmedRole = role.trim();
+        String trimmedRole = innerTrim(role.trim());
         if (!Role.isValidRoleName(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
@@ -124,7 +127,7 @@ public class ParserUtil {
      */
     public static Cca parseCca(String ccaString) throws ParseException {
         requireNonNull(ccaString);
-        String trimmedCca = ccaString.trim();
+        String trimmedCca = innerTrim(ccaString.trim());
         if (!Cca.isValidCcaName(trimmedCca)) {
             throw new ParseException(Cca.MESSAGE_CONSTRAINTS);
         }
@@ -208,7 +211,7 @@ public class ParserUtil {
      */
     public static Metadata parseMetadata(String metadata) throws ParseException {
         requireNonNull(metadata);
-        String trimmedMetadata = metadata.trim();
+        String trimmedMetadata = innerTrim(metadata.trim());
         if (!Metadata.isValidMetadata(trimmedMetadata)) {
             throw new ParseException(Metadata.MESSAGE_CONSTRAINTS);
         }
