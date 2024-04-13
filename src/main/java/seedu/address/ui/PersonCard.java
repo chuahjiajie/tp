@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -70,5 +71,15 @@ public class PersonCard extends UiPart<Region> {
         person.getCcas().stream()
                 .sorted(Comparator.comparing(cca -> cca.ccaName))
                 .forEach(cca -> ccas.getChildren().add(new Label(cca.ccaName)));
+
+        List.of(name, id, phone, address, email, owe, attendance, metadata)
+            .forEach(r -> r.setWrapText(true));
+        List.of(roles, ccas).stream()
+            .flatMap(f -> f.getChildren().stream())
+            .forEach(r -> {
+                Label l = (Label) r;
+                l.setWrapText(true);
+                l.setMaxWidth(500);
+            });
     }
 }
