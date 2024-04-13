@@ -28,7 +28,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     public static String innerTrim(String string) {
-        return String.join(" ",string.split("\\s+"));
+        return String.join(" ", string.split("\\s+"));
     }
 
     /**
