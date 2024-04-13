@@ -136,7 +136,7 @@ mark {
 
   /* Reduce font size when printing */
   h1 {
-      font-size: 1.2rem !important;
+      font-size: 2rem !important;
   }
   h2 {
       font-size: 1.0rem !important;
@@ -161,17 +161,34 @@ mark {
   }
 }
 
+img {
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+h1 {
+    font-size: 3em;
+}
+
 h2,
 h3,
-h4,
+h4 {
+    color: #e46c0a;
+}
+
 h5,
 h6 {
-  color: #e46c0a;
+  color: darkblue;
 }
 
 p {
     margin-bottom: 1em;
     margin-top: 1em;
+}
+
+.page-nav-print {
+    page-break-before: always;
+    page-break-after: always;
 }
 
 .page-nav-print > nav > a  {
@@ -184,20 +201,24 @@ p {
 }
 
 .page-nav-print > nav > nav {
-    margin: 2.5%;
+    margin: 1%;
 }
 
 .page-nav-print > nav > nav > a  {
     font-weight: bold;
 }
 
-.page-nav-print > nav > nav > nav  {
+.page-nav-print > nav > nav > nav > a  {
+    font-weight: bold;
+}
+
+.page-nav-print > nav > nav > nav > nav  {
     flex-direction: row !important;
     flex-wrap: wrap;
     align-content: flex-start;
 }
 
-.page-nav-print > nav > nav > nav > a {
+.page-nav-print > nav > nav > nav > nav > a {
     align-self: flex-start;
     padding-left: 0.3em;
     padding-right: 0em;
@@ -205,7 +226,7 @@ p {
     display: inline-block;
 }
 
-.page-nav-print > nav > nav > nav > a:not(:last-child):after {
+.page-nav-print > nav > nav > nav > nav > a:not(:last-child):after {
     content: " | ";
     color: black;
     font-weight: bold;
