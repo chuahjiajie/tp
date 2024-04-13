@@ -222,7 +222,7 @@ Have the contact details of some members changed, or maybe you just forgot to ad
 
 Here’s an example for reference, where John from NUS Origami would not only like to change CCAs but also moved from Kent Ridge to UTown:
 
-  ![edit-command](images/UG-Basics/edit-command.png)
+![edit-command](images/UG-Basics/edit-command.png)
 
 Output:
 
