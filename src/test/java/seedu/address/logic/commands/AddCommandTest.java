@@ -55,6 +55,16 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_roleWithoutCca_throwsCommandException() {
+        Person validPerson = new PersonBuilder().withName("Bub").build();
+        Person invalidPerson = new PersonBuilder().withRoles("Treasurer").build();
+        AddCommand addCommand = new AddCommand(invalidPerson);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_NO_CCA, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
