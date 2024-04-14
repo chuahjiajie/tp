@@ -25,7 +25,7 @@
 <img src="images/Ui.png">
 </center>
 
-Welcome to CCA Manager's User Guide! CCA Manager is a **contact manager designed to simplify the management of CCAs and enhance your administrative efficiency**, regardless of whether you're overseeing a sports team, academic club, any other extracurricular activity, or simply a CCA participant. It has a minimal and intuitive [_Graphic User Interface_](#Glossary) where most actions are performed via commands, making it a pleasure to use. If you can type fast, CCA Manager can get your admin tracking done faster than traditional [_Graphic User Interface_](#Glossary) apps.
+Welcome to CCA Manager's User Guide! CCA Manager is a **contact manager designed to simplify the management of CCAs and enhance your administrative efficiency**, regardless of whether you're overseeing a sports team, academic club, any other extracurricular activity, or simply a CCA participant. It has a minimal and intuitive [_Graphic User Interface_](#glossary) where most actions are performed via commands, making it a pleasure to use. If you can type fast, CCA Manager can get your admin tracking done faster than traditional [_Graphic User Interface_](#glossary) apps.
 
 In this user guide, we'll walk you through the essential steps to harness the full potential of CCA Manager. Whether you're a CCA Executive Committee Member or simply a CCA participant, our guide will provide you with the knowledge and tools you need to make the most of our app.
 
@@ -65,7 +65,7 @@ CCA Manager endeavors to equip CCAs with tools that streamline administration, f
 
 To get started with CCA Manager and explore its features further, check out our [Installation Guide](#installation-guide) and our [Quick Start](#quick-start), where we'll go through some concrete use cases for our app.
 
-(Reminder: the **blue link** means it has relevant explanations in the Glossary. ^_^ ) 
+(Reminder: the **blue link** means it has relevant explanations in the [_Glossary_](#glossary). `^_^` ) 
 
 ## Installation Guide
 
@@ -73,21 +73,21 @@ To get started with CCA Manager and explore its features further, check out our 
 
 <!-- TODO: Make the above disclaimer redundant -->
 
-1. Ensure you have [_Java_](#Glossary) `11` or above installed on your Computer.
+1. Ensure you have [_Java_](#glossary) `11` or above installed on your Computer.
 
-1. Download the latest `ccamanager.jar` from [here](https://github.com/se-edu/addressbook-level3/releases). (Click [_here_](#Glossary) if you don't know what is `.jar`)
+1. Download the latest `ccamanager.jar` from [here](https://github.com/se-edu/addressbook-level3/releases). (Click [_here_](#glossary) if you don't know what is `.jar`)
 
 1. Copy the file to the folder you want to use as the _home folder_ for your CCA Manager.
 
-1. On [**_Linux_**](#Glossary) and [**_macOS_**](#Glossary):
-   1. Open a [_command terminal_](#Glossary).
+1. On [**_Linux_**](#glossary) and [**_macOS_**](#glossary):
+   1. Open a [_command terminal_](#glossary).
    1. Type `cd <folder>` into the terminal and press `enter`, where you replace `<folder>` with the path to the folder where you've placed `ccamanager.jar`. This navigates the terminal to the correct folder.
    1. Type `java -jar ccamanager.jar` into the terminal and press `enter` to run the application. <br>
 
-1. On [**_Windows_**](#Glossary):
+1. On [**_Windows_**](#glossary):
     1. Double-click the `ccamanager.jar` file to run it.
 
-**A [_Graphic User Interface_](#Glossary) similar to below should appear in a few seconds. Note how the app contains some sample data.**<br>
+**A [_Graphic User Interface_](#glossary) similar to below should appear in a few seconds. Note how the app contains some sample data.**<br>
 
 <center>
 <img src="images/Ui.png" height=400>
@@ -203,7 +203,7 @@ help
 
 A box appears with a button `Copy URL`. Clicking it will allow you to paste the link into your internet browsing application of choice (E.g., Chrome, Safari, Firefox) and view our User Guide.
 
-(Click [_here_](#Glossary) if you don't know what is an URL.)
+(Click [_here_](#glossary) if you don't know what is an URL.)
 
 #### Exiting the program: `exit`
 
@@ -774,7 +774,7 @@ setatt 4 att/3 s/6
 ##### Possible Failures:
 
 - session number less than attendance
-- [_Index_](#Glossary) out of range
+- [_Index_](#glossary) out of range
 - Typed invalid number, number must be **non-negative**
 
 Set attendance for each person
@@ -895,7 +895,7 @@ CCA Manager data are saved in the hard disk automatically after any command that
 
 #### Editing the data file
 
-CCA Manager data are saved automatically as a [_JSON_](#Glossary) file `[JAR file location]/data/<TODO>.json`. Advanced users are welcome to update data directly by editing that data file.
+CCA Manager data are saved automatically as a [_JSON_](#glossary) file `[JAR file location]/data/<TODO>.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -929,11 +929,17 @@ _Details coming soon ..._
 
 ## Common Issues
 
+1. I updated CCA Manager and now nothing shows up in my contact list.
+   **WARNING**: This solution will require deleting your existing data.
+   Solution: delete your `data` folder and re-launch CCA Manager.
+2. My [_Java_](#glossary) does not open CCA Manager, what's up with that?
+   Solution: Make sure you're using Java 11 or a more recent version. We can't guarantee anything lower will work.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the [_Graphic User Interface_](#Glossary) will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the [_Graphic User Interface_](#glossary) will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
