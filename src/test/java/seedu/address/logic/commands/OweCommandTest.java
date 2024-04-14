@@ -2,6 +2,7 @@
 // CS2103T teaching team for this.
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -32,6 +33,13 @@ public class OweCommandTest {
         OweCommand oweCommand = new OweCommand(outOfBoundIndex, amount);
 
         assertCommandFailure(oweCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void testGetIndex() {
+        Index expectedIndex = Index.fromOneBased(1);
+        OweCommand oweCommand = new OweCommand(expectedIndex, new Amount("10.00"));
+        assertEquals(expectedIndex, oweCommand.getIndex());
     }
 
     @Test
