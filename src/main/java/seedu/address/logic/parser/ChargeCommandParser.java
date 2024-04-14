@@ -48,13 +48,6 @@ public class ChargeCommandParser implements Parser<ChargeCommand> {
             );
         }
 
-        // Make sure all roles are not empty
-        if (argumentMultimap.getAllValues(PREFIX_ROLE).stream().anyMatch(String::isEmpty)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ROLE_EMPTY)
-            + "\n" + ChargeCommand.MESSAGE_USAGE);
-        }
-
-
         Set<Cca> ccas = new HashSet<>(ParserUtil.parseCcas(argumentMultimap.getAllValues(PREFIX_CCA)));
 
         Optional<Set<Role>> roles = argumentMultimap.getAllValues(PREFIX_ROLE).isEmpty()

@@ -30,7 +30,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_ROLE + "ROLE]... "
             + "[" + PREFIX_CCA + "CCA]... "
-            + "[" + PREFIX_METADATA + "METADATA]...\n"
+            + "[" + PREFIX_METADATA + "METADATA]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "

@@ -38,13 +38,7 @@ public class DeleteCcaCommandParser implements Parser<DeleteCcaCommand> {
             );
         }
 
-        if (argumentMultimap.getAllValues(PREFIX_CCA).size() > 1) {
-            throw new ParseException(
-                    String.format(
-                            MESSAGE_INVALID_COMMAND_FORMAT, "Cannot delete more than one CCA."
-                    )
-            );
-        }
+        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CCA);
 
         Set<Cca> ccas = new HashSet<>(ParserUtil.parseCcas(argumentMultimap.getAllValues(PREFIX_CCA)));
 

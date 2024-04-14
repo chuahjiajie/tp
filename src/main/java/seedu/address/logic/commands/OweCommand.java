@@ -36,7 +36,7 @@ public class OweCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_AMOUNT + "AMOUNT]...\n"
+            + PREFIX_AMOUNT + "AMOUNT\n"
             + "Example: " + COMMAND_WORD + " 2 "
             + PREFIX_AMOUNT + "10.00 ";
 

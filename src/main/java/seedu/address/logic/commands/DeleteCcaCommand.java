@@ -5,7 +5,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,11 +26,13 @@ public class DeleteCcaCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes a CCA and all its associated members from your contacts. "
             + "Parameters: "
-            + "[" + PREFIX_CCA + "CCA]...\n"
+            + PREFIX_CCA + "CCA\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CCA + "NUS Cycling ";
 
     public static final String MESSAGE_NO_CCA = "A CCA should be provided.";
+    public static final String MESSAGE_NONEXISTANT_CCA = "No CCA was deleted because "
+        + "the CCA `%s` does not exists.";
     private final CcaContainsKeywordPredicate ccas;
 
     /**
@@ -53,9 +54,21 @@ public class DeleteCcaCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // Check if any CCA does not exists
+        List<Cca> ccalist = model.getAddressBook().getCcaList();
+        List<Cca> nonexistantCcas = this.ccas.getCcas().stream()
+            .filter(c1 -> !ccalist.stream().anyMatch(c1::isSameCcaName))
+            .collect(Collectors.toList());
+        if (!nonexistantCcas.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_NONEXISTANT_CCA,
+                nonexistantCcas.stream().map(c -> c.ccaName).collect(Collectors.joining(", "))));
+        }
+
         model.updateFilteredPersonList(this.ccas);
         StringBuilder result = new StringBuilder();
-        result.append(String.format("Deleting CCA(s) %s tags from all its members:\n", this.ccas));
+        result.append(String.format("Deleting CCA(s) %s tags from all its members:\n",
+            this.ccas.getCcas().stream().map(c -> c.ccaName).collect(Collectors.joining(", "))));
 
         // We have to essentially clone the list
         // because as `model.setPerson` is called,
@@ -67,19 +80,12 @@ public class DeleteCcaCommand extends Command {
             .collect(Collectors.toList());
 
         // Delete their roles
-        ArrayList<Cca> removedCcas = new ArrayList<>();
         affectedPeople
             .forEach(affectedPerson -> {
                 Set<Cca> updatedCca = affectedPerson
                     .getCcas()
                     .stream()
-                    .filter(c -> {
-                        boolean isToDelete = ccas.contains(c);
-                        if (isToDelete) {
-                            removedCcas.add(c);
-                        }
-                        return !isToDelete;
-                    })
+                    .filter(c -> !ccas.contains(c))
                     .collect(Collectors.toSet());
                 model.setPerson(affectedPerson, affectedPerson.replaceCca(updatedCca));
                 result.append(String.format("Person affected: %s\n", affectedPerson.getName()));

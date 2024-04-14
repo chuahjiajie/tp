@@ -3,6 +3,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -17,10 +19,14 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters a person by their CCA "
-            + "(case-sensitive) and optionally their roles."
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Filters a person by their CCA "
+            + "(case-sensitive) and optionally their roles. "
+            + "Exact word matches are required. "
             + "Displays them as a list with index numbers.\n"
-            + "Parameters: c/CCA c/[MORE CCAs]... r/ROLE /r[MORE ROLES]\n"
+            + "Parameters: "
+            + "[" + PREFIX_CCA + "CCA]... "
+            + "[" + PREFIX_ROLE + "ROLE]...\n"
             + "Example: " + COMMAND_WORD + " c/NUS Cycling r/Member";
 
     public static final String MESSAGE_NOT_FILTER_CCA = "A CCA should be provided.";

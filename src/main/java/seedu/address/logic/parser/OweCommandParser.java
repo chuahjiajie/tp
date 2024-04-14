@@ -34,6 +34,8 @@ public class OweCommandParser implements Parser<OweCommand> {
                 + "\n" + OweCommand.MESSAGE_USAGE, pe);
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT);
+
         if (argMultimap.getValue(PREFIX_AMOUNT).isEmpty()) {
             throw new ParseException(OweCommand.MESSAGE_NOT_OWE);
         }

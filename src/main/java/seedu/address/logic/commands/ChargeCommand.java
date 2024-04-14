@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -26,15 +28,18 @@ public class ChargeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a certain amount to how much all matching CCA + optional role members owe. "
             + "Parameters: "
-            + "[" + PREFIX_AMOUNT + "AMOUNT]...\n"
-            + "[" + PREFIX_CCA + "AMOUNT] (more than one allowed)...\n"
-            + "[" + PREFIX_ROLE + "AMOUNT] (more than one allowed)...\n"
+            + PREFIX_AMOUNT + "AMOUNT "
+            + "[" + PREFIX_CCA + "CCA]... "
+            + "[" + PREFIX_ROLE + "ROLE]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_AMOUNT + "10.00 "
             + PREFIX_CCA + "NUS Cycling "
             + PREFIX_ROLE + "friends";
 
     public static final String MESSAGE_NO_AMOUNT = "An amount should be provided.";
+    public static final String MESSAGE_DO_NOTHING =
+        "Nobody was charged as nobody is in any of the following CCAs: [%s] "
+        + "AND in any of the following roles: [%s]";
     private final Amount amount;
     private final CcaContainsKeywordPredicate ccas;
 
@@ -64,8 +69,16 @@ public class ChargeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Person> oldList = model.getFilteredPersonList().stream().collect(Collectors.toList());
         model.updateFilteredPersonList(this.ccas);
         List<Person> lastShownList = model.getFilteredPersonList();
+        if (lastShownList.isEmpty()) {
+            model.updateFilteredPersonList(oldList::contains);
+            Collector<CharSequence, ?, String> join = Collectors.joining(", ");
+            throw new CommandException(String.format(MESSAGE_DO_NOTHING,
+                ccas.getCcas().stream().map(c -> c.ccaName).collect(join),
+                ccas.getRoles().map(rs -> rs.stream().map(r -> r.roleName).collect(join)).orElse("")));
+        }
 
         StringBuilder result = new StringBuilder();
         for (Person personToOwe : lastShownList) {
