@@ -120,10 +120,10 @@ When you first boot up the app, the app will contain some example contacts for y
 To run a command, type the command in the **Command Box** and press Enter to execute it. For example, typing **`help`** and pressing Enter will open the help window.
 
 Here are some other example commands you can try:
-   * `list`: [Lists all contacts.](#listing-all-persons--list)
-   * `delete 3`: [Deletes the 3rd contact shown in the currently displayed list.](#deleting-a-person--delete)
-   * `filter NUS Cycling`: [Filter contacts by CCA.](#filter-by-cca)
-   * `exit`: [Exits the app.](#exiting-the-program--exit)
+   * `list`: [Lists all contacts.](#listing-all-persons-list)
+   * `delete 3`: [Deletes the 3rd contact shown in the currently displayed list.](#deleting-a-person-delete)
+   * `filter c/NUS Cycling`: [Filter contacts by CCA.](#filter-by-cca-and-roles-filter)
+   * `exit`: [Exits the app.](#exiting-the-program-exit)
    <!--* `add`: [Adds a contact/CCA group to the CCA Manager](#add-contacts-with-cca-labels)-->
    <!--* `edit`: [Edit details of the contacts.](#edit-the-details-of-your-contacts)-->
 
@@ -175,6 +175,8 @@ Archiving data files [coming in v2.0]
 
 Shows a message explaining how to access the help page.
 
+##### Command Format:
+
 $$
 \large
 \overbrace{\texttt{\colorbox{lightgrey}{help}}}
@@ -203,7 +205,21 @@ A box appears with a button `Copy URL`. Clicking it will allow you to paste the 
 
 Exits the program.
 
-Format: `exit`
+##### Command Format:
+
+$$
+\large
+\overbrace{\texttt{\colorbox{lightgrey}{exit}}}
+    ^{\text{\colorbox{lightgrey}{Action}}}
+$$
+
+##### Examples:
+
+TODO
+
+##### Outcome:
+
+TODO
 
 ### Displaying Contacts
 
@@ -242,24 +258,107 @@ Everybody added to CCA Manager is listed in the **Results Box**.
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+##### Command Format:
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+$$
+\large
+\begin{aligned}
+\overbrace{\texttt{\colorbox{lightgrey}{find}}}
+    ^{\text{\colorbox{lightgrey}{Action}}}
+\quad &
+    \underset{
+        \substack{
+            \text{\color{red}{Must have at least one}} \\
+            \text{\color{red}{word}}
+        }
+    }{
+        \overbrace{
+            \texttt{\fcolorbox{tomato}{transparent}{\color{green}{alex}} 
+            \quad 
+            \fcolorbox{tomato}{transparent}{\color{green}{lee}}}}
+            ^{\substack{
+                \text{\colorbox{gold}{Word in name}} \\
+                \text{\colorbox{gold}{of a person in}} \\
+                \text{\colorbox{gold}{CCA Manager}}
+            }}
+    }
+\end{aligned}
+$$
 
+
+<box type="info" seamless>
+
+* The words supplied to `find` are case-insensitive.
+    * If you have an `Alex Yeoh` in the app, performing `find alex` will match `Alex Yeoh`.
+* The order of the words does not matter.
+    * `find alex lee` is the same as `find lee alex`.
+* Only full words will be matched.
+    * Performing `find al` will not match `Alex Yeoh`
+* If a person's name contains at least one of the words supplied to `find`, the person will be matched.
+</box>
+
+##### Examples:
+
+<!--
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+-->
+
+TODO
+
+##### Outcome:
+
+TODO
+
+##### Possible Failures:
+
+TODO
 
 #### Filter by CCA and roles: `filter`
 Filter the current list with CCA and roles
 
-Format: filter c/CCA r/ROLES
+
+##### Command Format
+
+$$
+\large
+\overbrace{\texttt{\colorbox{lightgrey}{filter}}}
+    ^{\text{\colorbox{lightgrey}{Action}}}
+\quad
+\underset{
+    \substack{
+        \text{\color{red}{Optional}} \\
+        \text{\color{red}{can have multiple}}
+    }
+}{
+    \overbrace{\texttt{\colorbox{lavender}{r/}\color{green}{Treasurer}}}
+        ^{\text{\colorbox{lavender}{Role(s)}}}
+}
+\quad
+\underset{
+    \substack{
+        \text{\color{red}{Optional}} \\
+        \text{\color{red}{can have multiple}}
+    }
+}{
+    \overbrace{\texttt{\colorbox{plum}{c/}\color{green}{NUS Cycling}}}
+        ^{\text{\colorbox{plum}{CCA(s)}}}
+}
+$$
+
+##### Examples:
+
+TODO
+
+##### Outcome:
+
+TODO
+
+##### Possible Failures:
+
+TODO
 
 ### Editing Contacts
 
@@ -495,20 +594,187 @@ TODO
 
 #### Assigning roles to person: `assign`
 
-#### Track a person owing money: `owe`
-Set up amount of money each person owes
+##### Command Format:
 
+$$
+\large
+\overbrace{\texttt{\colorbox{lightgrey}{assign}}}
+    ^{\text{\colorbox{lightgrey}{Action}}}
+\quad
+\overbrace{\texttt{\fcolorbox{tomato}{transparent}{\color{green}{1}}}}
+    ^{\substack{
+        \text{\colorbox{gold}{Index of person}} \\
+        \text{\colorbox{gold}{in \textbf{Result Box}}}
+    }}
+\quad
+\underset{
+    \substack{
+        \text{\color{red}{must have at least one}} \\
+        \text{\color{red}{can have multiple}}
+    }
+}{
+    \overbrace{\texttt{\colorbox{lavender}{r/}\color{green}{Treasurer}}}
+        ^{\text{\colorbox{lavender}{Role(s)}}}
+}
+$$
+
+##### Examples:
+
+TODO
+
+##### Outcome:
+
+TODO
+
+##### Possible Failures:
+
+TODO
+
+#### Track a person owing money: `owe`
+
+Set up the amount of money a person owes.
+
+##### Command Format:
+
+$$
+\large
+\overbrace{\texttt{\colorbox{lightgrey}{owe}}}
+    ^{\text{\colorbox{lightgrey}{Action}}}
+\quad
+\overbrace{\texttt{\fcolorbox{tomato}{transparent}{\color{green}{1}}}}
+    ^{\substack{
+        \text{\colorbox{gold}{Index of person}} \\
+        \text{\colorbox{gold}{in \textbf{Result Box}}}
+    }}
+\quad
+\overbrace{\texttt{\colorbox{aquamarine}{m/}\color{green}{10.00}}}
+    ^{\text{\colorbox{aquamarine}{Amount owed}}}
+$$
+
+##### Examples:
+
+TODO
+
+##### Outcome:
+
+TODO
+
+##### Possible Failures:
+
+TODO
 
 #### Charge a person with money: `charge`
-Charge a person with an amount of money by CCA and role
+Charge a person with an amount of money by CCA and optionally, by role.
 
+##### Command Format:
+
+$$
+\large
+\overbrace{\texttt{\colorbox{lightgrey}{charge}}}
+    ^{\text{\colorbox{lightgrey}{Action}}}
+\quad
+\overbrace{\texttt{\colorbox{aquamarine}{m/}\color{green}{10.00}}}
+    ^{\text{\colorbox{aquamarine}{Amount to charge}}}
+\quad
+\underset{
+    \substack{
+        \text{\color{red}{must have at least one}} \\
+        \text{\color{red}{can have multiple}}
+    }
+}{
+    \overbrace{\texttt{\colorbox{plum}{c/}\color{green}{NUS Cycling}}}
+        ^{\text{\colorbox{plum}{CCA(s)}}}
+}
+\quad
+\underset{
+        \substack{
+            \text{\color{red}{Optional}} \\
+            \text{\color{red}{can have multiple}}
+        }
+    }{
+        \overbrace{\texttt{\colorbox{lavender}{r/}\color{green}{Treasurer}}}
+            ^{\text{\colorbox{lavender}{Role(s)}}}
+    }
+$$
+
+##### Examples:
+
+TODO
+
+##### Outcome:
+
+TODO
+
+##### Possible Failures:
+
+TODO
 
 #### Track attendance: `setatt`
+
+
+##### Command Format:
+
+$$
+\large
+\overbrace{\texttt{\colorbox{lightgrey}{setatt}}}
+    ^{\text{\colorbox{lightgrey}{Action}}}
+\quad
+\overbrace{\texttt{\fcolorbox{tomato}{transparent}{\color{green}{1}}}}
+    ^{\substack{
+        \text{\colorbox{gold}{Index of person}} \\
+        \text{\colorbox{gold}{in \textbf{Result Box}}}
+    }}
+\quad
+\overbrace{\texttt{\colorbox{aquamarine}{att/}\color{green}{3}}}
+    ^{\substack{
+        \text{\colorbox{aquamarine}{Number of attended}} \\
+        \text{\colorbox{aquamarine}{sessions}
+    }}}
+\quad
+\overbrace{\texttt{\colorbox{aquamarine}{s/}\color{green}{10}}}
+    ^{\text{\colorbox{aquamarine}{Number of sessions}}}
+$$
+
+
+##### Examples:
+
+TODO
+
+##### Outcome:
+
+TODO
+
+##### Possible Failures:
+
+TODO
 
 Set attendance for each person
 
 #### Delete a CCA: `cca_delete`
 Delete a current existing CCA
+
+##### Command Format:
+
+$$
+\large
+\overbrace{\texttt{\colorbox{lightgrey}{cca\_delete}}}
+    ^{\text{\colorbox{lightgrey}{Action}}}
+\quad
+\overbrace{\texttt{\colorbox{plum}{c/}\color{green}{NUS Cycling}}}
+        ^{\text{\colorbox{plum}{CCA to delete}}}
+$$
+
+##### Examples:
+
+TODO
+
+##### Outcome:
+
+TODO
+
+##### Possible Failures:
+
+TODO
 
 ### Deleting Contacts
 
@@ -516,6 +782,33 @@ Delete a current existing CCA
 
 Deletes the specified person from the CCA Manager.
 
+##### Command Format:
+
+$$
+\large
+\overbrace{\texttt{\colorbox{lightgrey}{delete}}}
+    ^{\text{\colorbox{lightgrey}{Action}}}
+\quad
+\overbrace{\texttt{\fcolorbox{tomato}{transparent}{\color{green}{1}}}}
+    ^{\substack{
+        \text{\colorbox{gold}{Index of person}} \\
+        \text{\colorbox{gold}{in \textbf{Result Box}}}
+    }}
+$$
+
+##### Examples:
+
+TODO
+
+##### Outcome:
+
+TODO
+
+##### Possible Failures:
+
+TODO
+
+<!--
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
@@ -525,12 +818,31 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the CCA Manager.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+-->
 
 #### Clearing all entries: `clear`
 
 Clears all entries from the CCA Manager.
 
-Format: `clear`
+##### Command Format:
+
+$$
+\large
+\overbrace{\texttt{\colorbox{lightgrey}{clear}}}
+    ^{\text{\colorbox{lightgrey}{Action}}}
+$$
+
+##### Examples:
+
+TODO
+
+##### Outcome:
+
+TODO
+
+##### Possible Failures:
+
+TODO
 
 ### Storage
 
