@@ -25,7 +25,7 @@
 <img src="images/Ui.png">
 </center>
 
-Welcome to CCA Manager's User Guide! CCA Manager is a **contact manager designed to simplify the management of CCAs and enhance your administrative efficiency**, regardless of whether you're overseeing a sports team, academic club, any other extracurricular activity, or simply a CCA participant. It has a minimal and intuitive Graphic User Interface where most actions are performed via commands, making it a pleasure to use. If you can type fast, CCA Manager can get your admin tracking done faster than traditional Graphic User Interface apps.
+Welcome to CCA Manager's User Guide! CCA Manager is a **contact manager designed to simplify the management of CCAs and enhance your administrative efficiency**, regardless of whether you're overseeing a sports team, academic club, any other extracurricular activity, or simply a CCA participant. It has a minimal and intuitive [_Graphic User Interface_](#Glossary) where most actions are performed via commands, making it a pleasure to use. If you can type fast, CCA Manager can get your admin tracking done faster than traditional [_Graphic User Interface_](#Glossary) apps.
 
 In this user guide, we'll walk you through the essential steps to harness the full potential of CCA Manager. Whether you're a CCA Executive Committee Member or simply a CCA participant, our guide will provide you with the knowledge and tools you need to make the most of our app.
 
@@ -65,27 +65,29 @@ CCA Manager endeavors to equip CCAs with tools that streamline administration, f
 
 To get started with CCA Manager and explore its features further, check out our [Installation Guide](#installation-guide) and our [Quick Start](#quick-start), where we'll go through some concrete use cases for our app.
 
+(Reminder: the **blue link** means it has relevant explanations in the Glossary. ^_^ ) 
+
 ## Installation Guide
 
 **This Installation guide targets an audience who has knowledge of how to install programs and how to use a command line/terminal.**
 
 <!-- TODO: Make the above disclaimer redundant -->
 
-1. Ensure you have Java `11` or above installed on your Computer.
+1. Ensure you have [_Java_](#Glossary) `11` or above installed on your Computer.
 
-1. Download the latest `ccamanager.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `ccamanager.jar` from [here](https://github.com/se-edu/addressbook-level3/releases). (Click [_here_](#Glossary) if you don't know what is `.jar`)
 
 1. Copy the file to the folder you want to use as the _home folder_ for your CCA Manager.
 
-1. On **Linux** and **macOS**:
-   1. Open a command terminal.
+1. On [**_Linux_**](#Glossary) and [**_macOS_**](#Glossary):
+   1. Open a [_command terminal_](#Glossary).
    1. Type `cd <folder>` into the terminal and press `enter`, where you replace `<folder>` with the path to the folder where you've placed `ccamanager.jar`. This navigates the terminal to the correct folder.
    1. Type `java -jar ccamanager.jar` into the terminal and press `enter` to run the application. <br>
 
-1. On **Windows**:
+1. On [**_Windows_**](#Glossary):
     1. Double-click the `ccamanager.jar` file to run it.
 
-**A Graphic User Interface similar to below should appear in a few seconds. Note how the app contains some sample data.**<br>
+**A [_Graphic User Interface_](#Glossary) similar to below should appear in a few seconds. Note how the app contains some sample data.**<br>
 
 <center>
 <img src="images/Ui.png" height=400>
@@ -115,7 +117,7 @@ All of CCA Manager's functionality is accessed via commands. This includes both 
 
 ### Upon Booting Up
 
-When you first boot up the app, the app will contain some example contacts for you to get a feel of using CCA Manager's functionalities.
+When you first boot up the app, the app will contain some example contacts for you to get a feel of using CCA Manager's functions.
 
 To run a command, type the command in the **Command Box** and press Enter to execute it. For example, typing **`help`** and pressing Enter will open the help window.
 
@@ -133,7 +135,7 @@ Now you can proceed to the [Features](#features) section for a detailed listing 
 
 ## Features
 
-This section details the available functionalities of CCA Manager, organised according to the following categories:
+This section details the available functions of CCA Manager, organised according to the following categories:
 
 1. [General Features](#general-features): General features for a better user experience
 2. [Displaying Contacts](#displaying-contacts): Displaying features in the **Results Box**
@@ -200,6 +202,8 @@ help
 </center>
 
 A box appears with a button `Copy URL`. Clicking it will allow you to paste the link into your internet browsing application of choice (E.g., Chrome, Safari, Firefox) and view our User Guide.
+
+(Click [_here_](#Glossary) if you don't know what is an URL.)
 
 #### Exiting the program: `exit`
 
@@ -754,15 +758,24 @@ $$
 
 ##### Examples:
 
-TODO
+```
+setatt 2 att/ 4 s/ 6
+```
+or 
+```
+setatt 4 att/3 s/6
+```
 
 ##### Outcome:
 
-TODO
+<img src="images/UG-Basics/outcomeSetatt1.png" width=700>
+<img src="images/UG-Basics/outcomeSetatt2.png" width=700>
 
 ##### Possible Failures:
 
-TODO
+- session number less than attendance
+- [_Index_](#Glossary) out of range
+- Typed invalid number, number must be **non-negative**
 
 Set attendance for each person
 
@@ -782,15 +795,29 @@ $$
 
 ##### Examples:
 
-TODO
+```
+cca_delete c/NUS Cycling 
+```
+```
+cca_delete c/Jogging
+```
 
 ##### Outcome:
+###### Before delete
+<img src="images/UG-Basics/outcomeCca_deleteBefore.png" width=700>
 
-TODO
+###### After delete
+<img src="images/UG-Basics/outcomeCca_deleteAfter1.png" width=700>
+<img src="images/UG-Basics/outcomeCca_deleteAfter2.png" width=700>
+<box type="tip" seamless>
+
+**Tip:**
+*  After running this command, CCA Manager will only list contacts of the deleted CCA. Type the `list` command again to see all contacts.
+   </box>
 
 ##### Possible Failures:
 
-TODO
+If you delete a non-existent CCA this command will fail.
 
 ### Deleting Contacts
 
@@ -868,7 +895,7 @@ CCA Manager data are saved in the hard disk automatically after any command that
 
 #### Editing the data file
 
-CCA Manager data are saved automatically as a JSON file `[JAR file location]/data/<TODO>.json`. Advanced users are welcome to update data directly by editing that data file.
+CCA Manager data are saved automatically as a [_JSON_](#Glossary) file `[JAR file location]/data/<TODO>.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -906,7 +933,7 @@ _Details coming soon ..._
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the Graphic User Interface will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the [_Graphic User Interface_](#Glossary) will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -951,6 +978,26 @@ Action     | Format, Examples
 **Set Attendance** | `setatt INDEX att/NUMBER s/NUMBER` e.g. `setatt 2 att/6 s/7`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear**  | `clear`
+
+
+## Glossary
+
+Term   | Explanation                                                                                                                                                                               
+---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Graphic User Interface** | What you see on your computer or phone screen when you're using programs or apps. It's the visual way you interact with your device.                                                      
+**FAQ** | Frequently Asked Questions                                                                                                                                                                
+**Project Repository** | A digital storage space or a virtual filing cabinet where all the files and documents related to a project are kept. It's usually hosted online using platforms like GitHub or Bitbucket. 
+**Java** | A popular programming language that's used to build all sorts of software applications, from simple mobile apps to complex web servers. For more refer to: https://www.java.com/en           
+**.jar file** | A package containing Java code, along with any other resources the program needs, such as images or configuration files. It stands for "Java ARchive."
+**Linux** | Linux is an operating system, just like Windows or macOS, but it's built on a different foundation. For more refer to: https://www.linux.org
+**macOS** | macOS is the operating system developed by Apple for their Macintosh computers. It's what makes everything run on your Mac, like opening apps, browsing the web, or organizing files. For more refer to: https://www.apple.com/macos/sonoma
+**command terminal** | A text-based interface that allows you to interact with your computer using text commands instead of clicking on icons or buttons like you would in a graphical user interface (GUI). It's also known as a command line interface (CLI).
+**Windows** |An operating system developed by Microsoft for personal computers. It's one of the most widely used operating systems in the world. For more refer to: https://www.microsoft.com/windows?r=1
+**URL** | A web address that specifies the location of a resource on the internet. It's basically the address you type into your web browser to visit a specific webpage or access a file online.
+**Index** | In this User Guide, it refers to the number that people appear in the list
+**JSON** | It's a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate. For more refer to: https://www.json.org
+**Github** | A platform for hosting and sharing code repositories. It's like a social network for developers, where they can collaborate on projects, share code, and track changes to their code over time. For more refer to: https://github.com/
+**Extraneous parameters** | In this User Guide, it refers to anything behind the command. e.g. cca_delete c/Jogging, c/Jogging is a parameter.
 
 <script>
 let woof = [...document.getElementById("content-wrapper").getElementsByTagName("a")].filter(a => a.href.includes("#")).filter(a => document.getElementById(a.href.split("#")[1]) === null).map(a => `  -- [${a.textContent}](${a.href.split("#")[1]})`).join("\n");
