@@ -625,6 +625,6 @@ Action     | Format, Examples
 **Clear**  | `clear`
 
 <script>
-let meow = [...document.getElementsByTagName("a")].filter(a => a.href.includes("#")).filter(a => document.getElementById(a.href.split("#")[1]) === null).map(a => `  -- [${a.textContent}](${a.href.split("#")[1]})`).join("\n");
-if (meow !== "") alert(`Broken links:\n${meow}`)
+let woof = [...document.getElementById("content-wrapper").getElementsByTagName("a")].filter(a => a.href.includes("#")).filter(a => document.getElementById(a.href.split("#")[1]) === null).map(a => `  -- [${a.textContent}](${a.href.split("#")[1]})`).join("\n");
+if (woof !== "") alert(`Broken links:\n${woof}`)
 </script>
