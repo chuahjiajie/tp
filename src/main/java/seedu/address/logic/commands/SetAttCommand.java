@@ -29,7 +29,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.roles.Role;
 
 /**
- * Assigns role to the existing person in the CCA Manager
+ * Sets the attendance details of an existing person in the CCA Manager
  */
 public class SetAttCommand extends Command {
 

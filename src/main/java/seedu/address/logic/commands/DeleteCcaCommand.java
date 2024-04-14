@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 
 
 /**
- * Owes the details of the person identified using the displayed index from the address book.
+ * Deletes a CCA and all persons that is associated with the CCA.
  */
 public class DeleteCcaCommand extends Command {
     public static final String COMMAND_WORD = "cca_delete";
