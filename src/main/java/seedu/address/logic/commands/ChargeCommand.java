@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
 
 
 /**
- * Owes the details of the person identified using the displayed index from the address book.
+ * Charges a person with an amount of money by CCA and optionally, by role.
  */
 public class ChargeCommand extends Command {
     public static final String COMMAND_WORD = "charge";

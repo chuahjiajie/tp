@@ -63,12 +63,13 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_NO_CCA = "Cannot assign role to person without a CCA.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -89,6 +90,11 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        if (personToEdit.getCcas().isEmpty() && !personToEdit.getRoles().isEmpty()) {
+            throw new CommandException(MESSAGE_NO_CCA);
+        }
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -114,8 +120,8 @@ public class EditCommand extends Command {
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
         Set<Cca> updatedCcas = editPersonDescriptor.getCcas().orElse(personToEdit.getCcas());
         Optional<Metadata> updatedMetadata = editPersonDescriptor
-            .getMetadata()
-            .or(() -> personToEdit.getMetadata());
+                .getMetadata()
+                .or(() -> personToEdit.getMetadata());
         Amount updatedAmount = personToEdit.getAmount();
         Attendance updatedAttendance = personToEdit.getAtt();
         Sessions updatedSessions = personToEdit.getSess();
@@ -162,7 +168,8 @@ public class EditCommand extends Command {
 
         private Metadata metadata;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
