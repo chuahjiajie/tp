@@ -29,13 +29,13 @@ Welcome to CCA Manager's User Guide! CCA Manager is a **contact manager designed
 
 In this user guide, we'll walk you through the essential steps to harness the full potential of CCA Manager. Whether you're a CCA Executive Committee Member or simply a CCA participant, our guide will provide you with the knowledge and tools you need to make the most of our app.
 
-This user guide does not assume any prior experience with administrative tools or command interfaces and is accessible for beginners and self-contained. However, if you've used command interfaces such as those from Telegram, you might find this guide easier to follow. If you have further questions while reading this document or while using our app, visit our [FAQ](#faq). If your question isn't answered there, feel free to visit our [project repository](https://github.com/AY2324S2-CS2103T-W11-2/tp/issues) and raise an issue.
+This user guide does assumes some prior experience with administrative tools and command interfaces. Don't worry if you don't know these, we'll guide you along thew way! If you have further questions while reading this document or while using our app, visit our [FAQ](#faq). If your question isn't answered there, feel free to visit our [project repository](https://github.com/AY2324S2-CS2103T-W11-2/tp/issues) and raise an issue.
 
 This user guide is split into 4 parts:
 1. An introduction to what CCA Manager offers,
 2. A section to set up our app,
 3. Beginner-friendly tutorials that introduce CCA Manager through a practical use case, and
-4. A comprehensive reference that explains all of CCA Manager's concepts and features. Feel free to navigate this guide via the sidebar on the right.
+4. A comprehensive reference that explains all of CCA Manager's concepts and features.
 
 
 <!-- * Table of Contents -->
@@ -215,11 +215,11 @@ $$
 
 ##### Examples:
 
-TODO
+`exit`
 
 ##### Outcome:
 
-TODO
+Nil.
 
 ### Displaying Contacts
 
@@ -299,22 +299,20 @@ $$
 
 ##### Examples:
 
-<!--
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
--->
-
-TODO
+* `find Alex`
+* `find Alex Yu`
 
 ##### Outcome:
 
-TODO
+The output for `find Alex Yu` is:
+<center>
+<img width="700px" src="images/UG-Basics/find-output-1.png">
+</center>
+
 
 ##### Possible Failures:
 
-TODO
+If you do not enter a name to find, the command will fail.
 
 #### Filter by CCA and roles: `filter`
 Filter the current list with CCA and roles
@@ -350,15 +348,20 @@ $$
 
 ##### Examples:
 
-TODO
+* `filter c/NUS Cycling`
+* `filter c/NUS Cycling r/classmates`
+* `filter c/NUS Cycling r/classmates r/colleagues`
 
 ##### Outcome:
 
-TODO
+For `filter c/NUS Cycling r/classmates r/colleagues`:
+<center>
+<img width="700px" src="images/UG-Basics/filter-output-1.png">
+</center>
 
 ##### Possible Failures:
 
-TODO
+Not entering a CCA will cause the command to fail.
 
 ### Editing Contacts
 
@@ -590,7 +593,7 @@ The 2nd person on the list, Bernice Yu, has her CCAs updated from `NUS Cycling` 
 
 ##### Possible Failures:
 
-TODO
+If the entry in the list is not present, the command will fail.
 
 #### Assigning roles to person: `assign`
 
@@ -620,15 +623,18 @@ $$
 
 ##### Examples:
 
-TODO
+* (Assuming you have a list of people displayed) `assign 1 r/Treasurer`
 
 ##### Outcome:
 
-TODO
+For `assign 1 r/Treasurer`
+<center>
+<img src="images/UG-Basics/assign-output-1.png" width=700>
+</center>
 
 ##### Possible Failures:
 
-TODO
+If the entry does not exist, the ocmmand will fail.
 
 #### Track a person owing money: `owe`
 
@@ -653,15 +659,19 @@ $$
 
 ##### Examples:
 
-TODO
+* (assuming a list of persons is currently shown) `owe 1 m/10.00`
 
 ##### Outcome:
 
-TODO
+For `owe 1 m/10.00`:
+<center>
+<img src="images/UG-Basics/owe-output-1.png" width=700>
+</center>
 
 ##### Possible Failures:
 
-TODO
+If the entry does not exist, the command will fail. The command will also reject
+non-numeric amounts of money, or money that exceeds 2 decimal places.
 
 #### Charge a person with money: `charge`
 Charge a person with an amount of money by CCA and optionally, by role.
@@ -699,15 +709,21 @@ $$
 
 ##### Examples:
 
-TODO
+* Charges all members in NUS Cycling with the role of "Treasurer":
+  `charge m/10.00 c/NUS Cycling r/Treasurer`
 
 ##### Outcome:
 
-TODO
+For `charge m/10.00 c/NUS Cycling r/Treasurer`:
+<center>
+<img src="images/UG-Basics/charge-output-1.png" width=700>
+</center>
 
 ##### Possible Failures:
 
-TODO
+If the amount entered is non-numeric, the
+command will fail. The command also fails if nobody was charged.
+This usually means the CCA or role was invalid.
 
 #### Track attendance: `setatt`
 
