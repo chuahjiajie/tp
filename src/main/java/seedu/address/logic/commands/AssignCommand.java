@@ -48,12 +48,13 @@ public class AssignCommand extends Command {
     public static final String MESSAGE_ASSIGN_PERSON_SUCCESS = "Assigned Person: %1$s";
     public static final String MESSAGE_NOT_ASSIGNED = "Role should be provided here.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_NO_CCA = "Cannot assign role to person without a CCA.";
 
     private final Index index;
     private final AssignCommand.AssignPersonDescriptor assignPersonDescriptor;
 
     /**
-     * @param index of the person to assign
+     * @param index                  of the person to assign
      * @param assignPersonDescriptor details of the role to assign the person with
      */
     public AssignCommand(Index index, AssignCommand.AssignPersonDescriptor assignPersonDescriptor) {
@@ -74,6 +75,11 @@ public class AssignCommand extends Command {
         }
 
         Person personToAssign = lastShownList.get(index.getZeroBased());
+
+        if (personToAssign.getCcas().isEmpty() && !personToAssign.getRoles().isEmpty()) {
+            throw new CommandException(MESSAGE_NO_CCA);
+        }
+
         Person assignedPerson = createAssignedPerson(personToAssign, assignPersonDescriptor);
 
         if (!personToAssign.isSamePerson(assignedPerson) && model.hasPerson(assignedPerson)) {
@@ -87,7 +93,8 @@ public class AssignCommand extends Command {
 
     /**
      * Creates and returns an assigned person with details of the role
-     * @param personToAssign person who will be assigned
+     *
+     * @param personToAssign         person who will be assigned
      * @param assignPersonDescriptor details of the role to assign the person with
      * @return Person who is assigned with a role
      */
@@ -116,7 +123,8 @@ public class AssignCommand extends Command {
     public static class AssignPersonDescriptor {
         private Set<Role> role;
 
-        public AssignPersonDescriptor() {}
+        public AssignPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
