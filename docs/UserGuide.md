@@ -47,10 +47,10 @@ Welcome to CCA Manager's User Guide! CCA Manager is a **contact manager designed
 
 In this user guide, we'll walk you through the essential steps to harness the full potential of CCA Manager. Whether you're a CCA Executive Committee Member or simply a CCA participant, our guide will provide you with the knowledge and tools you need to make the most of our app.
 
-This user guide does assumes some prior experience with administrative tools and command interfaces. Don't worry if you don't know these, we'll guide you along the way! If you have further questions while reading this document or while using our app, visit our [FAQ](#faq). If your question isn't answered there, feel free to visit our [project repository](https://github.com/AY2324S2-CS2103T-W11-2/tp/issues) and raise an issue.
+This user guide does assume some prior experience with administrative tools and command interfaces. Don't worry if you don't know these, we'll guide you along the way! If you have further questions while reading this document or while using our app, visit our [FAQ](#faq). If your question isn't answered there, feel free to visit our [project repository](https://github.com/AY2324S2-CS2103T-W11-2/tp/issues) and raise an issue.
 
 This user guide is split into 4 parts:
-1. [An introduction to what CCA Manager offers](#product-introduction),
+1. [An introduction to what CCA Manager offers](#about-cca-manager),
 2. [An installation guide and a quick start](#installation-guide),
 3. [An overview of all the features of CCA Manager](#features), and
 4. [An FAQ](#faq).
@@ -66,7 +66,7 @@ This green box contains helpful tips that aid you in using CCA Manager to its fu
 </box>
 
 <box type="warning">
-This yellow box contain warnings related to features in CCA Manager.
+This yellow box contains warnings related to features in CCA Manager.
 </box>
 
 
@@ -77,7 +77,7 @@ This yellow box contain warnings related to features in CCA Manager.
     {name: "Table of Contents", url: "#table-of-contents"}
 ]%}
 
-## Product Introduction
+## About CCA Manager
 
 <!--
 1. Introduction
@@ -956,7 +956,7 @@ $$
 ##### Examples:
 
 * `setatt 2 att/4 s/6`
-    * Sets the attendance of the second person in the **Result Box** to be `4/6`. For example, that they have attended 4 out of a total of 6 sessions.
+    * Sets the attendance of the second person in the **Result Box** to be `4/6`, which indicates that they have attended 4 out of a total of 6 sessions.
 
 ##### Outcome:
 
@@ -1154,7 +1154,7 @@ CCA Manager data are saved automatically as a [_JSON_](#glossary) file `[JAR fil
 **Warning:**
 
 If your changes to the data file make its format invalid, CCA Manager will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the CCA Manager to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the CCA Manager to behave in unexpected ways (for example, if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </md></box>
 
 {{ navigateback(navigationlinks) }}
