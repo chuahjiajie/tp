@@ -6,13 +6,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -111,7 +110,10 @@ public class AssignCommand extends Command {
         Email updatedEmail = personToAssign.getEmail();
         Address updatedAddress = personToAssign.getAddress();
         Set<Cca> updatedCcas = personToAssign.getCcas();
-        Set<Role> updatedRoles = merge(personToAssign.getRoles(), rolesToAppend);
+        Set<Role> updatedRoles = List.of(personToAssign.getRoles(), rolesToAppend)
+            .stream()
+            .flatMap(rs -> rs.stream())
+            .collect(Collectors.toSet());
         Amount updatedAmount = personToAssign.getAmount();
         Attendance updatedAttendance = personToAssign.getAtt();
         Sessions updatedSessions = personToAssign.getSess();
@@ -119,14 +121,6 @@ public class AssignCommand extends Command {
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedRoles, updatedCcas, updatedAmount, updatedAttendance, updatedSessions, updatedMetadata);
-    }
-
-    private static <T> Set<T> merge(Collection<? extends T>... collections) {
-        Set<T> newSet = new HashSet<T>();
-        for (Collection<? extends T> collection : collections) {
-            newSet.addAll(collection);
-        }
-        return newSet;
     }
 
     /**
