@@ -982,6 +982,14 @@ $$
 * After running this command, CCA Manager will only list contacts of the deleted CCA. Type the `list` command again to see all contacts.
 </md></box>
 
+<box type="warning"><md>
+**Warning:**
+
+* If this command removes the last CCA a person has, the roles that person has will also be automatically deleted.
+This is because a person without a CCA should not have any roles.
+
+</md></box>
+
 ##### Examples:
 
 * `cca_delete c/NUS Cycling`
