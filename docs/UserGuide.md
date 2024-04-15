@@ -19,6 +19,16 @@
 {% endfor %}
 {% endmacro %}
 
+<!-- Colour all glossary terms green because im confused too -->
+<script>
+[...document.getElementById("content-wrapper").getElementsByTagName("a")]
+    .filter(a => a.href.includes("#glossary"))
+    .forEach(a => {
+        a.style.color = "forestgreen";
+        //a.style.textDecoration = "underline";
+    });
+</script>
+
 # CCA Manager User Guide
 
 <!--
@@ -30,20 +40,34 @@
 -->
 
 <center>
-<img src="images/Ui.png">
+<img src="images/Ui.png" style="max-width: 500pt">
 </center>
 
 Welcome to CCA Manager's User Guide! CCA Manager is a **contact manager designed to simplify the management of CCAs and enhance your administrative efficiency**, regardless of whether you're overseeing a sports team, academic club, any other extracurricular activity, or simply a CCA participant. It has a minimal and intuitive [_Graphic User Interface_](#glossary) where most actions are performed via commands, making it a pleasure to use. If you can type fast, CCA Manager can get your admin tracking done faster than traditional [_Graphic User Interface_](#glossary) apps.
 
 In this user guide, we'll walk you through the essential steps to harness the full potential of CCA Manager. Whether you're a CCA Executive Committee Member or simply a CCA participant, our guide will provide you with the knowledge and tools you need to make the most of our app.
 
-This user guide does assumes some prior experience with administrative tools and command interfaces. Don't worry if you don't know these, we'll guide you along thew way! If you have further questions while reading this document or while using our app, visit our [FAQ](#faq). If your question isn't answered there, feel free to visit our [project repository](https://github.com/AY2324S2-CS2103T-W11-2/tp/issues) and raise an issue.
+This user guide does assumes some prior experience with administrative tools and command interfaces. Don't worry if you don't know these, we'll guide you along the way! If you have further questions while reading this document or while using our app, visit our [FAQ](#faq). If your question isn't answered there, feel free to visit our [project repository](https://github.com/AY2324S2-CS2103T-W11-2/tp/issues) and raise an issue.
 
 This user guide is split into 4 parts:
-1. An introduction to what CCA Manager offers,
-2. A section to set up our app,
-3. Beginner-friendly tutorials that introduce CCA Manager through a practical use case, and
-4. A comprehensive reference that explains all of CCA Manager's concepts and features.
+1. [An introduction to what CCA Manager offers](#product-introduction),
+2. [An installation guide and a quick start](#installation-guide),
+3. [An overview of all the features of CCA Manager](#features), and
+4. [An FAQ](#faq).
+
+##### Legend
+
+<box type="info">
+This blue box contains information that might be helpful to know.
+</box>
+
+<box type="tip">
+This green box contains helpful tips that aid you in using CCA Manager to its full potential.
+</box>
+
+<box type="warning">
+This yellow box contain warnings related to features in CCA Manager.
+</box>
 
 
 <!-- * Table of Contents -->
@@ -52,9 +76,6 @@ This user guide is split into 4 parts:
 {% set navigationlinks = [
     {name: "Table of Contents", url: "#table-of-contents"}
 ]%}
-
-
----
 
 ## Product Introduction
 
@@ -78,7 +99,7 @@ CCA Manager endeavors to equip CCAs with tools that streamline administration, f
 
 To get started with CCA Manager and explore its features further, check out our [Installation Guide](#installation-guide) and our [Quick Start](#quick-start), where we'll go through some concrete use cases for our app.
 
-(Reminder: the **blue link** means it has relevant explanations in the [_Glossary_](#glossary). `^_^` ) 
+(Reminder: the **green link** means it has relevant explanations in the [_Glossary_](#glossary). `^_^` ) 
 
 {{ navigateback(navigationlinks) }}
 
@@ -107,7 +128,7 @@ To get started with CCA Manager and explore its features further, check out our 
 **A [_Graphic User Interface_](#glossary) similar to below should appear in a few seconds. Note how the app contains some sample data.**<br>
 
 <center>
-<img src="images/Ui.png" height=400>
+<img src="images/Ui.png">
 </center>
 
 To gain an idea of what CCA Manager is about, head down to [Quick Start](#quick-start).
@@ -124,7 +145,7 @@ Confused about where to get started? Don’t fret, in this section, we'll outlin
 First off, CCA Manager's interface consists of the following main components:
 
 <center>
-<img src="images/CommandLine.png" width=700>
+<img src="images/CommandLine.png" >
 </center>
 
 1. **Command Box**: A small text box where you type the commands.
@@ -238,7 +259,7 @@ help
 
 A box appears with a button `Copy URL`. Clicking it will allow you to paste the link into your internet browsing application of choice (E.g., Chrome, Safari, Firefox) and view our User Guide.
 
-(Click [_here_](#glossary) if you don't know what is an URL.)
+(Click [_here_](#glossary) if you don't know what is a URL.)
 
 {{ navigateback(navigationlinks) }}
 
@@ -258,7 +279,7 @@ $$
 
 ##### Examples:
 
-`exit`
+* `exit`
 
 ##### Outcome:
 
@@ -347,7 +368,8 @@ $$
 $$
 
 
-<box type="info" seamless>
+<box type="info"><md>
+**Information:**
 
 * The words supplied to `find` are case-insensitive.
     * If you have an `Alex Yeoh` in the app, performing `find alex` will match `Alex Yeoh`.
@@ -356,7 +378,7 @@ $$
 * Only full words will be matched.
     * Performing `find al` will not match `Alex Yeoh`
 * If a person's name contains at least one of the words supplied to `find`, the person will be matched.
-</box>
+</md></box>
 
 ##### Examples:
 
@@ -373,7 +395,12 @@ The output for `find Alex Yu` is:
 
 ##### Possible Failures:
 
-If you do not enter a name to find, the command will fail.
++ If you do not provide a word (for instance, if you ran the command `find`), the command will fail.
+
+<box type="tip"><md>
+**Tip**:
+If you intend to display all contacts by not providing a word, refer to the [`list` command](#listing-all-persons-list).
+</md></box>
 
 {{ navigateback(navigationlinks) }}
 
@@ -411,6 +438,15 @@ $$
 }
 $$
 
+<box type="info"><md>
+**Information:** 
+
+The people who will be listed are people who are:
+
+1. In any of the CCAs provided, **AND**
+2. In any of the roles provided.
+</md></box>
+
 ##### Examples:
 
 * `filter c/NUS Cycling`
@@ -426,7 +462,11 @@ For `filter c/NUS Cycling r/classmates r/colleagues`:
 
 ##### Possible Failures:
 
-Not entering a CCA will cause the command to fail.
++ If you do not provide a CCA to the command (for instance, if you ran the command `filter`), then the command will fail.
+
+<box type="tip"><md>
+**Tip**: If you intend to display all contacts by not providing a CCA, refer to the [`list` command](#listing-all-persons-list).
+</md></box>
 
 {{ navigateback(navigationlinks) }}
 
@@ -507,12 +547,12 @@ $$
 $$
 
 
-<box type="tip" seamless>
-
+<box type="tip"><md>
 **Tip:**
+
 *  A person can have any number of Role(s) and CCAs(s) (including 0)
 *  A person need not have any Description attached.
-</box>
+</md></box>
 
 ##### Examples:
 
@@ -529,7 +569,7 @@ add n/John Doe p/98765432 e/johnd@example.com a/6 Sin Ming #01-01 c/NUS Cycling 
 ```
 
 <center>
-<img src="images/addcommandoutcome.png" width=700>
+<img src="images/addcommandoutcome.png" >
 </center>
 
 A person is added to CCA Manager with the information provided in the command, and the new person is displayed in the **Results Box**.
@@ -634,23 +674,26 @@ $$
 $$
 
 
-<box type="info" seamless>
+<box type="info"><md>
+**Information:**
 
 * `Index of person` **must be a number greater than 0**.
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
-</box>
+</md></box>
 
-<box type="tip" seamless>
+<box type="tip"><md>
+**Tip:**
 
 * To remove all Roles of a person, use `r/nil`.
 * To remove all CCAs of a person, use `c/nil`.
-</box>
+</md></box>
 
-<box type="warning" seamless>
+<box type="warning"><md>
+**Warning:**
 
-* When editing Roles, (E.g., `edit 1 r/new role`), the existing Roles of the person **will be removed**. I.e., editing of Roles is **not cumulative**.
-</box>
+* When editing Roles, (E.g., `edit 1 r/new role`), the existing Roles of the person **will be removed**. For example, editing of Roles is **not cumulative**.
+</md></box>
 
 ##### Examples:
 
@@ -666,7 +709,7 @@ $$
 Suppose we start with this list of people displayed in the **Results Box**.
 
 <center>
-<img src="images/editcommandoutcome1.png" width=700>
+<img src="images/editcommandoutcome1.png" >
 </center>
 
 We then run the following command:
@@ -676,20 +719,22 @@ edit 2 c/NUS Rollers c/NUS Origami
 ```
 
 <center>
-<img src="images/editcommandoutcome2.png" width=700>
+<img src="images/editcommandoutcome2.png" >
 </center>
 
 The 2nd person on the list, Bernice Yu, has her CCAs updated from `NUS Cycling` to both `NUS Origami` and `NUS Rollers`.
 
 ##### Possible Failures:
 
-If the entry in the list is not present, the command will fail.
++ The [_Index of person_](#glossary) must be within range. For example, it must be greater than 0, and smaller than the length of the currently displayed list of people. This is because the [_Index of person_](#glossary) will be used to indicate which person to operate the command on.
 
 {{ navigateback(navigationlinks) }}
 
 ---
 
 #### Assigning roles to person: `assign`
+
+TODO
 
 ##### Command Format:
 
@@ -717,18 +762,18 @@ $$
 
 ##### Examples:
 
-* (Assuming you have a list of people displayed) `assign 1 r/Treasurer`
+* `assign 1 r/Treasurer`
 
 ##### Outcome:
 
 For `assign 1 r/Treasurer`
 <center>
-<img src="images/UG-Basics/assign-output-1.png" width=700>
+<img src="images/UG-Basics/assign-output-1.png" >
 </center>
 
 ##### Possible Failures:
 
-If the entry does not exist, the ocmmand will fail.
+- The [_Index of person_](#glossary) must be within range. For example, it must be greater than 0, and smaller than the length of the currently displayed list of people. This is because the [_Index of person_](#glossary) will be used to indicate which person to operate the command on.
 
 {{ navigateback(navigationlinks) }}
 
@@ -757,19 +802,22 @@ $$
 
 ##### Examples:
 
-* (assuming a list of persons is currently shown) `owe 1 m/10.00`
+* `owe 1 m/10.00`
 
 ##### Outcome:
 
 For `owe 1 m/10.00`:
 <center>
-<img src="images/UG-Basics/owe-output-1.png" width=700>
+<img src="images/UG-Basics/owe-output-1.png" >
 </center>
 
 ##### Possible Failures:
 
-If the entry does not exist, the command will fail. The command will also reject
-non-numeric amounts of money, or money that exceeds 2 decimal places.
+
+- The [_Index of person_](#glossary) must be within range.
++ The amount of money provided `m/` must also be numeric and in dollars, and cannot exceed 2 decimal places. For example, the following are invalid for the amount:
+    + `m/one dollar`: Not numeric.
+    + `m/10.001`: More than 2 decimal places.
 
 {{ navigateback(navigationlinks) }}
 
@@ -809,23 +857,38 @@ $$
     }
 $$
 
+<box type="info"><md>
+**Information:**
+
+The people who will be charged are people who are:
+1. In any of the CCAs provided, **AND**
+2. In any of the roles provided.
+</md></box>
+
+<box type="tip"><md>
+**Tip:**
+
+To see who will be charged by a command, say via `charge m/10.00 c/NUS Cycling r/Logistics`, run the [`filter` command](#filter-by-cca-and-roles-filter). In this case, `filter c/NUS Cycling r/Logistics` will display the people that will be charged.
+</md></box>
+
 ##### Examples:
 
-* Charges all members in NUS Cycling with the role of "Treasurer":
-  `charge m/10.00 c/NUS Cycling r/Treasurer`
+* `charge m/10.00 c/NUS Cycling r/Treasurer`
+    * Charges all members in `NUS Cycling` with the role of `Treasurer`
 
 ##### Outcome:
 
 For `charge m/10.00 c/NUS Cycling r/Treasurer`:
 <center>
-<img src="images/UG-Basics/charge-output-1.png" width=700>
+<img src="images/UG-Basics/charge-output-1.png" >
 </center>
 
 ##### Possible Failures:
 
-If the amount entered is non-numeric, the
-command will fail. The command also fails if nobody was charged.
-This usually means the CCA or role was invalid.
++ The amount of money provided `m/` must also be numeric and in dollars, and cannot exceed 2 decimal places. For example, the following are invalid for the amount:
+    + `m/one dollar`: Not numeric.
+    + `m/10.001`: More than 2 decimal places.
++ If nobody is charged, the command will fail. This might be caused by nobody in the contact list fulfilling both the CCAs and the Roles provided to the command.
 
 {{ navigateback(navigationlinks) }}
 
@@ -862,26 +925,19 @@ $$
 
 ##### Examples:
 
-```
-setatt 2 att/ 4 s/ 6
-```
-or 
-```
-setatt 4 att/3 s/6
-```
+* `setatt 2 att/4 s/6`
+    * Sets the attendance of the second person in the **Result Box** to be `4/6`. For example, that they have attended 4 out of a total of 6 sessions.
 
 ##### Outcome:
 
-<img src="images/UG-Basics/outcomeSetatt1.png" width=700>
-<img src="images/UG-Basics/outcomeSetatt2.png" width=700>
+<img src="images/UG-Basics/outcomeSetatt1.png" >
+<img src="images/UG-Basics/outcomeSetatt2.png" >
 
 ##### Possible Failures:
 
-- session number less than attendance
-- [_Index_](#glossary) out of range
-- Typed invalid number, number must be a **non-negative integer**
+- If the number of sessions attended (`att/`) exceeds the number of sessions total `s/`, the application will error out.
+- The [_Index of person_](#glossary) must be within range.
 
-Set attendance for each person
 
 {{ navigateback(navigationlinks) }}
 
@@ -901,31 +957,37 @@ $$
         ^{\text{\colorbox{plum}{CCA to delete}}}
 $$
 
+<box type="info"><md>
+**Info:**
+
+* This command will remove the selected CCA from every person in the CCA, but will not delete the person.
+* After running this command, CCA Manager will only list contacts of the deleted CCA. Type the `list` command again to see all contacts.
+</md></box>
+
 ##### Examples:
 
-```
-cca_delete c/NUS Cycling 
-```
-```
-cca_delete c/Jogging
-```
+* `cca_delete c/NUS Cycling`
+* `cca_delete c/Jogging`
 
 ##### Outcome:
-###### Before delete
-<img src="images/UG-Basics/outcomeCca_deleteBefore.png" width=700>
 
-###### After delete
-<img src="images/UG-Basics/outcomeCca_deleteAfter1.png" width=700>
-<img src="images/UG-Basics/outcomeCca_deleteAfter2.png" width=700>
-<box type="tip" seamless>
+Suppose we start with this list of people displayed in the **Results Box**.
 
-**Tip:**
-*  After running this command, CCA Manager will only list contacts of the deleted CCA. Type the `list` command again to see all contacts.
-   </box>
+<img src="images/UG-Basics/outcomeCca_deleteBefore.png" >
+
+We then run the following command:
+
+```
+cca_delete c/NUS Cycling
+```
+
+<img src="images/UG-Basics/outcomeCca_deleteAfter1.png" >
+
+Notice that the CCA of the person `Caleb Hugh` has been removed.
 
 ##### Possible Failures:
 
-If you delete a non-existent CCA this command will fail.
++ If the CCA specified to the command does not exist, the command will fail as there is nothing to delete.
 
 {{ navigateback(navigationlinks) }}
 
@@ -944,6 +1006,10 @@ The following commands are documented in this section:
 ]%}
 
 #### Deleting a person: `delete`
+
+<box type="warning"><md>
+**Warning:** This operation is irreversible.
+</md></box>
 
 Deletes the specified person from the CCA Manager.
 
@@ -995,6 +1061,10 @@ Examples:
 
 #### Clearing all entries: `clear`
 
+<box type="warning"><md>
+**Warning:** This operation is irreversible.
+</md></box>
+
 Clears all entries from the CCA Manager.
 
 ##### Command Format:
@@ -1004,6 +1074,7 @@ $$
 \overbrace{\texttt{\colorbox{lightgrey}{clear}}}
     ^{\text{\colorbox{lightgrey}{Action}}}
 $$
+
 
 ##### Examples:
 
@@ -1024,7 +1095,6 @@ $$
 ### Storage
 
 The following features are documented in this section:
-* [Saving the data](#saving-the-data)
 * [Editing the data file](#editing-the-data-file)
 * [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v2-0)
 
@@ -1034,24 +1104,20 @@ The following features are documented in this section:
     {name: "Storage", url: "#storage"}
 ]%}
 
-#### Saving the data
-
-CCA Manager data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-{{ navigateback(navigationlinks) }}
-
----
+<box type="info"><md>
+**Information**: CCA Manager data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+</md></box>
 
 #### Editing the data file
 
-CCA Manager data are saved automatically as a [_JSON_](#glossary) file `[JAR file location]/data/<TODO>.json`. Advanced users are welcome to update data directly by editing that data file.
+CCA Manager data are saved automatically as a [_JSON_](#glossary) file `[JAR file location]/data/ccamanager.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning"><md>
+**Warning:**
 
-**Caution:**
-If your changes to the data file makes its format invalid, CCA Manager will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file make its format invalid, CCA Manager will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the CCA Manager to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
+</md></box>
 
 {{ navigateback(navigationlinks) }}
 
@@ -1092,11 +1158,21 @@ _Details coming soon ..._
 
 ## Common Issues
 
-1. I updated CCA Manager and now nothing shows up in my contact list.
-   **WARNING**: This solution will require deleting your existing data.
-   Solution: delete your `data` folder and re-launch CCA Manager.
-2. My [_Java_](#glossary) does not open CCA Manager, what's up with that?
-   Solution: Make sure you're using Java 11 or a more recent version. We can't guarantee anything lower will work.
+**I updated CCA Manager and now nothing shows up in my contact list!**
+ 
+> <box type="warning"><md>
+> **Warning**: This solution will require deleting your existing data.
+> </md></box>
+> 
+> **Solution:** Delete your `data` folder and re-launch CCA Manager.
+
+---
+
+**My [_Java_](#glossary) does not open CCA Manager, what's up with that?**
+
+> **Solution:** Make sure you're using Java 11 or a more recent version. We can't guarantee anything lower will work.
+
+---
 
 {{ navigateback(navigationlinks) }}
 
@@ -1112,7 +1188,7 @@ _Details coming soon ..._
 
 ## Command summary
 
-<box type="info" seamless>
+<box type="info"><md>
 
 **Notes about the command format:**<br>
 
@@ -1133,7 +1209,7 @@ _Details coming soon ..._
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-</box>
+</md></box>
 
 Action     | Format, Examples
 ---|---
@@ -1147,8 +1223,8 @@ Action     | Format, Examples
 **Assign** | `assign INDEX [r/ROLE]...` <br> e.g. `assign 2 r/Member`
 **Owe**    | `owe INDEX m/AMOUNT` <br> e.g. `owe 2 m/10.0`
 **Charge** | `charge m/AMOUNT c/CCA r/ROLES` <br> e.g. `charge m/5.0 c/NUS Cycling r/member`
-**Delete CCA** | `cca_delete c/CCA` e.g. `cca_delete c/NUS Cycling`
-**Set Attendance** | `setatt INDEX att/NUMBER s/NUMBER` e.g. `setatt 2 att/6 s/7`
+**Delete CCA** | `cca_delete c/CCA` <br> e.g. `cca_delete c/NUS Cycling`
+**Set Attendance** | `setatt INDEX att/NUMBER s/NUMBER` <br> e.g. `setatt 2 att/6 s/7`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear**  | `clear`
 
@@ -1171,7 +1247,7 @@ Term   | Explanation
 **command terminal** | A text-based interface that allows you to interact with your computer using text commands instead of clicking on icons or buttons like you would in a graphical user interface (GUI). It's also known as a command line interface (CLI).
 **Windows** |An operating system developed by Microsoft for personal computers. It's one of the most widely used operating systems in the world. For more refer to: https://www.microsoft.com/windows?r=1
 **URL** | A web address that specifies the location of a resource on the internet. It's basically the address you type into your web browser to visit a specific webpage or access a file online.
-**Index** | In this User Guide, it refers to the number that people appear in the list
+**Index of person** | In this User Guide, this refers to the number that person appears in the list
 **JSON** | It's a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate. For more refer to: https://www.json.org
 **Github** | A platform for hosting and sharing code repositories. It's like a social network for developers, where they can collaborate on projects, share code, and track changes to their code over time. For more refer to: https://github.com/
 **Extraneous parameters** | In this User Guide, it refers to anything behind the command. e.g. cca_delete c/Jogging, c/Jogging is a parameter.

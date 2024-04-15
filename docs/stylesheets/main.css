@@ -158,6 +158,7 @@ mark {
   }
   img {
       zoom: 0.8;  /* might not work on some browsers */
+      max-width: 100%;
   }
 }
 
