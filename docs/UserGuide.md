@@ -536,7 +536,8 @@ A person is added to CCA Manager with the information provided in the command, a
 
 ##### Possible Failures:
 
-TODO
+- Incorrect format of parameters.
+- Not having the minimum parameters (A contact must have name, phone, email, address).
 
 {{ navigateback(navigationlinks) }}
 
@@ -832,7 +833,8 @@ This usually means the CCA or role was invalid.
 
 #### Track attendance: `setatt`
 
-TODO
+Tracks the attendance of each contact by recording the number of attended sessions out of 
+the total number of sessions.
 
 ##### Command Format:
 
@@ -877,7 +879,7 @@ setatt 4 att/3 s/6
 
 - session number less than attendance
 - [_Index_](#glossary) out of range
-- Typed invalid number, number must be **non-negative**
+- Typed invalid number, number must be a **non-negative integer**
 
 Set attendance for each person
 
@@ -961,15 +963,19 @@ $$
 
 ##### Examples:
 
-TODO
+`delete 3`
 
 ##### Outcome:
 
-TODO
+###### Before
+<img src="images/UG-Basics/outcomeDeleteBefore.png" width=700>
+
+###### After
+<img src="images/UG-Basics/outcomeDeleteAfter.png" width=700>
 
 ##### Possible Failures:
 
-TODO
+- Index out of range
 
 <!--
 Format: `delete INDEX`
@@ -1001,15 +1007,15 @@ $$
 
 ##### Examples:
 
-TODO
+`clear`
 
 ##### Outcome:
 
-TODO
+###### Before
+<img src="images/UG-Basics/outcomeClearBefore.png" width=700>
 
-##### Possible Failures:
-
-TODO
+###### After
+<img src="images/UG-Basics/outcomeClearAfter.png" width=700>
 
 {{ navigateback(navigationlinks) }}
 

@@ -255,8 +255,22 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Track a person owing money
 
-### \[Proposed\] Payment splitting
+In order to better manage a CCA, we created a functionality that allows executive
+committee members to track the amount of money a person owes. Take for example this command `owe 1 m/10.00`.
+As a result of this command, the first person listed will now owe $10.00.
+The general steps are:
+
+1. Check the current list of contacts to see whether the list is `null` or not.
+2. If it is `null`, throw an exception, otherwise validate the index.
+3. Lastly, validate the amount, ensuring that the amount provided is not blank, 
+negative, or more than 2 decimal places.
+
+If all the parameters provided are valid, the person shown on the list will be successfully updated
+to display the amount they owe as provided by the user. Otherwise, CCA Manager will display corresponding warnings.
+
+### Payment splitting
 
 After payments are implemented, we expect to be able to split payments among
 CCA members. An example command is ``split a/4.00 c/NUS Cycling``. Which means
@@ -267,7 +281,6 @@ CCA members. An example command is ``split a/4.00 c/NUS Cycling``. Which means
    * Note: rounding errors may occur here. So we should use `double` in Java
      for higher precision and also round to nearest 2 d.p.
 3. Add the split amount to each member's "payment owed" field
-   (this field has yet to be implemented).
 
 
 ### \[Proposed\] Better CCA-level Actions
