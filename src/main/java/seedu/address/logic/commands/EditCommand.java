@@ -91,11 +91,11 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        if (personToEdit.getCcas().isEmpty() && !personToEdit.getRoles().isEmpty()) {
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        if (editedPerson.getCcas().isEmpty() && !editedPerson.getRoles().isEmpty()) {
             throw new CommandException(MESSAGE_NO_CCA);
         }
-
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

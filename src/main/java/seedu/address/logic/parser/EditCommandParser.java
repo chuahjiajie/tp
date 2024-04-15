@@ -31,6 +31,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
@@ -45,11 +46,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
-                + "\n" + EditCommand.MESSAGE_USAGE, pe);
+                    + "\n" + EditCommand.MESSAGE_USAGE, pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(
-            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_METADATA);
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_METADATA);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -65,8 +66,19 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editPersonDescriptor::setRoles);
-        parseCcasForEdit(argMultimap.getAllValues(PREFIX_CCA)).ifPresent(editPersonDescriptor::setCcas);
+
+        Collection<String> ccas = argMultimap.getAllValues(PREFIX_CCA);
+        Collection<String> roles = argMultimap.getAllValues(PREFIX_ROLE);
+        parseCcasForEdit(ccas).ifPresent(editPersonDescriptor::setCcas);
+
+        if (ccas.contains(NIL_FIELD)) {
+            if (!roles.isEmpty() && !roles.contains(NIL_FIELD)) {
+                throw new ParseException(EditCommand.MESSAGE_NO_CCA);
+            }
+            parseRolesForEdit(ccas).ifPresent(editPersonDescriptor::setRoles);
+        } else {
+            parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editPersonDescriptor::setRoles);
+        }
 
         if (argMultimap.getValue(PREFIX_METADATA).isPresent()) {
             editPersonDescriptor.setMetadata(ParserUtil.parseMetadata(argMultimap.getValue(PREFIX_METADATA).get()));
@@ -74,7 +86,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED
-                + "\n" + EditCommand.MESSAGE_USAGE);
+                    + "\n" + EditCommand.MESSAGE_USAGE);
         }
 
         return new EditCommand(index, editPersonDescriptor);
