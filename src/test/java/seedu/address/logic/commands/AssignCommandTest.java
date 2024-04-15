@@ -2,24 +2,18 @@
 // CS2103T teaching team for this.
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_HEAD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.AssignPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for AssignCommand.
