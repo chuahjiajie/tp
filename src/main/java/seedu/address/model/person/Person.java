@@ -72,7 +72,12 @@ public class Person {
      * @return new person
      */
     public Person replaceCca(Set<Cca> newCcas) {
-        return new Person(name, phone, email, address, roles, newCcas, amount, attendance, sessions, metadata);
+        Set<Role> newRoles = roles;
+        // If there's no more ccas, delete all the roles as well.
+        if (newCcas.isEmpty()) {
+            newRoles = Collections.emptySet();
+        }
+        return new Person(name, phone, email, address, newRoles, newCcas, amount, attendance, sessions, metadata);
     }
 
     public Name getName() {

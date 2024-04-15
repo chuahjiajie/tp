@@ -5,6 +5,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -67,17 +68,15 @@ public class DeleteCcaCommand extends Command {
 
         model.updateFilteredPersonList(this.ccas);
         StringBuilder result = new StringBuilder();
-        result.append(String.format("Deleting CCA(s) %s tags from all its members:\n",
+        result.append(String.format("Deleting CCA(s) %s from all its members, and also clearing their roles:\n",
             this.ccas.getCcas().stream().map(c -> c.ccaName).collect(Collectors.joining(", "))));
 
         // We have to essentially clone the list
         // because as `model.setPerson` is called,
         // the ObservableList gets updated.
         // This causes some people to be skipped.
-        List<Person> affectedPeople = model
-            .getFilteredPersonList()
-            .stream()
-            .collect(Collectors.toList());
+        List<Person> affectedPeople = new ArrayList<>(model
+                .getFilteredPersonList());
 
         // Delete their roles
         affectedPeople
@@ -87,7 +86,8 @@ public class DeleteCcaCommand extends Command {
                     .stream()
                     .filter(c -> !ccas.contains(c))
                     .collect(Collectors.toSet());
-                model.setPerson(affectedPerson, affectedPerson.replaceCca(updatedCca));
+                model.setPerson(affectedPerson, affectedPerson
+                        .replaceCca(updatedCca));
                 result.append(String.format("Person affected: %s\n", affectedPerson.getName()));
             });
 
