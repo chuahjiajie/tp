@@ -554,6 +554,13 @@ $$
 *  A person need not have any Description attached.
 </md></box>
 
+<box type="warning"><md>
+**Warning:**
+
+* When adding a role, (E.g., `add 1... r/new role`), you must also **add a CCA**. For example, 
+`add 1... c/CCA r/new role` because a person not in a CCA should not have a role. 
+</md></box>
+
 ##### Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/6 Sin Ming #01-01`
@@ -687,12 +694,17 @@ $$
 
 * To remove all Roles of a person, use `r/nil`.
 * To remove all CCAs of a person, use `c/nil`.
+* When removing all CCAs of a person, all Roles will also be removed, because a person with no CCA should not have any
+Roles.
 </md></box>
 
 <box type="warning"><md>
 **Warning:**
 
-* When editing Roles, (E.g., `edit 1 r/new role`), the existing Roles of the person **will be removed**. For example, editing of Roles is **not cumulative**.
+* When editing Roles, (E.g., `edit 1 r/new role`), the existing Roles of the person **will be removed**. Editing of Roles is **not cumulative**.
+* When editing Roles, the person must either already have a CCA or a CCA must be added at the same time, 
+(E.g., `edit 1 c/CCA r/new role`).
+
 </md></box>
 
 ##### Examples:
@@ -759,6 +771,12 @@ $$
         ^{\text{\colorbox{lavender}{Role(s)}}}
 }
 $$
+
+<box type="warning"><md>
+**Warning:**
+
+* When assigning a role, (E.g., `assign 1 r/new role`), that person must already be in a CCA.
+</md></box>
 
 ##### Examples:
 
@@ -962,6 +980,14 @@ $$
 
 * This command will remove the selected CCA from every person in the CCA, but will not delete the person.
 * After running this command, CCA Manager will only list contacts of the deleted CCA. Type the `list` command again to see all contacts.
+</md></box>
+
+<box type="warning"><md>
+**Warning:**
+
+* If this command removes the last CCA a person has, the roles that person has will also be automatically deleted.
+This is because a person without a CCA should not have any roles.
+
 </md></box>
 
 ##### Examples:
