@@ -78,7 +78,7 @@ public class AssignCommand extends Command {
 
         Person personToAssign = lastShownList.get(index.getZeroBased());
 
-        if (personToAssign.getCcas().isEmpty() && !personToAssign.getRoles().isEmpty()) {
+        if (personToAssign.getCcas().isEmpty()) {
             throw new CommandException(MESSAGE_NO_CCA);
         }
 
