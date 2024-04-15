@@ -353,6 +353,35 @@ Following the implementation of this meta-feature, the following features can be
 
 More details of these specific features in the future.
 
+
+### Attendance Tracking
+
+After members of a CCA has been added to CCA Manager, it is expected to be able to track
+their attendance. This will be displayed below their CCA.
+
+An example command for setting attendance is ``setatt index att\9 s\10``. Which means
+"Set the attendance of person at index to be 9 out of 10 sessions".  The process is as follows.
+
+1. Retrieve the attendance information of John Doe.
+2. Edit the attendance details according to the input.
+3. Update the attendance details of the person in the model.
+
+#### \[Proposed\]
+An example command for setting the number of sessions is ``setsess index s\10``. Which means
+"Set the number of sessions of person at index to be 10".  The process is as follows.
+
+1. Retrieve the attendance information of John Doe.
+2. Increment the attendance value by 1.
+3. Update the attendance details of the person in the model.
+
+#### \[Proposed\]
+An example command for incrementing attendance is ``incatt index``. Which means
+"Increment the attendance of person at index by 1".  The process is as follows.
+
+1. Retrieve the attendance information of John Doe.
+2. Edit the session detail according to the input.
+3. Update the attendance details of the person in the model.
+
 ### \[Proposed\] Feedback to App Developers and CCA Excos
 
 After using the app (CCA Manager), there will be certain features that
