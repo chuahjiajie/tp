@@ -746,7 +746,14 @@ The 2nd person on the list, Bernice Yu, has her CCAs updated from `NUS Cycling` 
 
 #### Assigning roles to person: `assign`
 
-TODO
+Appends new roles to a person.
+
+<box type="info"><md>
+**Information:** `assign` differs from `edit` in that `assign` **adds** new roles to a person while `edit` **replaces** the current roles of a person. For instance, if the first person has roles `Treasurer` and `Logistics`:
+
+* Running `assign 1 r/Captain` results in the person having roles: `Treasurer`, `Logistics` and `Captain`.
+* Running `edit 1 r/Captain` results in the person having role: `Captain`.
+</md></box>
 
 ##### Command Format:
 
@@ -792,6 +799,11 @@ For `assign 1 r/Treasurer`
 ##### Possible Failures:
 
 - The [_Index of person_](#glossary) must be within range. For example, it must be greater than 0, and smaller than the length of the currently displayed list of people. This is because the [_Index of person_](#glossary) will be used to indicate which person to operate the command on.
+- If the CCA is `nil` (for instance, the command you ran is `assign 1 r/nil`), the command will error out.
+
+<box type="tip"><md>
+**Tip**: If you intend to remove all roles for a person, try running `edit <index of person> r/nil`, (see the [`edit` command](#editing-a-person-edit)). 
+</md></box>
 
 {{ navigateback(navigationlinks) }}
 
