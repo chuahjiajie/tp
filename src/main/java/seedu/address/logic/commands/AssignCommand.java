@@ -6,7 +6,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -76,7 +78,7 @@ public class AssignCommand extends Command {
 
         Person personToAssign = lastShownList.get(index.getZeroBased());
 
-        if (personToAssign.getCcas().isEmpty() && !personToAssign.getRoles().isEmpty()) {
+        if (personToAssign.getCcas().isEmpty()) {
             throw new CommandException(MESSAGE_NO_CCA);
         }
 
@@ -102,12 +104,14 @@ public class AssignCommand extends Command {
                                                AssignCommand.AssignPersonDescriptor assignPersonDescriptor) {
         assert personToAssign != null;
 
+        Set<Role> rolesToAppend = assignPersonDescriptor.getRole().orElse(personToAssign.getRoles());
+
         Name updatedName = personToAssign.getName();
         Phone updatedPhone = personToAssign.getPhone();
         Email updatedEmail = personToAssign.getEmail();
         Address updatedAddress = personToAssign.getAddress();
         Set<Cca> updatedCcas = personToAssign.getCcas();
-        Set<Role> updatedRoles = assignPersonDescriptor.getRole().orElse(personToAssign.getRoles());
+        Set<Role> updatedRoles = merge(personToAssign.getRoles(), rolesToAppend);
         Amount updatedAmount = personToAssign.getAmount();
         Attendance updatedAttendance = personToAssign.getAtt();
         Sessions updatedSessions = personToAssign.getSess();
@@ -115,6 +119,14 @@ public class AssignCommand extends Command {
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedRoles, updatedCcas, updatedAmount, updatedAttendance, updatedSessions, updatedMetadata);
+    }
+
+    private static <T> Set<T> merge(Collection<? extends T>... collections) {
+        Set<T> newSet = new HashSet<T>();
+        for (Collection<? extends T> collection : collections) {
+            newSet.addAll(collection);
+        }
+        return newSet;
     }
 
     /**
