@@ -158,13 +158,13 @@ mark {
   }
   img {
       zoom: 0.8;  /* might not work on some browsers */
-      max-width: 100%;
   }
 }
 
 img {
     padding-bottom: 1em;
     padding-top: 1em;
+    max-width: 100%;
 }
 
 h1 {
